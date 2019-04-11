@@ -1,0 +1,4 @@
+type: object
+properties:
+  command:
+    $ref: '#/definitions/DeviceCommandEnum'

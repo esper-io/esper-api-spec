@@ -1,0 +1,500 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "# Introduction\nEsper Manage API is a HTTP REST API to manage your applications and devices. You can find out more about Esper at [https://esper.io](https://esper.io)\n\nYou can use your favorite HTTP/REST library for your programming language to use Esper APIs, or you can use one of our SDKs (currently available in [python](https://github.com/esper-io/esper-client-py)).\n\nThis guide documents all the instructions for using Esper API, along with code samples in python and Java. If you find any issues using our API, please reach out to us at developer@esper.io\n\nTo get started you need a developer account with [developer.esper.io](https://developer.esper.io/). Please register youself at https://developer.esper.io/register.\n\n# Authentication\nClient needs to send authentication details to access APIs. Following authentication schemes are supported:\n\n#### Basic Authentication\nClient can use username and password to authenticate. These are your developer account credentials.\nFor example, the client sends HTTP requests with the Authorization header that contains the word `Basic` followed by a space and a base64-encoded string `username`:`password`.\n\n```bash\ncurl -X GET \\\n  https://developer.esper.io/api/enterprise/<enterprise_id>/device/ \\\n  -H 'Authorization: Basic cl0ZWFkbWluOnNpdG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json' \\\n```\nYou can read more about basic authentication scheme  [here](https://swagger.io/docs/specification/authentication/basic-authentication/)\n\n#### API Key\nYou can generate API keys for your application from Esper dashboard and send them in header to authorize. For example:\n\n```bash\ncurl -X GET \\\n  https://developer.esper.io/api/enterprise/<enterprise_id>/device/ \\\n  -H 'API_KEY: abhbvksvdrkjsh' \\\n  -H 'Content-Type: application/json' \\\n```\nMore details to come soon.\n",
+    "version": "1.0.0",
+    "title": "Esper Manage API",
+    "termsOfService": "http://shoonya.io/terms/",
+    "x-logo": {
+      "url": "http://localhost:3000/esper.svg"
+    },
+    "contact": {
+      "email": "developer@esper.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "developer.esper.io",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Device",
+      "description": "APIs to fetch device information",
+      "externalDocs": {
+        "description": "Find out more about device management",
+        "url": "https://docs.shoonyacloud.com"
+      }
+    },
+    {
+      "name": "Commands",
+      "description": "APIs to run device commands",
+      "externalDocs": {
+        "description": "Find out more about device commands",
+        "url": "https://docs.shoonyacloud.com"
+      }
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "externalDocs": {
+    "description": "Find out more about Esper",
+    "url": "http://shoonya.io"
+  },
+  "x-tagGroups": [
+    {
+      "name": "API Reference",
+      "tags": [
+        "Device",
+        "Commands"
+      ]
+    }
+  ],
+  "paths": {
+    "/enterprise/{enterprise_id}/device/": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Fetch all devices in an enterprise",
+        "description": "Returns a list of devices",
+        "operationId": "getAllDevices",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "enterprise_id",
+            "in": "path",
+            "description": "ID of the enterprise",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Filter by device name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Pagination",
+            "required": false,
+            "type": "integer",
+            "default": 20
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "url"
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "url"
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Device"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedResponse"
+            }
+          }
+        },
+        "x-code-samples": [
+          {
+            "lang": "Shell",
+            "source": "curl -X GET \\\n  https://developer.esper.io/api/enterprise/<enterprise_id>/device/ \\\n  -H 'Authorization: Basic cluOnNpdGVhZG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json'\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://developer.esper.io/api/enterprise/<enterprise_id>/device/\"\n\npayload = \"\"\nheaders = {\n    'Content-Type': \"application/json\",\n    'Authorization': \"Basic cbWluOnNpdGVhZG1pbjEyMyQ=\",\n    }\n\nresponse = requests.request(\"GET\", url, data=payload, headers=headers)\n\nprint(response.text)\n"
+          },
+          {
+            "lang": "Java",
+            "source": "OkHttpClient client = new OkHttpClient();\n\nRequest request = new Request.Builder()\n  .url(\"https://developer.esper.io/api/enterprise/<enterprise_id>/device/\")\n  .get()\n  .addHeader(\"Content-Type\", \"application/json\")\n  .addHeader(\"Authorization\", \"Basic c2luOnNpdGVhZG1pbjEyMyQ=\")\n  .build();\n\nResponse response = client.newCall(request).execute();\n"
+          }
+        ]
+      }
+    },
+    "/enterprise/{enterprise_id}/device/{device_id}/": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Fetch device details by ID",
+        "description": "Returns details of a device",
+        "operationId": "getDeviceById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "enterprise_id",
+            "in": "path",
+            "description": "ID of the enterprise",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "ID of the device",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedResponse"
+            }
+          }
+        },
+        "x-code-samples": [
+          {
+            "lang": "Shell",
+            "source": "curl -X GET \\\n  https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/ \\\n  -H 'Authorization: Basic c2lnNpdGVhZG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json'\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/\"\n\npayload = \"\"\nheaders = {\n    'Content-Type': \"application/json\",\n    'Authorization': \"Basic cbWluOnNpdGVhZG1pbjEyMyQ=\",\n    }\n\nresponse = requests.request(\"GET\", url, data=payload, headers=headers)\n\nprint(response.text)\n"
+          },
+          {
+            "lang": "Java",
+            "source": "OkHttpClient client = new OkHttpClient();\n\nRequest request = new Request.Builder()\n  .url(\"https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>\")\n  .get()\n  .addHeader(\"Content-Type\", \"application/json\")\n  .addHeader(\"Authorization\", \"Basic cOnNpdGVhZG1pbjEyMyQ=\")\n  .build();\n\nResponse response = client.newCall(request).execute();\n"
+          }
+        ]
+      }
+    },
+    "/enterprise/{enterprise_id}/device/{device_id}/command/": {
+      "post": {
+        "tags": [
+          "Commands"
+        ],
+        "summary": "Run commands on device",
+        "description": "Fire commands on device like lock, ping etc",
+        "operationId": "runCommand",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "enterprise_id",
+            "in": "path",
+            "description": "ID of the enterprise",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "ID of the device",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "command",
+            "in": "body",
+            "description": "command name to fire",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceCommandRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceCommandResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedResponse"
+            }
+          }
+        },
+        "x-code-samples": [
+          {
+            "lang": "Shell",
+            "source": "curl -X POST \\\n  https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/command/ \\\n  -H 'Authorization: Basic c2l0ZWFNpdGVhZG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"command\": \"UPDATE_HEARTBEAT\"}'\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/command/\"\n\npayload = \"{\\\"command\\\": \\\"UPDATE_HEARTBEAT\\\"}\"\nheaders = {\n  'Content-Type': \"application/json\",\n  'Authorization': \"Basic c2l0ZWFkbWdGVhZG1pbjEyMyQ=\"\n}\n\nresponse = requests.request(\"POST\", url, data=payload, headers=headers)\n\nprint(response.text)\n"
+          },
+          {
+            "lang": "Java",
+            "source": "OkHttpClient client = new OkHttpClient();\n\nMediaType mediaType = MediaType.parse(\"application/json\");\nRequestBody body = RequestBody.create(mediaType, \"{\\\"command\\\": \\\"UPDATE_HEARTBEAT\\\"}\");\nRequest request = new Request.Builder()\n  .url(\"https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/command/\")\n  .post(body)\n  .addHeader(\"Content-Type\", \"application/json\")\n  .addHeader(\"Authorization\", \"Basic c2l0ZWFnNpdGVhZG1pbjEyMyQ=\")\n  .build();\n\nResponse response = client.newCall(request).execute();\n"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Device": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "url"
+        },
+        "device_name": {
+          "type": "string"
+        },
+        "policy_name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current status of device"
+        },
+        "state": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current state of device"
+        },
+        "current_command": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Current command associated with device"
+        },
+        "suid": {
+          "type": "string",
+          "description": "Device generated unique id"
+        },
+        "fcm_id": {
+          "type": "string"
+        },
+        "enterprise": {
+          "type": "string",
+          "format": "url"
+        },
+        "policy": {
+          "type": "string",
+          "format": "url"
+        },
+        "user": {
+          "type": "string",
+          "format": "url"
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "url"
+          }
+        },
+        "api_level": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "template_name": {
+          "type": "string"
+        },
+        "mqtt_id": {
+          "type": "string"
+        },
+        "softwareInfo": {
+          "type": "object"
+        },
+        "hardwareInfo": {
+          "type": "object"
+        },
+        "displays": {
+          "type": "object"
+        },
+        "networkInfo": {
+          "type": "object"
+        },
+        "memoryInfo": {
+          "type": "object"
+        },
+        "audioConstraints": {
+          "type": "object"
+        },
+        "provisioned_on": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "emm_device": {
+          "$ref": "#/definitions/EmmDevice"
+        },
+        "is_gms": {
+          "type": "boolean",
+          "default": true
+        },
+        "is_active": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "DeviceCommandEnum": {
+      "type": "string",
+      "enum": [
+        "UPDATE_HEARTBEAT",
+        "LOCK"
+      ]
+    },
+    "DeviceCommandRequest": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "$ref": "#/definitions/DeviceCommandEnum"
+        }
+      }
+    },
+    "DeviceCommandResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "url": {
+          "type": "string",
+          "format": "url"
+        },
+        "enterprise": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "device": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "command": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "issued_by": {
+          "type": "string"
+        },
+        "command_args": {
+          "type": "object"
+        },
+        "details": {
+          "type": "object"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "EmmDevice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "google_device_id": {
+          "type": "string"
+        },
+        "managementType": {
+          "type": "string"
+        },
+        "device": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "google_user": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "policy": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "is_active": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "UnauthorizedResponse": {
+      "description": "Represents an authorization error",
+      "type": "object",
+      "required": [
+        "detail"
+      ],
+      "properties": {
+        "detail": {
+          "description": "The error message.",
+          "type": "string"
+        }
+      },
+      "example": {
+        "detail": "Invalid username/password"
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+type: object
+properties:
+  url:
+    type: string
+    format: url
+  device_name:
+    type: string
+  policy_name:
+    type: string
+  status:
+    type: integer
+    format: int32
+    description: Current status of device
+  state:
+    type: integer
+    format: int32
+    description: Current state of device
+  current_command:
+    type: string
+    format: uuid
+    description: Current command associated with device
+  suid:
+    type: string
+    description: Device generated unique id
+  fcm_id:
+    type: string
+  enterprise:
+    type: string
+    format: url
+  policy:
+    type: string
+    format: url
+  user:
+    type: string
+    format: url
+  groups:
+    type: array
+    items:
+      type: string
+      format: url
+  api_level:
+    type: integer
+    format: int32
+  template_name:
+    type: string
+  mqtt_id:
+    type: string
+  softwareInfo:
+    type: object
+  hardwareInfo:
+    type: object
+  displays:
+    type: object
+  networkInfo:
+    type: object
+  memoryInfo:
+    type: object
+  audioConstraints:
+    type: object
+  provisioned_on:
+    type: string
+    format: date-time
+  created_on:
+    type: string
+    format: date-time
+  updated_on:
+    type: string
+    format: date-time
+  emm_device:
+    $ref: '#/definitions/EmmDevice'
+  is_gms:
+    type: boolean
+    default: true
+  is_active:
+    type: boolean
+    default: true

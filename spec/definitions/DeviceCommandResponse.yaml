@@ -1,0 +1,30 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+  url:
+    type: string
+    format: url
+  enterprise:
+    type: string
+    format: uuid
+  device:
+    type: string
+    format: uuid
+  command:
+    type: string
+  state:
+    type: string
+  issued_by:
+    type: string
+  command_args:
+    type: object
+  details:
+    type: object
+  created_on:
+    type: string
+    format: date-time
+  updated_on:
+    type: string
+    format: date-time

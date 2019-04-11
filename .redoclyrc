@@ -1,0 +1,8 @@
+specFileName: /Users/tarunvashisth/projects/esper-sdk/esper-spec-0.0.2.yaml
+apiTitle: Esper Manage
+splitSpec: true
+codeSamples: false
+swaggerUI: true
+travis: true
+repo: esper-io/esper-api-spec
+oasVersion: '2.0'
