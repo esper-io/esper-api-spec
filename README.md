@@ -4,7 +4,6 @@
 ## Links
 
 - [Reference Documentation (ReDoc)](https://esper-io.github.io/esper-api-spec/)
-- [SwaggerUI](https://esper-io.github.io/esper-api-spec/swagger-ui/)
 - OpenAPI Raw Files: [JSON](https://esper-io.github.io/esper-api-spec/openapi.json) [YAML](https://esper-io.github.io/esper-api-spec/openapi.yaml)
 
 **Warning:** All above links are updated only after Travis CI finishes deployment
