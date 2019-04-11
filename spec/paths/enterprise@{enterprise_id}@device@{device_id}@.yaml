@@ -1,0 +1,71 @@
+get:
+  tags:
+    - Device
+  summary: Fetch device details by ID
+  description: Returns details of a device
+  operationId: getDeviceById
+  produces:
+    - application/json
+  parameters:
+    - name: enterprise_id
+      in: path
+      description: ID of the enterprise
+      required: true
+      type: string
+      format: uuid
+    - name: device_id
+      in: path
+      description: ID of the device
+      required: true
+      type: string
+      format: uuid
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/Device'
+    '400':
+      description: Bad request
+    '401':
+      description: Unauthorized
+      schema:
+        $ref: '#/definitions/UnauthorizedResponse'
+  x-code-samples:
+    - lang: Shell
+      source: |
+        curl -X GET \
+          https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/ \
+          -H 'Authorization: Basic c2lnNpdGVhZG1pbjEyMyQ=' \
+          -H 'Content-Type: application/json'
+    - lang: Python
+      source: >
+        import requests
+
+
+        url =
+        "https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/"
+
+
+        payload = ""
+
+        headers = {
+            'Content-Type': "application/json",
+            'Authorization': "Basic cbWluOnNpdGVhZG1pbjEyMyQ=",
+            }
+
+        response = requests.request("GET", url, data=payload, headers=headers)
+
+
+        print(response.text)
+    - lang: Java
+      source: |
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder()
+          .url("https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>")
+          .get()
+          .addHeader("Content-Type", "application/json")
+          .addHeader("Authorization", "Basic cOnNpdGVhZG1pbjEyMyQ=")
+          .build();
+
+        Response response = client.newCall(request).execute();

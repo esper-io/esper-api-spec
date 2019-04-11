@@ -1,0 +1,27 @@
+type: object
+properties:
+  id:
+    type: integer
+    format: int64
+  google_device_id:
+    type: string
+  managementType:
+    type: string
+  device:
+    type: string
+    format: uuid
+  google_user:
+    type: integer
+    format: int64
+  policy:
+    type: integer
+    format: int64
+  created_on:
+    type: string
+    format: date-time
+  updated_on:
+    type: string
+    format: date-time
+  is_active:
+    type: boolean
+    default: true
