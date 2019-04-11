@@ -39,7 +39,7 @@ info:
   title: Esper Manage API
   termsOfService: 'http://shoonya.io/terms/'
   x-logo:
-    url: 'http://localhost:3000/esper.svg'
+    url: esper.svg
   contact:
     email: developer@esper.io
   license:
