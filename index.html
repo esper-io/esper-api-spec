@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>API Reference | ReDoc</title>
+    <title>Esper API Doc</title>
     <!-- needed for adaptive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="favicon.png">
-
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat" rel="stylesheet">
     <!--
     ReDoc uses font options from the parent element
     So override default browser styles
@@ -14,11 +15,26 @@
       body {
         margin: 0;
         padding: 0;
+        font-family: 'Lato', sans-serif;
+      }
+      h1, h2, h3, h4, h5 {
+        font-family: 'Montserrat', sans-serif;
       }
     </style>
     
   </head>
   <body>
+
+  <header class="shoonya-header">
+    <div class=" container-reset">
+      <!-- png -->
+      <a href="https://esper.io">
+        <img src="esper.svg"  class="shoonya-logo" />
+      </a>
+
+    </div>
+  </header>
+
     <div id="redoc_container"></div>
     <script src="https://cdn.jsdelivr.net/npm/redoc/bundles/redoc.standalone.js"></script>
     <script>

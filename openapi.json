@@ -1,13 +1,10 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "# Introduction\nEsper Manage API is a HTTP REST API to manage your applications and devices. You can find out more about Esper at [https://esper.io](https://esper.io)\n\nYou can use your favorite HTTP/REST library for your programming language to use Esper APIs, or you can use one of our SDKs (currently available in [python](https://github.com/esper-io/esper-client-py)).\n\nThis guide documents all the instructions for using Esper API, along with code samples in python and Java. If you find any issues using our API, please reach out to us at developer@esper.io\n\nTo get started you need a developer account with [developer.esper.io](https://developer.esper.io/). Please register youself at https://developer.esper.io/register.\n\n# Authentication\nClient needs to send authentication details to access APIs. Following authentication schemes are supported:\n\n#### Basic Authentication\nClient can use username and password to authenticate. These are your developer account credentials.\nFor example, the client sends HTTP requests with the Authorization header that contains the word `Basic` followed by a space and a base64-encoded string `username`:`password`.\n\n```bash\ncurl -X GET \\\n  https://developer.esper.io/api/enterprise/<enterprise_id>/device/ \\\n  -H 'Authorization: Basic cl0ZWFkbWluOnNpdG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json' \\\n```\nYou can read more about basic authentication scheme  [here](https://swagger.io/docs/specification/authentication/basic-authentication/)\n\n#### API Key\nYou can generate API keys for your application from Esper dashboard and send them in header to authorize. For example:\n\n```bash\ncurl -X GET \\\n  https://developer.esper.io/api/enterprise/<enterprise_id>/device/ \\\n  -H 'API_KEY: abhbvksvdrkjsh' \\\n  -H 'Content-Type: application/json' \\\n```\nMore details to come soon.\n",
+    "description": "# Introduction\nEsper Manage APIs for Cloud are a set of REST-based APIs that help you programmatically control and monitor your enterprise's dedicated Esper endpoint. Using these APIs, one can orchestrate & manage devices that have been provisioned against your endpoint. Furthermore, this API allows you to manage android applications that get installed on such devices. To read more about the various capabilities of Esper endpoints and Esper managed devices, please visit [esper.io](https://esper.io). This guide describes all the available APIs in detail, along with code samples for you to quickly ramp up to using them.\n\nYou can find out more about Esper at [https://esper.io](https://esper.io)\n\nWe've done our best to keep this document up to date, but if you find any issues, please reach out to us at developer@esper.io.\n\n# SDK\n\n  You are welcome to use your favorite HTTP/REST library for your programming language in order to use these APIs, or you can use our official SDK (currently available in [python](https://github.com/esper-io/esper-client-py)) to do so.\n\n# Authentication\nClient needs to send authentication details to access APIs. Following authentication schemes are supported:\n\n#### Basic Authentication\nClient can use username and password to authenticate. These are your developer account credentials.\nFor example, the client sends HTTP requests with the Authorization header that contains the word `Basic` followed by a space and a base64-encoded string `username:password`.\n##### Base64 encoding\nBash\n\n``` echo 'username:password' | base64 ```\n\nPowershell\n\n``` [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(\"username:password\")) ```\n\n**Example request**\n```bash\ncurl -X GET \\\n  https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/ \\\n  -H 'Authorization: Basic cl0ZWFkbWluOnNpdG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json' \\\n```\nYou can read more about basic authentication scheme  [here](https://swagger.io/docs/specification/authentication/basic-authentication/)\n",
     "version": "1.0.0",
     "title": "Esper Manage API",
-    "termsOfService": "http://shoonya.io/terms/",
-    "x-logo": {
-      "url": "esper.svg"
-    },
+    "termsOfService": "http://esper.io/terms/",
     "contact": {
       "email": "developer@esper.io"
     },
@@ -16,7 +13,7 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "developer.esper.io",
+  "host": "DOMAIN.shoonyacloud.com",
   "basePath": "/api",
   "tags": [
     {
@@ -40,10 +37,6 @@
     "https",
     "http"
   ],
-  "externalDocs": {
-    "description": "Find out more about Esper",
-    "url": "http://shoonya.io"
-  },
   "x-tagGroups": [
     {
       "name": "API Reference",
@@ -127,15 +120,15 @@
         "x-code-samples": [
           {
             "lang": "Shell",
-            "source": "curl -X GET \\\n  https://developer.esper.io/api/enterprise/<enterprise_id>/device/ \\\n  -H 'Authorization: Basic cluOnNpdGVhZG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json'\n"
+            "source": "curl -X GET \\\n  https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/ \\\n  -H 'Authorization: Basic cluOnNpdGVhZG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json'\n"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://developer.esper.io/api/enterprise/<enterprise_id>/device/\"\n\npayload = \"\"\nheaders = {\n    'Content-Type': \"application/json\",\n    'Authorization': \"Basic cbWluOnNpdGVhZG1pbjEyMyQ=\",\n    }\n\nresponse = requests.request(\"GET\", url, data=payload, headers=headers)\n\nprint(response.text)\n"
+            "source": "import requests\n\nurl = \"https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/\"\n\npayload = \"\"\nheaders = {\n    'Content-Type': \"application/json\",\n    'Authorization': \"Basic cbWluOnNpdGVhZG1pbjEyMyQ=\",\n    }\n\nresponse = requests.request(\"GET\", url, data=payload, headers=headers)\n\nprint(response.text)\n"
           },
           {
             "lang": "Java",
-            "source": "OkHttpClient client = new OkHttpClient();\n\nRequest request = new Request.Builder()\n  .url(\"https://developer.esper.io/api/enterprise/<enterprise_id>/device/\")\n  .get()\n  .addHeader(\"Content-Type\", \"application/json\")\n  .addHeader(\"Authorization\", \"Basic c2luOnNpdGVhZG1pbjEyMyQ=\")\n  .build();\n\nResponse response = client.newCall(request).execute();\n"
+            "source": "OkHttpClient client = new OkHttpClient();\n\nRequest request = new Request.Builder()\n  .url(\"https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/\")\n  .get()\n  .addHeader(\"Content-Type\", \"application/json\")\n  .addHeader(\"Authorization\", \"Basic c2luOnNpdGVhZG1pbjEyMyQ=\")\n  .build();\n\nResponse response = client.newCall(request).execute();\n"
           }
         ]
       }
@@ -189,15 +182,15 @@
         "x-code-samples": [
           {
             "lang": "Shell",
-            "source": "curl -X GET \\\n  https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/ \\\n  -H 'Authorization: Basic c2lnNpdGVhZG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json'\n"
+            "source": "curl -X GET \\\n  https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/ \\\n  -H 'Authorization: Basic c2lnNpdGVhZG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json'\n"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/\"\n\npayload = \"\"\nheaders = {\n    'Content-Type': \"application/json\",\n    'Authorization': \"Basic cbWluOnNpdGVhZG1pbjEyMyQ=\",\n    }\n\nresponse = requests.request(\"GET\", url, data=payload, headers=headers)\n\nprint(response.text)\n"
+            "source": "import requests\n\nurl = \"https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/\"\n\npayload = \"\"\nheaders = {\n    'Content-Type': \"application/json\",\n    'Authorization': \"Basic cbWluOnNpdGVhZG1pbjEyMyQ=\",\n    }\n\nresponse = requests.request(\"GET\", url, data=payload, headers=headers)\n\nprint(response.text)\n"
           },
           {
             "lang": "Java",
-            "source": "OkHttpClient client = new OkHttpClient();\n\nRequest request = new Request.Builder()\n  .url(\"https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>\")\n  .get()\n  .addHeader(\"Content-Type\", \"application/json\")\n  .addHeader(\"Authorization\", \"Basic cOnNpdGVhZG1pbjEyMyQ=\")\n  .build();\n\nResponse response = client.newCall(request).execute();\n"
+            "source": "OkHttpClient client = new OkHttpClient();\n\nRequest request = new Request.Builder()\n  .url(\"https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>\")\n  .get()\n  .addHeader(\"Content-Type\", \"application/json\")\n  .addHeader(\"Authorization\", \"Basic cOnNpdGVhZG1pbjEyMyQ=\")\n  .build();\n\nResponse response = client.newCall(request).execute();\n"
           }
         ]
       }
@@ -260,15 +253,15 @@
         "x-code-samples": [
           {
             "lang": "Shell",
-            "source": "curl -X POST \\\n  https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/command/ \\\n  -H 'Authorization: Basic c2l0ZWFNpdGVhZG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"command\": \"UPDATE_HEARTBEAT\"}'\n"
+            "source": "curl -X POST \\\n  https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/command/ \\\n  -H 'Authorization: Basic c2l0ZWFNpdGVhZG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"command\": \"UPDATE_HEARTBEAT\"}'\n"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/command/\"\n\npayload = \"{\\\"command\\\": \\\"UPDATE_HEARTBEAT\\\"}\"\nheaders = {\n  'Content-Type': \"application/json\",\n  'Authorization': \"Basic c2l0ZWFkbWdGVhZG1pbjEyMyQ=\"\n}\n\nresponse = requests.request(\"POST\", url, data=payload, headers=headers)\n\nprint(response.text)\n"
+            "source": "import requests\n\nurl = \"https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/command/\"\n\npayload = \"{\\\"command\\\": \\\"UPDATE_HEARTBEAT\\\"}\"\nheaders = {\n  'Content-Type': \"application/json\",\n  'Authorization': \"Basic c2l0ZWFkbWdGVhZG1pbjEyMyQ=\"\n}\n\nresponse = requests.request(\"POST\", url, data=payload, headers=headers)\n\nprint(response.text)\n"
           },
           {
             "lang": "Java",
-            "source": "OkHttpClient client = new OkHttpClient();\n\nMediaType mediaType = MediaType.parse(\"application/json\");\nRequestBody body = RequestBody.create(mediaType, \"{\\\"command\\\": \\\"UPDATE_HEARTBEAT\\\"}\");\nRequest request = new Request.Builder()\n  .url(\"https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/command/\")\n  .post(body)\n  .addHeader(\"Content-Type\", \"application/json\")\n  .addHeader(\"Authorization\", \"Basic c2l0ZWFnNpdGVhZG1pbjEyMyQ=\")\n  .build();\n\nResponse response = client.newCall(request).execute();\n"
+            "source": "OkHttpClient client = new OkHttpClient();\n\nMediaType mediaType = MediaType.parse(\"application/json\");\nRequestBody body = RequestBody.create(mediaType, \"{\\\"command\\\": \\\"UPDATE_HEARTBEAT\\\"}\");\nRequest request = new Request.Builder()\n  .url(\"https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/command/\")\n  .post(body)\n  .addHeader(\"Content-Type\", \"application/json\")\n  .addHeader(\"Authorization\", \"Basic c2l0ZWFnNpdGVhZG1pbjEyMyQ=\")\n  .build();\n\nResponse response = client.newCall(request).execute();\n"
           }
         ]
       }
