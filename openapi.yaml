@@ -58,7 +58,6 @@ tags:
       url: 'https://docs.shoonyacloud.com'
 schemes:
   - https
-  - http
 x-tagGroups:
   - name: API Reference
     tags:
