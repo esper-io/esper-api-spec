@@ -51,7 +51,7 @@ get:
     - lang: Shell
       source: |
         curl -X GET \
-          https://developer.esper.io/api/enterprise/<enterprise_id>/device/ \
+          https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/ \
           -H 'Authorization: Basic cluOnNpdGVhZG1pbjEyMyQ=' \
           -H 'Content-Type: application/json'
     - lang: Python
@@ -60,7 +60,7 @@ get:
 
 
         url =
-        "https://developer.esper.io/api/enterprise/<enterprise_id>/device/"
+        "https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/"
 
 
         payload = ""
@@ -79,7 +79,7 @@ get:
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
-          .url("https://developer.esper.io/api/enterprise/<enterprise_id>/device/")
+          .url("https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/")
           .get()
           .addHeader("Content-Type", "application/json")
           .addHeader("Authorization", "Basic c2luOnNpdGVhZG1pbjEyMyQ=")

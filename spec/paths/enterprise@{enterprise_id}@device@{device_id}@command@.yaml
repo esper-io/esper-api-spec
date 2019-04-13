@@ -40,7 +40,7 @@ post:
     - lang: Shell
       source: |
         curl -X POST \
-          https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/command/ \
+          https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/command/ \
           -H 'Authorization: Basic c2l0ZWFNpdGVhZG1pbjEyMyQ=' \
           -H 'Content-Type: application/json' \
           -d '{"command": "UPDATE_HEARTBEAT"}'
@@ -50,7 +50,7 @@ post:
 
 
         url =
-        "https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/command/"
+        "https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/command/"
 
 
         payload = "{\"command\": \"UPDATE_HEARTBEAT\"}"
@@ -76,7 +76,7 @@ post:
         \"UPDATE_HEARTBEAT\"}");
 
         Request request = new Request.Builder()
-          .url("https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/command/")
+          .url("https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/command/")
           .post(body)
           .addHeader("Content-Type", "application/json")
           .addHeader("Authorization", "Basic c2l0ZWFnNpdGVhZG1pbjEyMyQ=")
