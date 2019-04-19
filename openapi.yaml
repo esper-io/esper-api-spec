@@ -46,6 +46,11 @@ info:
 host: DOMAIN.shoonyacloud.com
 basePath: /api
 tags:
+  - name: Enterprise
+    description: APIs to manage your enterprise information
+    externalDocs:
+      description: Find out more about device management
+      url: 'https://docs.shoonyacloud.com'
   - name: Device
     description: APIs to fetch device information
     externalDocs:
@@ -61,9 +66,51 @@ schemes:
 x-tagGroups:
   - name: API Reference
     tags:
+      - Enterprise
       - Device
       - Commands
 paths:
+  '/enterprise/{enterprise_id}/':
+    get:
+      operationId: getEnterprise
+      summary: Get your enteprise information
+      description: Returns enterprise
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Enterprise'
+      tags:
+        - Enterprise
+    patch:
+      operationId: partialUpdateEnterprise
+      summary: Partial update enterprise information
+      description: Returns updated enterprise
+      produces:
+        - application/json
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Enterprise'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Enterprise'
+      tags:
+        - Enterprise
+    parameters:
+      - name: enterprise_id
+        in: path
+        description: A UUID string identifying this enterprise.
+        required: true
+        type: string
+        format: uuid
   '/enterprise/{enterprise_id}/device/':
     get:
       tags:
@@ -438,6 +485,212 @@ definitions:
       is_active:
         type: boolean
         default: true
+  EMMEnterpriseStateEnum:
+    title: State
+    description: |
+      EMM enterprise workflow state
+      * UNSPECIFIED = 1
+      * BEGIN_SIGNUP = 2
+      * COMPLETE_SIGNUP = 3
+      * ENROLLED = 4
+      * UNENROLLED = 5
+      * ENROLL_FAILED = 10
+    type: integer
+    enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 10
+  Enterprise:
+    required:
+      - name
+      - short_code
+      - details
+    type: object
+    properties:
+      id:
+        title: Id
+        description: Enterprise id
+        type: string
+        format: uuid
+        readOnly: true
+      url:
+        title: Url
+        type: string
+        format: uri
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        maxLength: 255
+        minLength: 1
+      display_name:
+        title: Display name
+        type: string
+        maxLength: 50
+        minLength: 1
+        x-nullable: true
+      short_code:
+        title: Short code
+        type: string
+        maxLength: 10
+        minLength: 1
+      mdm_service:
+        title: Mdm service
+        type: integer
+        enum:
+          - 1
+          - 2
+      details:
+        $ref: '#/definitions/EnterpriseDetail'
+      default_policy:
+        title: Default policy
+        description: Policy associated with enteprise
+        type: integer
+      emm:
+        $ref: '#/definitions/GoogleEnterprise'
+      created_on:
+        title: Created on
+        type: string
+        format: date-time
+        readOnly: true
+      updated_on:
+        title: Updated on
+        type: string
+        format: date-time
+        readOnly: true
+      is_active:
+        title: Is active
+        type: boolean
+  EnterpriseDetail:
+    title: Details
+    required:
+      - registered_name
+      - registered_address
+      - location
+      - zipcode
+      - contact_email
+    type: object
+    properties:
+      id:
+        title: Id
+        type: string
+        format: uuid
+        readOnly: true
+      registered_name:
+        title: Registered name
+        type: string
+        maxLength: 255
+        minLength: 1
+      registered_address:
+        title: Registered address
+        type: string
+        minLength: 1
+      location:
+        title: Location
+        type: string
+        maxLength: 255
+        minLength: 1
+      zipcode:
+        title: Zipcode
+        type: string
+        maxLength: 8
+        minLength: 1
+      contact_person:
+        title: Contact person
+        type: string
+        maxLength: 255
+        minLength: 1
+        x-nullable: true
+      contact_number:
+        title: Contact number
+        type: string
+        maxLength: 20
+        minLength: 1
+        x-nullable: true
+      contact_email:
+        title: Contact email
+        type: string
+        format: email
+        maxLength: 254
+        minLength: 1
+      created_on:
+        title: Created on
+        type: string
+        format: date-time
+        readOnly: true
+      updated_on:
+        title: Updated on
+        type: string
+        format: date-time
+        readOnly: true
+      is_active:
+        title: Is active
+        type: boolean
+  GoogleEnterprise:
+    title: Emm
+    required:
+      - name
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      google_enterprise_id:
+        title: Google enterprise id
+        type: string
+        maxLength: 50
+        minLength: 1
+        x-nullable: true
+      name:
+        title: Name
+        type: string
+        maxLength: 255
+        minLength: 1
+      state:
+        $ref: '#/definitions/EMMEnterpriseStateEnum'
+      callback_url:
+        title: Callback url
+        type: string
+        minLength: 1
+        x-nullable: true
+      signup_url:
+        title: Signup url
+        type: string
+        minLength: 1
+        x-nullable: true
+      completion_token:
+        title: Completion token
+        type: string
+        maxLength: 255
+        minLength: 1
+        x-nullable: true
+      enterprise_token:
+        title: Enterprise token
+        type: string
+        maxLength: 255
+        minLength: 1
+        x-nullable: true
+      is_active:
+        title: Is active
+        type: boolean
+      created_on:
+        title: Created on
+        type: string
+        format: date-time
+        readOnly: true
+      updated_on:
+        title: Updated on
+        type: string
+        format: date-time
+        readOnly: true
+      enterprise:
+        title: Enterprise
+        type: string
+        format: uuid
   UnauthorizedResponse:
     description: Represents an authorization error
     type: object
