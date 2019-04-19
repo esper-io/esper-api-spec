@@ -74,6 +74,11 @@ info:
 host: DOMAIN.shoonyacloud.com
 basePath: /api
 tags:
+  - name: Enterprise
+    description: APIs to manage your enterprise information
+    externalDocs:
+      description: Find out more about device management
+      url: 'https://docs.shoonyacloud.com'
   - name: Device
     description: APIs to fetch device information
     externalDocs:
@@ -89,5 +94,6 @@ schemes:
 x-tagGroups:
   - name: API Reference
     tags:
+      - Enterprise
       - Device
       - Commands
