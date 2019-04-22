@@ -18,12 +18,22 @@ get:
       description: Filter by device name
       required: false
       type: string
+    - name: search
+      in: query
+      description: A search term. Search by device name or imei
+      required: false
+      type: string
     - name: limit
       in: query
-      description: Pagination
+      description: Number of results to return per page.
       required: false
       type: integer
       default: 20
+    - name: offset
+      in: query
+      description: The initial index from which to return the results.
+      required: false
+      type: integer
   responses:
     '200':
       description: successful operation
@@ -43,10 +53,6 @@ get:
             type: array
             items:
               $ref: '#/definitions/Device'
-    '401':
-      description: Unauthorized
-      schema:
-        $ref: '#/definitions/UnauthorizedResponse'
   x-code-samples:
     - lang: Shell
       source: |
