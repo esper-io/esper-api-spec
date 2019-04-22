@@ -50,6 +50,7 @@
       "tags": [
         "Enterprise",
         "Device",
+        "Device App",
         "Commands"
       ]
     }
@@ -144,12 +145,26 @@
             "type": "string"
           },
           {
+            "name": "search",
+            "in": "query",
+            "description": "A search term. Search by device name or imei",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "limit",
             "in": "query",
-            "description": "Pagination",
+            "description": "Number of results to return per page.",
             "required": false,
             "type": "integer",
             "default": 20
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "required": false,
+            "type": "integer"
           }
         ],
         "responses": {
@@ -177,12 +192,6 @@
                   }
                 }
               }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/UnauthorizedResponse"
             }
           }
         },
@@ -264,6 +273,152 @@
         ]
       }
     },
+    "/enterprise/{enterprise_id}/device/{device_id}/app/": {
+      "get": {
+        "operationId": "device_app_list",
+        "summary": "List all device apps",
+        "description": "Returns DeviceApp list",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "package_name",
+            "in": "query",
+            "description": "package name contains filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "whitelisted",
+            "in": "query",
+            "description": "Whitelist filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "A search term. Search by app_name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "required": false,
+            "type": "integer",
+            "default": 20
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeviceApp"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Device App"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "enterprise_id",
+          "description": "A UUID string identifying this enterprise.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "device_id",
+          "description": "A UUID string identifying device.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/enterprise/{enterprise_id}/device/{device_id}/app/{app_id}/": {
+      "get": {
+        "operationId": "device_app_by_id",
+        "summary": "Get app information",
+        "description": "Returns DeviceApp instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceApp"
+            }
+          }
+        },
+        "tags": [
+          "Device App"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "app_id",
+          "in": "path",
+          "description": "A UUID string identifying this device app.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "name": "enterprise_id",
+          "description": "A UUID string identifying this device.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "device_id",
+          "description": "A UUID string identifying this enteprise.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
     "/enterprise/{enterprise_id}/device/{device_id}/command/": {
       "post": {
         "tags": [
@@ -334,9 +489,187 @@
           }
         ]
       }
+    },
+    "/enterprise/{enterprise_id}/device/{device_id}/install/": {
+      "get": {
+        "operationId": "device_app_install_list",
+        "summary": "List installed apps",
+        "description": "Returns AppInstall list",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device",
+            "in": "query",
+            "description": "filter by device id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "package_name",
+            "in": "query",
+            "description": "filter by package name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "application_name",
+            "in": "query",
+            "description": "filter by application name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "install_state",
+            "in": "query",
+            "description": "filter by install state",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "required": false,
+            "type": "integer",
+            "default": 20
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AppInstall"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Device App"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "enterprise_id",
+          "description": "A UUID string identifying this enterprise.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "device_id",
+          "description": "A UUID string identifying device.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
     }
   },
   "definitions": {
+    "AppInstall": {
+      "required": [
+        "application",
+        "install_state",
+        "enterprise",
+        "device"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "application": {
+          "title": "Application",
+          "type": "string",
+          "format": "uuid"
+        },
+        "install_state": {
+          "$ref": "#/definitions/AppInstallStateEnum"
+        },
+        "reason_details": {
+          "title": "Reason details",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "is_active": {
+          "title": "Is active",
+          "type": "boolean"
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "type": "string",
+          "format": "url"
+        },
+        "device": {
+          "title": "Device",
+          "type": "string",
+          "format": "url"
+        }
+      }
+    },
+    "AppInstallStateEnum": {
+      "title": "Install state",
+      "type": "string",
+      "description": "Device App Install State\n* NOT_INSTALLED = \"Not Installed\"\n* INSTALL_IN_PROGRESS = \"Installation In-Progress\"\n* UNINSTALL_IN_PROGRESS = \"Uninstallation In-Progress\"\n* INSTALL_SUCCESS = \"Install Success\"\n* INSTALL_FAILED = \"Install Failed\"\n* UNINSTALL_SUCCESS = \"Uninstall Success\"\n* UNINSTALL_FAILED = \"Uninstall Failed\"\n",
+      "enum": [
+        "not_installed",
+        "install_in_progress",
+        "uninstall_in_progress",
+        "install_success",
+        "install_failed",
+        "uninstall_success",
+        "uninstall_failed"
+      ]
+    },
     "Device": {
       "type": "object",
       "properties": {
@@ -441,6 +774,135 @@
         "is_active": {
           "type": "boolean",
           "default": true
+        }
+      }
+    },
+    "DeviceApp": {
+      "required": [
+        "app_name",
+        "package_name",
+        "device"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeviceAppPermission"
+          }
+        },
+        "app_name": {
+          "title": "App name",
+          "type": "string",
+          "minLength": 1
+        },
+        "package_name": {
+          "title": "Package name",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "whitelisted": {
+          "title": "Whitelisted",
+          "type": "boolean"
+        },
+        "product_id": {
+          "title": "Product id",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "version_code": {
+          "title": "Version code",
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "version_name": {
+          "title": "Version name",
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "is_active": {
+          "title": "Is active",
+          "type": "boolean"
+        },
+        "device": {
+          "title": "Device",
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "DeviceAppPermission": {
+      "required": [
+        "permission"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "permission": {
+          "title": "Permission",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "grant_state": {
+          "title": "Grant state",
+          "type": "integer",
+          "enum": [
+            0,
+            1,
+            2
+          ]
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "is_active": {
+          "title": "Is active",
+          "type": "boolean"
+        },
+        "app": {
+          "title": "App",
+          "type": "string",
+          "format": "uuid"
         }
       }
     },
@@ -573,7 +1035,7 @@
         "url": {
           "title": "Url",
           "type": "string",
-          "format": "uri",
+          "format": "url",
           "readOnly": true
         },
         "name": {
