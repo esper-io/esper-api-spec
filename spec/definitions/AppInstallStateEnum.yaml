@@ -1,0 +1,27 @@
+title: Install state
+type: string
+description: >
+  Device App Install State
+
+  * NOT_INSTALLED = "Not Installed"
+
+  * INSTALL_IN_PROGRESS = "Installation In-Progress"
+
+  * UNINSTALL_IN_PROGRESS = "Uninstallation In-Progress"
+
+  * INSTALL_SUCCESS = "Install Success"
+
+  * INSTALL_FAILED = "Install Failed"
+
+  * UNINSTALL_SUCCESS = "Uninstall Success"
+
+  * UNINSTALL_FAILED = "Uninstall Failed"
+
+enum:
+  - not_installed
+  - install_in_progress
+  - uninstall_in_progress
+  - install_success
+  - install_failed
+  - uninstall_success
+  - uninstall_failed
