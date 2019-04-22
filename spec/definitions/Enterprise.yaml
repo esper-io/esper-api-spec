@@ -13,7 +13,7 @@ properties:
   url:
     title: Url
     type: string
-    format: uri
+    format: url
     readOnly: true
   name:
     title: Name
