@@ -17,6 +17,7 @@ info:
 
       You are welcome to use your favorite HTTP/REST library for your programming language in order to use these APIs, or you can use our official SDK (currently available in [python](https://github.com/esper-io/esper-client-py)) to do so.
 
+
     # Authentication
 
     Client needs to send authentication details to access APIs. Following
@@ -96,6 +97,7 @@ x-tagGroups:
     tags:
       - Enterprise
       - Application
+      - Policy
       - Device
       - Device App
       - Commands
