@@ -18,10 +18,10 @@ description: >
   * UNINSTALL_FAILED = "Uninstall Failed"
 
 enum:
-  - not_installed
-  - install_in_progress
-  - uninstall_in_progress
-  - install_success
-  - install_failed
-  - uninstall_success
-  - uninstall_failed
+  - NOT_INSTALLED
+  - INSTALL_IN_PROGRESS
+  - UNINSTALL_IN_PROGRESS
+  - INSTALL_SUCCESS
+  - INSTALL_FAILED
+  - UNINSTALL_SUCCESS
+  - UNINSTALL_FAILED
