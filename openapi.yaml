@@ -12,6 +12,7 @@ info:
 
       You are welcome to use your favorite HTTP/REST library for your programming language in order to use these APIs, or you can use our official SDK (currently available in [python](https://github.com/esper-io/esper-client-py)) to do so.
 
+
     # Authentication
     Client needs to send authentication details to access APIs. Following authentication schemes are supported:
 
@@ -67,6 +68,8 @@ x-tagGroups:
   - name: API Reference
     tags:
       - Enterprise
+      - Application
+      - Policy
       - Device
       - Device App
       - Commands
@@ -112,6 +115,251 @@ paths:
         required: true
         type: string
         format: uuid
+  '/enterprise/{enterprise_id}/application/':
+    get:
+      operationId: list
+      summary: List apps in enterprise
+      description: Returns Application list
+      produces:
+        - application/json
+      parameters:
+        - name: application_name
+          in: query
+          description: filter by application name
+          required: false
+          type: string
+        - name: package_name
+          in: query
+          description: filter by package name
+          required: false
+          type: string
+        - name: limit
+          in: query
+          description: Number of results to return per page.
+          required: false
+          type: integer
+          default: 20
+        - name: offset
+          in: query
+          description: The initial index from which to return the results.
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            required:
+              - count
+              - results
+            type: object
+            properties:
+              count:
+                type: integer
+              next:
+                type: string
+                format: url
+                x-nullable: true
+              previous:
+                type: string
+                format: url
+                x-nullable: true
+              results:
+                type: array
+                items:
+                  $ref: '#/definitions/Application'
+      tags:
+        - Application
+    parameters:
+      - name: enterprise_id
+        description: A UUID string identifying this enterprise.
+        in: path
+        required: true
+        type: string
+  '/enterprise/{enterprise_id}/application/{application_id}/':
+    get:
+      operationId: get
+      summary: Get application information
+      description: Returns Application instance
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Application'
+      tags:
+        - Application
+    delete:
+      operationId: delete
+      summary: Delete an application
+      description: Empty response
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '204':
+          description: successful operation
+      tags:
+        - Application
+    parameters:
+      - name: application_id
+        in: path
+        description: A UUID string identifying this application.
+        required: true
+        type: string
+        format: uuid
+      - name: enterprise_id
+        description: A UUID string identifying enterprise.
+        in: path
+        required: true
+        type: string
+  '/enterprise/{enterprise_id}/application/{application_id}/version/':
+    get:
+      operationId: getAppVersions
+      summary: List App versions
+      description: Returns AppVersion list
+      produces:
+        - application/json
+      parameters:
+        - name: version_code
+          in: query
+          description: filter by version code
+          required: false
+          type: string
+        - name: build_number
+          in: query
+          description: filter by build number
+          required: false
+          type: string
+        - name: limit
+          in: query
+          description: Number of results to return per page.
+          required: false
+          type: integer
+          default: 20
+        - name: offset
+          in: query
+          description: The initial index from which to return the results.
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            required:
+              - count
+              - results
+            type: object
+            properties:
+              count:
+                type: integer
+              next:
+                type: string
+                format: url
+                x-nullable: true
+              previous:
+                type: string
+                format: url
+                x-nullable: true
+              results:
+                type: array
+                items:
+                  $ref: '#/definitions/AppVersion'
+      tags:
+        - Application
+    parameters:
+      - name: application_id
+        in: path
+        description: A UUID string identifying this application.
+        required: true
+        type: string
+        format: uuid
+      - name: enterprise_id
+        description: A UUID string identifying enterprise.
+        in: path
+        required: true
+        type: string
+  '/enterprise/{enterprise_id}/application/{application_id}/version/{version_id}/':
+    get:
+      operationId: getAppVersion
+      summary: Get app version information
+      description: Returns AppVersion instance
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/AppVersion'
+      tags:
+        - Application
+    delete:
+      operationId: deleteAppVersion
+      summary: Delete app version
+      description: Empty response
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '204':
+          description: successful operations
+      tags:
+        - Application
+    parameters:
+      - name: version_id
+        in: path
+        description: A UUID string identifying this app version.
+        required: true
+        type: string
+        format: uuid
+      - name: application_id
+        in: path
+        description: A UUID string identifying this application.
+        required: true
+        type: string
+        format: uuid
+      - name: enterprise_id
+        description: A UUID string identifying enterprise.
+        in: path
+        required: true
+        type: string
+  '/enterprise/{enterprise_id}/application/upload/':
+    post:
+      operationId: upload
+      summary: upload an application to enterprise
+      description: Returns application
+      produces:
+        - application/json
+      parameters:
+        - name: enterprise
+          description: enterprise id
+          in: formData
+          required: true
+          type: string
+          format: uuid
+        - name: app_file
+          description: valid APK file
+          in: formData
+          required: true
+          type: file
+      responses:
+        '201':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Application'
+      consumes:
+        - multipart/form-data
+        - application/x-www-form-urlencoded
+      tags:
+        - Enterprise Application
+    parameters:
+      - name: enterprise_id
+        description: A UUID string identifying this enterprise.
+        in: path
+        required: true
+        type: string
   '/enterprise/{enterprise_id}/device/':
     get:
       tags:
@@ -522,6 +770,205 @@ paths:
         in: path
         required: true
         type: string
+  '/enterprise/{enterprise_id}/device/{device_id}/status/':
+    get:
+      operationId: getDeviceEvent
+      summary: Get latest device event
+      description: Returns DeviceStatus instance
+      produces:
+        - application/json
+      parameters:
+        - name: latest_event
+          in: query
+          description: Flag to get latest event
+          required: true
+          type: number
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            required:
+              - count
+              - results
+            type: object
+            properties:
+              count:
+                type: integer
+              next:
+                type: string
+                format: url
+                x-nullable: true
+              previous:
+                type: string
+                format: url
+                x-nullable: true
+              results:
+                type: array
+                items:
+                  $ref: '#/definitions/DeviceStatus'
+      tags:
+        - Device
+    parameters:
+      - name: enterprise_id
+        description: A UUID string identifying this enterprise.
+        in: path
+        required: true
+        type: string
+      - name: device_id
+        description: A UUID string identifying device.
+        in: path
+        required: true
+        type: string
+  '/enterprise/{enterprise_id}/policy/':
+    get:
+      operationId: getAllPolicies
+      summary: List enterprise policies
+      description: Returns EnterprisePolicy list
+      produces:
+        - application/json
+      parameters:
+        - name: name
+          in: query
+          description: filter by name (starts with)
+          required: false
+          type: string
+        - name: limit
+          in: query
+          description: Number of results to return per page.
+          required: false
+          type: integer
+          default: 20
+        - name: offset
+          in: query
+          description: The initial index from which to return the results.
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            required:
+              - count
+              - results
+            type: object
+            properties:
+              count:
+                type: integer
+              next:
+                type: string
+                format: url
+                x-nullable: true
+              previous:
+                type: string
+                format: url
+                x-nullable: true
+              results:
+                type: array
+                items:
+                  $ref: '#/definitions/EnterprisePolicy'
+      tags:
+        - Policy
+    post:
+      operationId: createPolicy
+      summary: Create a policy
+      description: Return EnterprisePolicy instance
+      produces:
+        - application/json
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/EnterprisePolicy'
+      responses:
+        '201':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/EnterprisePolicy'
+      tags:
+        - Policy
+    parameters:
+      - name: enterprise_id
+        description: A UUID string identifying enterprise.
+        in: path
+        required: true
+        type: string
+  '/enterprise/{enterprise_id}/policy/{policy_id}/':
+    get:
+      operationId: getPolicyById
+      summary: Get policy details
+      description: Returns EnterprisePolicy instance
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/EnterprisePolicy'
+      tags:
+        - Policy
+    put:
+      operationId: updatePolicy
+      summary: Update/Replace information
+      description: Returns updated policy
+      produces:
+        - application/json
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/EnterprisePolicy'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/EnterprisePolicy'
+      tags:
+        - Policy
+    patch:
+      operationId: partialUpdatePolicy
+      summary: Partial update policy
+      description: Returns updated policy
+      produces:
+        - application/json
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/EnterprisePolicy'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/EnterprisePolicy'
+      tags:
+        - Policy
+    delete:
+      operationId: deletePolicy
+      summary: Delete a policy
+      description: Empty response
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '204':
+          description: successful operation
+      tags:
+        - Policy
+    parameters:
+      - name: policy_id
+        in: path
+        description: A unique integer value identifying this enterprise policy.
+        required: true
+        type: integer
+      - name: enterprise_id
+        description: A UUID string identifying enterprise.
+        in: path
+        required: true
+        type: string
 definitions:
   AppInstall:
     required:
@@ -581,13 +1028,223 @@ definitions:
       * UNINSTALL_SUCCESS = "Uninstall Success"
       * UNINSTALL_FAILED = "Uninstall Failed"
     enum:
-      - not_installed
-      - install_in_progress
-      - uninstall_in_progress
-      - install_success
-      - install_failed
-      - uninstall_success
-      - uninstall_failed
+      - NOT_INSTALLED
+      - INSTALL_IN_PROGRESS
+      - UNINSTALL_IN_PROGRESS
+      - INSTALL_SUCCESS
+      - INSTALL_FAILED
+      - UNINSTALL_SUCCESS
+      - UNINSTALL_FAILED
+  Application:
+    required:
+      - application_name
+      - package_name
+      - enterprise
+    type: object
+    properties:
+      id:
+        title: Id
+        type: string
+        format: uuid
+        readOnly: true
+      version:
+        $ref: '#/definitions/AppVersion'
+      application_name:
+        title: Application name
+        type: string
+        maxLength: 255
+        minLength: 1
+      package_name:
+        title: Package name
+        type: string
+        maxLength: 255
+        minLength: 1
+      developer:
+        title: Developer
+        type: string
+        maxLength: 255
+        minLength: 1
+        x-nullable: true
+      category:
+        title: Category
+        type: string
+        maxLength: 255
+        minLength: 1
+        x-nullable: true
+      content_rating:
+        title: Content rating
+        type: string
+        format: decimal
+      compatibility:
+        title: Compatibility
+        type: string
+        minLength: 1
+        x-nullable: true
+      created_on:
+        title: Created on
+        type: string
+        format: date-time
+        readOnly: true
+      updated_on:
+        title: Updated on
+        type: string
+        format: date-time
+        readOnly: true
+      is_active:
+        title: Is active
+        type: boolean
+      is_hidden:
+        title: Is hidden
+        type: boolean
+      enterprise:
+        title: Enterprise
+        type: string
+        format: url
+  AppPermission:
+    required:
+      - permission
+      - enterprise
+    type: object
+    properties:
+      id:
+        title: Id
+        type: string
+        format: uuid
+        readOnly: true
+      permission:
+        title: Permission
+        type: string
+        maxLength: 255
+        minLength: 1
+      grant_state:
+        title: Grant state
+        type: string
+        enum:
+          - Default
+          - Denied
+          - Granted
+      created_on:
+        title: Created on
+        type: string
+        format: date-time
+        readOnly: true
+      updated_on:
+        title: Updated on
+        type: string
+        format: date-time
+        readOnly: true
+      is_active:
+        title: Is active
+        type: boolean
+      enterprise:
+        title: Enterprise
+        type: string
+        format: url
+      app_version:
+        title: App version
+        type: string
+        format: url
+  AppVersion:
+    title: Version
+    required:
+      - permissions
+      - version_code
+      - enterprise
+    type: object
+    properties:
+      id:
+        title: Id
+        type: string
+        format: uuid
+        readOnly: true
+      installed_count:
+        title: Installed count
+        type: integer
+        readOnly: true
+      permissions:
+        type: array
+        items:
+          $ref: '#/definitions/AppPermission'
+      app_file:
+        title: App file
+        type: string
+        readOnly: true
+        format: url
+      app_icon:
+        title: App icon
+        type: string
+        readOnly: true
+        x-nullable: true
+        format: url
+      version_code:
+        title: Version code
+        type: string
+        maxLength: 50
+        minLength: 1
+      build_number:
+        title: Build number
+        type: string
+        maxLength: 100
+        minLength: 1
+        x-nullable: true
+      size_in_mb:
+        title: Size in mb
+        type: number
+      hash_string:
+        title: Hash string
+        type: string
+      release_name:
+        title: Release name
+        type: string
+        maxLength: 255
+        minLength: 1
+        x-nullable: true
+      release_comments:
+        title: Release comments
+        type: string
+        minLength: 1
+        x-nullable: true
+      release_track:
+        title: Release track
+        type: string
+        enum:
+          - Alpha
+          - Beta
+          - Production
+        x-nullable: true
+      created_on:
+        title: Created on
+        type: string
+        format: date-time
+        readOnly: true
+      updated_on:
+        title: Updated on
+        type: string
+        format: date-time
+        readOnly: true
+      min_sdk_version:
+        title: Min sdk version
+        type: string
+        maxLength: 10
+        minLength: 1
+        x-nullable: true
+      target_sdk_version:
+        title: Target sdk version
+        type: string
+        maxLength: 10
+        minLength: 1
+        x-nullable: true
+      is_enabled:
+        title: Is enabled
+        type: boolean
+      enterprise:
+        title: Enterprise
+        type: string
+        format: url
+      application:
+        title: Application
+        type: string
+        format: url
   Device:
     type: object
     properties:
@@ -808,6 +1465,33 @@ definitions:
       updated_on:
         type: string
         format: date-time
+  DeviceStatus:
+    required:
+      - data
+      - device
+      - enterprise
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      data:
+        title: Data
+        type: string
+      created_on:
+        title: Created on
+        type: string
+        format: date-time
+        readOnly: true
+      device:
+        title: Device
+        type: string
+        format: url
+      enterprise:
+        title: Enterprise
+        type: string
+        format: url
   EmmDevice:
     type: object
     properties:
@@ -980,6 +1664,71 @@ definitions:
       is_active:
         title: Is active
         type: boolean
+  EnterprisePolicy:
+    required:
+      - name
+      - policy
+      - enterprise
+    type: object
+    properties:
+      url:
+        title: Url
+        type: string
+        format: url
+        readOnly: true
+      device_count:
+        title: Device count
+        type: integer
+        readOnly: true
+      is_default:
+        title: Is default
+        type: boolean
+        readOnly: true
+      is_template:
+        title: Is template
+        type: boolean
+        default: false
+      uuid:
+        title: Uuid
+        type: string
+        format: uuid
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        maxLength: 255
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        x-nullable: true
+      google_policy_id:
+        title: Google policy id
+        type: string
+        maxLength: 255
+        minLength: 1
+        x-nullable: true
+      policy:
+        title: Policy
+        description: Policy JSON string
+        type: string
+      created_on:
+        title: Created on
+        type: string
+        format: date-time
+        readOnly: true
+      updated_on:
+        title: Updated on
+        type: string
+        format: date-time
+        readOnly: true
+      is_active:
+        title: Is active
+        type: boolean
+      enterprise:
+        title: Enterprise
+        type: string
+        format: url
   GoogleEnterprise:
     title: Emm
     required:
