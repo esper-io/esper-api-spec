@@ -1,0 +1,44 @@
+get:
+  operationId: getAppVersion
+  summary: Get app version information
+  description: Returns AppVersion instance
+  produces:
+    - application/json
+  parameters: []
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/AppVersion'
+  tags:
+    - Application
+delete:
+  operationId: deleteAppVersion
+  summary: Delete app version
+  description: Empty response
+  produces:
+    - application/json
+  parameters: []
+  responses:
+    '204':
+      description: successful operations
+  tags:
+    - Application
+parameters:
+  - name: version_id
+    in: path
+    description: A UUID string identifying this app version.
+    required: true
+    type: string
+    format: uuid
+  - name: application_id
+    in: path
+    description: A UUID string identifying this application.
+    required: true
+    type: string
+    format: uuid
+  - name: enterprise_id
+    description: A UUID string identifying enterprise.
+    in: path
+    required: true
+    type: string

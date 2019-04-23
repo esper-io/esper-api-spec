@@ -1,0 +1,100 @@
+title: Version
+required:
+  - permissions
+  - version_code
+  - enterprise
+type: object
+properties:
+  id:
+    title: Id
+    type: string
+    format: uuid
+    readOnly: true
+  installed_count:
+    title: Installed count
+    type: integer
+    readOnly: true
+  permissions:
+    type: array
+    items:
+      $ref: '#/definitions/AppPermission'
+  app_file:
+    title: App file
+    type: string
+    readOnly: true
+    format: url
+  app_icon:
+    title: App icon
+    type: string
+    readOnly: true
+    x-nullable: true
+    format: url
+  version_code:
+    title: Version code
+    type: string
+    maxLength: 50
+    minLength: 1
+  build_number:
+    title: Build number
+    type: string
+    maxLength: 100
+    minLength: 1
+    x-nullable: true
+  size_in_mb:
+    title: Size in mb
+    type: number
+  hash_string:
+    title: Hash string
+    type: string
+  release_name:
+    title: Release name
+    type: string
+    maxLength: 255
+    minLength: 1
+    x-nullable: true
+  release_comments:
+    title: Release comments
+    type: string
+    minLength: 1
+    x-nullable: true
+  release_track:
+    title: Release track
+    type: string
+    enum:
+      - Alpha
+      - Beta
+      - Production
+    x-nullable: true
+  created_on:
+    title: Created on
+    type: string
+    format: date-time
+    readOnly: true
+  updated_on:
+    title: Updated on
+    type: string
+    format: date-time
+    readOnly: true
+  min_sdk_version:
+    title: Min sdk version
+    type: string
+    maxLength: 10
+    minLength: 1
+    x-nullable: true
+  target_sdk_version:
+    title: Target sdk version
+    type: string
+    maxLength: 10
+    minLength: 1
+    x-nullable: true
+  is_enabled:
+    title: Is enabled
+    type: boolean
+  enterprise:
+    title: Enterprise
+    type: string
+    format: url
+  application:
+    title: Application
+    type: string
+    format: url

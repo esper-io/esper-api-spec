@@ -95,6 +95,7 @@ x-tagGroups:
   - name: API Reference
     tags:
       - Enterprise
+      - Application
       - Device
       - Device App
       - Commands

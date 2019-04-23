@@ -1,0 +1,38 @@
+get:
+  operationId: get
+  summary: Get application information
+  description: Returns Application instance
+  produces:
+    - application/json
+  parameters: []
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/Application'
+  tags:
+    - Application
+delete:
+  operationId: delete
+  summary: Delete an application
+  description: Empty response
+  produces:
+    - application/json
+  parameters: []
+  responses:
+    '204':
+      description: successful operation
+  tags:
+    - Application
+parameters:
+  - name: application_id
+    in: path
+    description: A UUID string identifying this application.
+    required: true
+    type: string
+    format: uuid
+  - name: enterprise_id
+    description: A UUID string identifying enterprise.
+    in: path
+    required: true
+    type: string
