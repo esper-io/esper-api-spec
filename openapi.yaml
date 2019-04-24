@@ -76,11 +76,45 @@ x-tagGroups:
       - Device Commands
       - Group Commands
 paths:
+  /enterprise/:
+    get:
+      operationId: getAllEnterprises
+      summary: List all enterprises
+      description: Returns Enterprise list
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            required:
+              - count
+              - results
+            type: object
+            properties:
+              count:
+                type: integer
+              next:
+                type: string
+                format: url
+                x-nullable: true
+              previous:
+                type: string
+                format: url
+                x-nullable: true
+              results:
+                type: array
+                items:
+                  $ref: '#/definitions/Enterprise'
+      tags:
+        - Enterprise
+    parameters: []
   '/enterprise/{enterprise_id}/':
     get:
       operationId: getEnterprise
       summary: Get your enteprise information
-      description: Returns enterprise
+      description: Returns Enterprise instance
       produces:
         - application/json
       parameters: []
