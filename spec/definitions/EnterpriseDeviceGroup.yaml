@@ -1,0 +1,39 @@
+required:
+  - name
+  - enterprise
+type: object
+properties:
+  id:
+    title: Id
+    type: string
+    format: uuid
+    readOnly: true
+  device_ids:
+    type: array
+    items:
+      type: string
+      format: uuid
+    uniqueItems: true
+  device_tiles:
+    type: array
+    items:
+      $ref: '#/definitions/DeviceStatusTiles'
+    readOnly: true
+  device_count:
+    title: Device count
+    type: integer
+    readOnly: true
+  name:
+    title: Name
+    type: string
+    maxLength: 255
+    minLength: 1
+  created_on:
+    title: Created on
+    type: string
+    format: date-time
+    readOnly: true
+  enterprise:
+    title: Enterprise
+    type: string
+    format: url
