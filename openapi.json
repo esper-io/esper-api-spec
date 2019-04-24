@@ -54,7 +54,8 @@
         "Device",
         "Device App",
         "Device Group",
-        "Commands"
+        "Device Commands",
+        "Group Commands"
       ]
     }
   ],
@@ -773,77 +774,6 @@
         }
       ]
     },
-    "/enterprise/{enterprise_id}/device/{device_id}/command/": {
-      "post": {
-        "tags": [
-          "Commands"
-        ],
-        "summary": "Run commands on device",
-        "description": "Fire commands on device like lock, ping etc",
-        "operationId": "runCommand",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "enterprise_id",
-            "in": "path",
-            "description": "ID of the enterprise",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "device_id",
-            "in": "path",
-            "description": "ID of the device",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "command",
-            "in": "body",
-            "description": "command name to fire",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeviceCommandRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/DeviceCommandResponse"
-            }
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/UnauthorizedResponse"
-            }
-          }
-        },
-        "x-code-samples": [
-          {
-            "lang": "Shell",
-            "source": "curl -X POST \\\n  https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/command/ \\\n  -H 'Authorization: Basic c2l0ZWFNpdGVhZG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"command\": \"UPDATE_HEARTBEAT\"}'\n"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/command/\"\n\npayload = \"{\\\"command\\\": \\\"UPDATE_HEARTBEAT\\\"}\"\nheaders = {\n  'Content-Type': \"application/json\",\n  'Authorization': \"Basic c2l0ZWFkbWdGVhZG1pbjEyMyQ=\"\n}\n\nresponse = requests.request(\"POST\", url, data=payload, headers=headers)\n\nprint(response.text)\n"
-          },
-          {
-            "lang": "Java",
-            "source": "OkHttpClient client = new OkHttpClient();\n\nMediaType mediaType = MediaType.parse(\"application/json\");\nRequestBody body = RequestBody.create(mediaType, \"{\\\"command\\\": \\\"UPDATE_HEARTBEAT\\\"}\");\nRequest request = new Request.Builder()\n  .url(\"https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/command/\")\n  .post(body)\n  .addHeader(\"Content-Type\", \"application/json\")\n  .addHeader(\"Authorization\", \"Basic c2l0ZWFnNpdGVhZG1pbjEyMyQ=\")\n  .build();\n\nResponse response = client.newCall(request).execute();\n"
-          }
-        ]
-      }
-    },
     "/enterprise/{enterprise_id}/device/{device_id}/install/": {
       "get": {
         "operationId": "device_app_install_list",
@@ -1464,6 +1394,204 @@
           "type": "string"
         }
       ]
+    },
+    "/v0/device-command/{command_id}/": {
+      "get": {
+        "operationId": "getDeviceCommand",
+        "summary": "Get command information",
+        "description": "Returns DeviceCommand instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceCommand"
+            }
+          }
+        },
+        "tags": [
+          "v0",
+          "Device Commands"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "command_id",
+          "in": "path",
+          "description": "A UUID string identifying this device command.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "/v0/device-command/lock/": {
+      "post": {
+        "operationId": "lockDevice",
+        "summary": "Lock a device",
+        "description": "Creates DeviceCommand instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceCommandRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceCommand"
+            }
+          }
+        },
+        "tags": [
+          "v0",
+          "Device Commands"
+        ]
+      },
+      "parameters": []
+    },
+    "/v0/device-command/reboot/": {
+      "post": {
+        "operationId": "rebootDevice",
+        "summary": "Rebbot a device",
+        "description": "Creates DeviceCommand instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceCommandRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceCommand"
+            }
+          }
+        },
+        "tags": [
+          "v0",
+          "Device Commands"
+        ]
+      },
+      "parameters": []
+    },
+    "/v0/group-command/{command_id}/": {
+      "get": {
+        "operationId": "getGroupCommand",
+        "summary": "Get command information",
+        "description": "Returns GroupCommand instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/GroupCommand"
+            }
+          }
+        },
+        "tags": [
+          "v0",
+          "Group Commands"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "command_id",
+          "in": "path",
+          "description": "A UUID string identifying this device group command.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "/v0/group-command/lock/": {
+      "post": {
+        "operationId": "lockGroup",
+        "summary": "Lock devices in a group",
+        "description": "Creates GroupCommand instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GroupCommandRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/GroupCommand"
+            }
+          }
+        },
+        "tags": [
+          "v0",
+          "Group Commands"
+        ]
+      },
+      "parameters": []
+    },
+    "/v0/group-command/reboot/": {
+      "post": {
+        "operationId": "rebootGroup",
+        "summary": "Reboot devices in a group",
+        "description": "Creates GroupCommand instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GroupCommandRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/GroupCommand"
+            }
+          }
+        },
+        "tags": [
+          "v0",
+          "Group Commands"
+        ]
+      },
+      "parameters": []
     }
   },
   "definitions": {
@@ -2036,62 +2164,129 @@
         }
       }
     },
+    "DeviceCommand": {
+      "required": [
+        "command",
+        "enterprise",
+        "device"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "current_base_uri": {
+          "title": "Current base uri",
+          "type": "string",
+          "minLength": 1
+        },
+        "command_args": {
+          "title": "Command args",
+          "type": "string"
+        },
+        "action": {
+          "title": "Action",
+          "type": "string",
+          "enum": [
+            "acknowledge",
+            "in_progress",
+            "success",
+            "failed"
+          ]
+        },
+        "schedule": {
+          "title": "Schedule",
+          "type": "string"
+        },
+        "group_schedule_id": {
+          "title": "Group schedule id",
+          "type": "string",
+          "format": "uuid"
+        },
+        "command": {
+          "$ref": "#/definitions/DeviceCommandEnum"
+        },
+        "state": {
+          "title": "State",
+          "type": "string",
+          "enum": [
+            "Command Initiated",
+            "Command Acknowledged",
+            "Command In Progress",
+            "Command TimeOut",
+            "Command Success",
+            "Command Failure",
+            "Command Scheduled"
+          ]
+        },
+        "details": {
+          "title": "Details",
+          "type": "string",
+          "x-nullable": true
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "type": "string",
+          "format": "url"
+        },
+        "device": {
+          "title": "Device",
+          "type": "string",
+          "format": "url"
+        },
+        "group_command": {
+          "title": "Group command",
+          "type": "string",
+          "format": "url",
+          "x-nullable": true
+        },
+        "issued_by": {
+          "title": "Issued by",
+          "type": "string",
+          "format": "url",
+          "x-nullable": true
+        }
+      }
+    },
     "DeviceCommandEnum": {
       "type": "string",
+      "description": "\n* REBOOT: Reboot device\n* LOCK:  Lock device screen\n",
       "enum": [
-        "UPDATE_HEARTBEAT",
+        "REBOOT",
         "LOCK"
       ]
     },
     "DeviceCommandRequest": {
+      "required": [
+        "enterprise",
+        "device"
+      ],
       "type": "object",
       "properties": {
-        "command": {
-          "$ref": "#/definitions/DeviceCommandEnum"
-        }
-      }
-    },
-    "DeviceCommandResponse": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "url": {
-          "type": "string",
-          "format": "url"
-        },
         "enterprise": {
+          "title": "Enterprise",
           "type": "string",
           "format": "uuid"
         },
         "device": {
+          "title": "Device",
           "type": "string",
           "format": "uuid"
-        },
-        "command": {
-          "type": "string"
-        },
-        "state": {
-          "type": "string"
-        },
-        "issued_by": {
-          "type": "string"
-        },
-        "command_args": {
-          "type": "object"
-        },
-        "details": {
-          "type": "object"
-        },
-        "created_on": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "updated_on": {
-          "type": "string",
-          "format": "date-time"
         }
       }
     },
@@ -2741,6 +2936,100 @@
         },
         "enterprise": {
           "title": "Enterprise",
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "GroupCommand": {
+      "required": [
+        "command",
+        "enterprise",
+        "group"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "schedule": {
+          "title": "Schedule",
+          "type": "string"
+        },
+        "command": {
+          "$ref": "#/definitions/DeviceCommandEnum"
+        },
+        "command_args": {
+          "title": "Command args",
+          "type": "string",
+          "x-nullable": true
+        },
+        "state": {
+          "title": "State",
+          "type": "string",
+          "enum": [
+            "Command Initiated",
+            "Command Success",
+            "Command Failure",
+            "Command Scheduled"
+          ]
+        },
+        "details": {
+          "title": "Details",
+          "type": "string",
+          "x-nullable": true
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "is_active": {
+          "title": "Is active",
+          "type": "boolean"
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "type": "string",
+          "format": "url"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string",
+          "format": "url"
+        },
+        "issued_by": {
+          "title": "Issued by",
+          "type": "string",
+          "format": "url",
+          "x-nullable": true
+        }
+      }
+    },
+    "GroupCommandRequest": {
+      "required": [
+        "enterprise",
+        "group"
+      ],
+      "type": "object",
+      "properties": {
+        "enterprise": {
+          "title": "Enterprise",
+          "type": "string",
+          "format": "uuid"
+        },
+        "group": {
+          "title": "Group",
           "type": "string",
           "format": "uuid"
         }
