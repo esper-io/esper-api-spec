@@ -64,6 +64,29 @@ info:
     You can read more about basic authentication scheme 
     [here](https://swagger.io/docs/specification/authentication/basic-authentication/)
 
+
+    # Errors
+
+    The API uses standard HTTP status codes to indicate success or failure. All error responses will have a JSON body in the following format
+
+
+    ```
+
+    {
+      "errors": [],
+      "message": "error message",
+      "status": 400
+    }
+
+    ```
+
+    * `errors` -  List of error details
+
+    * `message` - Error description
+
+    * `status` - HTTP status code
+
+
   version: 1.0.0
   title: Esper Manage API
   termsOfService: 'http://esper.io/terms/'

@@ -1,6 +1,6 @@
 post:
   operationId: rebootDevice
-  summary: Rebbot a device
+  summary: Reboot a device
   description: Creates DeviceCommand instance
   produces:
     - application/json
