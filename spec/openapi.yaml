@@ -101,4 +101,5 @@ x-tagGroups:
       - Device
       - Device App
       - Device Group
-      - Commands
+      - Device Commands
+      - Group Commands

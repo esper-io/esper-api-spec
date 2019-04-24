@@ -1,0 +1,21 @@
+post:
+  operationId: lockGroup
+  summary: Lock devices in a group
+  description: Creates GroupCommand instance
+  produces:
+    - application/json
+  parameters:
+    - name: data
+      in: body
+      required: true
+      schema:
+        $ref: '#/definitions/GroupCommandRequest'
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/GroupCommand'
+  tags:
+    - v0
+    - Group Commands
+parameters: []

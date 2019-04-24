@@ -1,13 +1,13 @@
 required:
   - enterprise
-  - device
+  - group
 type: object
 properties:
   enterprise:
     title: Enterprise
     type: string
     format: uuid
-  device:
-    title: Device
+  group:
+    title: Group
     type: string
     format: uuid

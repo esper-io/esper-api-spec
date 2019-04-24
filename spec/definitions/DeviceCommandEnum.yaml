@@ -1,4 +1,10 @@
 type: string
+description: >
+
+  * REBOOT: Reboot device
+
+  * LOCK:  Lock device screen
+
 enum:
-  - UPDATE_HEARTBEAT
+  - REBOOT
   - LOCK

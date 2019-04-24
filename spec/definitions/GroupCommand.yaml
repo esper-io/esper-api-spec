@@ -1,0 +1,58 @@
+required:
+  - command
+  - enterprise
+  - group
+type: object
+properties:
+  id:
+    title: Id
+    type: string
+    format: uuid
+    readOnly: true
+  schedule:
+    title: Schedule
+    type: string
+  command:
+    $ref: '#/definitions/DeviceCommandEnum'
+  command_args:
+    title: Command args
+    type: string
+    x-nullable: true
+  state:
+    title: State
+    type: string
+    enum:
+      - Command Initiated
+      - Command Success
+      - Command Failure
+      - Command Scheduled
+  details:
+    title: Details
+    type: string
+    x-nullable: true
+  created_on:
+    title: Created on
+    type: string
+    format: date-time
+    readOnly: true
+  updated_on:
+    title: Updated on
+    type: string
+    format: date-time
+    readOnly: true
+  is_active:
+    title: Is active
+    type: boolean
+  enterprise:
+    title: Enterprise
+    type: string
+    format: url
+  group:
+    title: Group
+    type: string
+    format: url
+  issued_by:
+    title: Issued by
+    type: string
+    format: url
+    x-nullable: true

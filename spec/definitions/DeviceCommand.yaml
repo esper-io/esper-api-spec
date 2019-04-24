@@ -1,0 +1,78 @@
+required:
+  - command
+  - enterprise
+  - device
+type: object
+properties:
+  id:
+    title: Id
+    type: string
+    format: uuid
+    readOnly: true
+  current_base_uri:
+    title: Current base uri
+    type: string
+    minLength: 1
+  command_args:
+    title: Command args
+    type: string
+  action:
+    title: Action
+    type: string
+    enum:
+      - acknowledge
+      - in_progress
+      - success
+      - failed
+  schedule:
+    title: Schedule
+    type: string
+  group_schedule_id:
+    title: Group schedule id
+    type: string
+    format: uuid
+  command:
+    $ref: '#/definitions/DeviceCommandEnum'
+  state:
+    title: State
+    type: string
+    enum:
+      - Command Initiated
+      - Command Acknowledged
+      - Command In Progress
+      - Command TimeOut
+      - Command Success
+      - Command Failure
+      - Command Scheduled
+  details:
+    title: Details
+    type: string
+    x-nullable: true
+  created_on:
+    title: Created on
+    type: string
+    format: date-time
+    readOnly: true
+  updated_on:
+    title: Updated on
+    type: string
+    format: date-time
+    readOnly: true
+  enterprise:
+    title: Enterprise
+    type: string
+    format: url
+  device:
+    title: Device
+    type: string
+    format: url
+  group_command:
+    title: Group command
+    type: string
+    format: url
+    x-nullable: true
+  issued_by:
+    title: Issued by
+    type: string
+    format: url
+    x-nullable: true

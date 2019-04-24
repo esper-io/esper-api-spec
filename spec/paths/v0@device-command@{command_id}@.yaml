@@ -1,0 +1,22 @@
+get:
+  operationId: getDeviceCommand
+  summary: Get command information
+  description: Returns DeviceCommand instance
+  produces:
+    - application/json
+  parameters: []
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/DeviceCommand'
+  tags:
+    - v0
+    - Device Commands
+parameters:
+  - name: command_id
+    in: path
+    description: A UUID string identifying this device command.
+    required: true
+    type: string
+    format: uuid
