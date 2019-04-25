@@ -1117,6 +1117,28 @@ paths:
         required: true
         type: string
         format: uuid
+  /v0/device-command/install/:
+    post:
+      operationId: installDeviceApp
+      summary: Install an app on device
+      description: Creates DeviceCommand instance
+      produces:
+        - application/json
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceCommandRequest'
+      responses:
+        '201':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/DeviceCommand'
+      tags:
+        - v0
+        - Device Commands
+    parameters: []
   /v0/device-command/lock/:
     post:
       operationId: lockDevice
@@ -1768,9 +1790,11 @@ definitions:
 
       * REBOOT: Reboot device
       * LOCK:  Lock device screen
+      * INSTALL:  Install an app version
     enum:
       - REBOOT
       - LOCK
+      - INSTALL
   DeviceCommandRequest:
     required:
       - enterprise
@@ -1785,6 +1809,9 @@ definitions:
         title: Device
         type: string
         format: uuid
+      command_args:
+        title: Command args
+        type: string
   DeviceCustom:
     title: Device
     required:
