@@ -5,6 +5,9 @@ description: >
 
   * LOCK:  Lock device screen
 
+  * INSTALL:  Install an app version
+
 enum:
   - REBOOT
   - LOCK
+  - INSTALL
