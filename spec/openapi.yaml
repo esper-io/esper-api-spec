@@ -83,8 +83,6 @@ x-tagGroups:
       - Device App
       - Device Group
       - Commands
-      - Device Commands
-      - Group Commands
 securityDefinitions:
   apiKey:
     description: |
