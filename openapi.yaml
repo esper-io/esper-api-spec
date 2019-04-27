@@ -15,28 +15,6 @@ info:
 
     # Authentication
     Client needs to send authentication details to access APIs. Following authentication schemes are supported:
-
-    #### Basic Authentication
-    Client can use username and password to authenticate. These are your developer account credentials.
-    For example, the client sends HTTP requests with the Authorization header that contains the word `Basic` followed by a space and a base64-encoded string `username:password`.
-    ##### Base64 encoding
-    Bash
-
-    ``` echo 'username:password' | base64 ```
-
-    Powershell
-
-    ``` [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("username:password")) ```
-
-    **Example request**
-    ```bash
-    curl -X GET \
-      https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/ \
-      -H 'Authorization: Basic cl0ZWFkbWluOnNpdG1pbjEyMyQ=' \
-      -H 'Content-Type: application/json' \
-    ```
-    You can read more about basic authentication scheme  [here](https://swagger.io/docs/specification/authentication/basic-authentication/)
-
     # Errors
     The API uses standard HTTP status codes to indicate success or failure. All error responses will have a JSON body in the following format
 
@@ -88,8 +66,27 @@ x-tagGroups:
       - Device App
       - Device Group
       - Commands
-      - Device Commands
-      - Group Commands
+securityDefinitions:
+  apiKey:
+    description: |
+      Access token for APIs. You need to generate this from your developer portal at DOMAIN.shoonyacloud.com. Please follow the instructions [here](https://docs.shoonyacloud.com) to generate an access token.
+      Once you have the access token, you need to send an authorization header as below
+
+      ```bash
+
+          curl -X GET \
+            https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/ \
+            -H 'Authorization: Bearer <ACCESS_TOKEN>' \
+            -H 'Content-Type: application/json' \
+      ```
+
+      > Please note the use of keyword **Bearer** before the token value.
+
+
+      You can read more about api key authentication scheme [here](https://swagger.io/docs/specification/authentication/api-keys/).
+    name: Authorization
+    type: apiKey
+    in: header
 paths:
   /enterprise/:
     get:
@@ -122,6 +119,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/Enterprise'
+      security:
+        - apiKey: []
       tags:
         - Enterprise
     parameters: []
@@ -138,6 +137,8 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/Enterprise'
+      security:
+        - apiKey: []
       tags:
         - Enterprise
     patch:
@@ -157,6 +158,8 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/Enterprise'
+      security:
+        - apiKey: []
       tags:
         - Enterprise
     parameters:
@@ -168,7 +171,7 @@ paths:
         format: uuid
   '/enterprise/{enterprise_id}/application/':
     get:
-      operationId: list
+      operationId: getAllApplications
       summary: List apps in enterprise
       description: Returns Application list
       produces:
@@ -218,6 +221,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/Application'
+      security:
+        - apiKey: []
       tags:
         - Application
     parameters:
@@ -228,7 +233,7 @@ paths:
         type: string
   '/enterprise/{enterprise_id}/application/{application_id}/':
     get:
-      operationId: get
+      operationId: getApplication
       summary: Get application information
       description: Returns Application instance
       produces:
@@ -239,10 +244,12 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/Application'
+      security:
+        - apiKey: []
       tags:
         - Application
     delete:
-      operationId: delete
+      operationId: deleteApplication
       summary: Delete an application
       description: Empty response
       produces:
@@ -251,6 +258,8 @@ paths:
       responses:
         '204':
           description: successful operation
+      security:
+        - apiKey: []
       tags:
         - Application
     parameters:
@@ -317,6 +326,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/AppVersion'
+      security:
+        - apiKey: []
       tags:
         - Application
     parameters:
@@ -344,6 +355,8 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/AppVersion'
+      security:
+        - apiKey: []
       tags:
         - Application
     delete:
@@ -356,6 +369,8 @@ paths:
       responses:
         '204':
           description: successful operations
+      security:
+        - apiKey: []
       tags:
         - Application
     parameters:
@@ -406,8 +421,10 @@ paths:
       consumes:
         - multipart/form-data
         - application/x-www-form-urlencoded
+      security:
+        - apiKey: []
       tags:
-        - Enterprise Application
+        - Application
     parameters:
       - name: enterprise_id
         description: A UUID string identifying this enterprise.
@@ -416,8 +433,6 @@ paths:
         type: string
   '/enterprise/{enterprise_id}/device/':
     get:
-      tags:
-        - Device
       summary: Fetch all devices in an enterprise
       description: Returns a list of devices
       operationId: getAllDevices
@@ -470,6 +485,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/Device'
+      security:
+        - apiKey: []
+      tags:
+        - Device
       x-code-samples:
         - lang: Shell
           source: |
@@ -506,8 +525,6 @@ paths:
             Response response = client.newCall(request).execute();
   '/enterprise/{enterprise_id}/device/{device_id}/':
     get:
-      tags:
-        - Device
       summary: Fetch device details by ID
       description: Returns details of a device
       operationId: getDeviceById
@@ -537,6 +554,10 @@ paths:
           description: Unauthorized
           schema:
             $ref: '#/definitions/UnauthorizedResponse'
+      security:
+        - apiKey: []
+      tags:
+        - Device
       x-code-samples:
         - lang: Shell
           source: |
@@ -573,7 +594,7 @@ paths:
             Response response = client.newCall(request).execute();
   '/enterprise/{enterprise_id}/device/{device_id}/app/':
     get:
-      operationId: device_app_list
+      operationId: getDeviceApps
       summary: List all device apps
       description: Returns DeviceApp list
       produces:
@@ -628,6 +649,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/DeviceApp'
+      security:
+        - apiKey: []
       tags:
         - Device App
     parameters:
@@ -643,7 +666,7 @@ paths:
         type: string
   '/enterprise/{enterprise_id}/device/{device_id}/app/{app_id}/':
     get:
-      operationId: device_app_by_id
+      operationId: getDeviceAppById
       summary: Get app information
       description: Returns DeviceApp instance
       produces:
@@ -654,6 +677,8 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/DeviceApp'
+      security:
+        - apiKey: []
       tags:
         - Device App
     parameters:
@@ -675,8 +700,6 @@ paths:
         type: string
   '/enterprise/{enterprise_id}/device/{device_id}/command/':
     post:
-      tags:
-        - Commands
       summary: Run commands on device
       description: 'Fire commands on device like lock, ping etc'
       operationId: runCommand
@@ -706,9 +729,13 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/DeviceCommand'
+      security:
+        - apiKey: []
+      tags:
+        - Commands
   '/enterprise/{enterprise_id}/device/{device_id}/install/':
     get:
-      operationId: device_app_install_list
+      operationId: getAppInstalls
       summary: List installed apps
       description: Returns AppInstall list
       produces:
@@ -768,8 +795,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/AppInstall'
+      security:
+        - apiKey: []
       tags:
-        - Device App
+        - Device
     parameters:
       - name: enterprise_id
         description: A UUID string identifying this enterprise.
@@ -817,6 +846,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/DeviceStatus'
+      security:
+        - apiKey: []
       tags:
         - Device
     parameters:
@@ -877,6 +908,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/EnterpriseDeviceGroup'
+      security:
+        - apiKey: []
       tags:
         - Device Group
     post:
@@ -917,6 +950,8 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/EnterpriseDeviceGroup'
+      security:
+        - apiKey: []
       tags:
         - Device Group
     put:
@@ -936,6 +971,8 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/EnterpriseDeviceGroup'
+      security:
+        - apiKey: []
       tags:
         - Device Group
     patch:
@@ -955,6 +992,8 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/EnterpriseDeviceGroup'
+      security:
+        - apiKey: []
       tags:
         - Device Group
     delete:
@@ -967,6 +1006,8 @@ paths:
       responses:
         '204':
           description: successful operation
+      security:
+        - apiKey: []
       tags:
         - Device Group
     parameters:
@@ -1028,6 +1069,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/EnterprisePolicy'
+      security:
+        - apiKey: []
       tags:
         - Policy
     post:
@@ -1047,6 +1090,8 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/EnterprisePolicy'
+      security:
+        - apiKey: []
       tags:
         - Policy
     parameters:
@@ -1068,6 +1113,8 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/EnterprisePolicy'
+      security:
+        - apiKey: []
       tags:
         - Policy
     put:
@@ -1087,6 +1134,8 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/EnterprisePolicy'
+      security:
+        - apiKey: []
       tags:
         - Policy
     patch:
@@ -1106,6 +1155,8 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/EnterprisePolicy'
+      security:
+        - apiKey: []
       tags:
         - Policy
     delete:
@@ -1118,6 +1169,8 @@ paths:
       responses:
         '204':
           description: successful operation
+      security:
+        - apiKey: []
       tags:
         - Policy
     parameters:
@@ -1131,162 +1184,6 @@ paths:
         in: path
         required: true
         type: string
-  '/v0/device-command/{command_id}/':
-    get:
-      operationId: getDeviceCommand
-      summary: Get command information
-      description: Returns DeviceCommand instance
-      produces:
-        - application/json
-      parameters: []
-      responses:
-        '200':
-          description: successful operation
-          schema:
-            $ref: '#/definitions/DeviceCommand'
-      tags:
-        - v0
-        - Device Commands
-    parameters:
-      - name: command_id
-        in: path
-        description: A UUID string identifying this device command.
-        required: true
-        type: string
-        format: uuid
-  /v0/device-command/install/:
-    post:
-      operationId: installDeviceApp
-      summary: Install an app on device
-      description: Creates DeviceCommand instance
-      produces:
-        - application/json
-      parameters:
-        - name: data
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeviceCommandRequest'
-      responses:
-        '201':
-          description: successful operation
-          schema:
-            $ref: '#/definitions/DeviceCommand'
-      tags:
-        - v0
-        - Device Commands
-    parameters: []
-  /v0/device-command/lock/:
-    post:
-      operationId: lockDevice
-      summary: Lock a device
-      description: Creates DeviceCommand instance
-      produces:
-        - application/json
-      parameters:
-        - name: data
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeviceCommandRequest'
-      responses:
-        '201':
-          description: successful operation
-          schema:
-            $ref: '#/definitions/DeviceCommand'
-      tags:
-        - v0
-        - Device Commands
-    parameters: []
-  /v0/device-command/reboot/:
-    post:
-      operationId: rebootDevice
-      summary: Reboot a device
-      description: Creates DeviceCommand instance
-      produces:
-        - application/json
-      parameters:
-        - name: data
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/DeviceCommandRequest'
-      responses:
-        '201':
-          description: successful operation
-          schema:
-            $ref: '#/definitions/DeviceCommand'
-      tags:
-        - v0
-        - Device Commands
-    parameters: []
-  '/v0/group-command/{command_id}/':
-    get:
-      operationId: getGroupCommand
-      summary: Get command information
-      description: Returns GroupCommand instance
-      produces:
-        - application/json
-      parameters: []
-      responses:
-        '200':
-          description: successful operation
-          schema:
-            $ref: '#/definitions/GroupCommand'
-      tags:
-        - v0
-        - Group Commands
-    parameters:
-      - name: command_id
-        in: path
-        description: A UUID string identifying this device group command.
-        required: true
-        type: string
-        format: uuid
-  /v0/group-command/lock/:
-    post:
-      operationId: lockGroup
-      summary: Lock devices in a group
-      description: Creates GroupCommand instance
-      produces:
-        - application/json
-      parameters:
-        - name: data
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GroupCommandRequest'
-      responses:
-        '201':
-          description: successful operation
-          schema:
-            $ref: '#/definitions/GroupCommand'
-      tags:
-        - v0
-        - Group Commands
-    parameters: []
-  /v0/group-command/reboot/:
-    post:
-      operationId: rebootGroup
-      summary: Reboot devices in a group
-      description: Creates GroupCommand instance
-      produces:
-        - application/json
-      parameters:
-        - name: data
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/GroupCommandRequest'
-      responses:
-        '201':
-          description: successful operation
-          schema:
-            $ref: '#/definitions/GroupCommand'
-      tags:
-        - v0
-        - Group Commands
-    parameters: []
 definitions:
   AppInstall:
     required:
@@ -1886,23 +1783,6 @@ definitions:
       - REBOOT
       - LOCK
       - INSTALL
-  DeviceCommandRequest:
-    required:
-      - enterprise
-      - device
-    type: object
-    properties:
-      enterprise:
-        title: Enterprise
-        type: string
-        format: uuid
-      device:
-        title: Device
-        type: string
-        format: uuid
-      command_args:
-        title: Command args
-        type: string
   DeviceCustom:
     title: Device
     required:
@@ -2445,82 +2325,6 @@ definitions:
         title: Enterprise
         type: string
         format: uuid
-  GroupCommand:
-    required:
-      - command
-      - enterprise
-      - group
-    type: object
-    properties:
-      id:
-        title: Id
-        type: string
-        format: uuid
-        readOnly: true
-      schedule:
-        title: Schedule
-        type: string
-      command:
-        $ref: '#/definitions/DeviceCommandEnum'
-      command_args:
-        title: Command args
-        type: string
-        x-nullable: true
-      state:
-        title: State
-        type: string
-        enum:
-          - Command Initiated
-          - Command Success
-          - Command Failure
-          - Command Scheduled
-      details:
-        title: Details
-        type: string
-        x-nullable: true
-      created_on:
-        title: Created on
-        type: string
-        format: date-time
-        readOnly: true
-      updated_on:
-        title: Updated on
-        type: string
-        format: date-time
-        readOnly: true
-      is_active:
-        title: Is active
-        type: boolean
-      enterprise:
-        title: Enterprise
-        type: string
-        format: url
-      group:
-        title: Group
-        type: string
-        format: url
-      issued_by:
-        title: Issued by
-        type: string
-        format: url
-        x-nullable: true
-  GroupCommandRequest:
-    required:
-      - enterprise
-      - group
-    type: object
-    properties:
-      enterprise:
-        title: Enterprise
-        type: string
-        format: uuid
-      group:
-        title: Group
-        type: string
-        format: uuid
-      command_args:
-        title: Command args
-        type: string
   UnauthorizedResponse:
     description: Represents an authorization error
     type: object

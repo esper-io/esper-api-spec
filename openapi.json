@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "# Introduction\nEsper Manage APIs for Cloud are a set of REST-based APIs that help you programmatically control and monitor your enterprise's dedicated Esper endpoint. Using these APIs, one can orchestrate & manage devices that have been provisioned against your endpoint. Furthermore, this API allows you to manage android applications that get installed on such devices. To read more about the various capabilities of Esper endpoints and Esper managed devices, please visit [esper.io](https://esper.io). This guide describes all the available APIs in detail, along with code samples for you to quickly ramp up to using them.\n\nYou can find out more about Esper at [https://esper.io](https://esper.io)\n\nWe've done our best to keep this document up to date, but if you find any issues, please reach out to us at developer@esper.io.\n\n# SDK\n\n  You are welcome to use your favorite HTTP/REST library for your programming language in order to use these APIs, or you can use our official SDK (currently available in [python](https://github.com/esper-io/esper-client-py)) to do so.\n\n\n# Authentication\nClient needs to send authentication details to access APIs. Following authentication schemes are supported:\n\n#### Basic Authentication\nClient can use username and password to authenticate. These are your developer account credentials.\nFor example, the client sends HTTP requests with the Authorization header that contains the word `Basic` followed by a space and a base64-encoded string `username:password`.\n##### Base64 encoding\nBash\n\n``` echo 'username:password' | base64 ```\n\nPowershell\n\n``` [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(\"username:password\")) ```\n\n**Example request**\n```bash\ncurl -X GET \\\n  https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/ \\\n  -H 'Authorization: Basic cl0ZWFkbWluOnNpdG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json' \\\n```\nYou can read more about basic authentication scheme  [here](https://swagger.io/docs/specification/authentication/basic-authentication/)\n\n# Errors\nThe API uses standard HTTP status codes to indicate success or failure. All error responses will have a JSON body in the following format\n\n```\n{\n  \"errors\": [],\n  \"message\": \"error message\",\n  \"status\": 400\n}\n```\n* `errors` -  List of error details\n* `message` - Error description\n* `status` - HTTP status code\n",
+    "description": "# Introduction\nEsper Manage APIs for Cloud are a set of REST-based APIs that help you programmatically control and monitor your enterprise's dedicated Esper endpoint. Using these APIs, one can orchestrate & manage devices that have been provisioned against your endpoint. Furthermore, this API allows you to manage android applications that get installed on such devices. To read more about the various capabilities of Esper endpoints and Esper managed devices, please visit [esper.io](https://esper.io). This guide describes all the available APIs in detail, along with code samples for you to quickly ramp up to using them.\n\nYou can find out more about Esper at [https://esper.io](https://esper.io)\n\nWe've done our best to keep this document up to date, but if you find any issues, please reach out to us at developer@esper.io.\n\n# SDK\n\n  You are welcome to use your favorite HTTP/REST library for your programming language in order to use these APIs, or you can use our official SDK (currently available in [python](https://github.com/esper-io/esper-client-py)) to do so.\n\n\n# Authentication\nClient needs to send authentication details to access APIs. Following authentication schemes are supported:\n# Errors\nThe API uses standard HTTP status codes to indicate success or failure. All error responses will have a JSON body in the following format\n\n```\n{\n  \"errors\": [],\n  \"message\": \"error message\",\n  \"status\": 400\n}\n```\n* `errors` -  List of error details\n* `message` - Error description\n* `status` - HTTP status code\n",
     "version": "1.0.0",
     "title": "Esper Manage API",
     "termsOfService": "http://esper.io/terms/",
@@ -54,12 +54,18 @@
         "Device",
         "Device App",
         "Device Group",
-        "Commands",
-        "Device Commands",
-        "Group Commands"
+        "Commands"
       ]
     }
   ],
+  "securityDefinitions": {
+    "apiKey": {
+      "description": "Access token for APIs. You need to generate this from your developer portal at DOMAIN.shoonyacloud.com. Please follow the instructions [here](https://docs.shoonyacloud.com) to generate an access token.\nOnce you have the access token, you need to send an authorization header as below\n\n```bash\n\n    curl -X GET \\\n      https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/ \\\n      -H 'Authorization: Bearer <ACCESS_TOKEN>' \\\n      -H 'Content-Type: application/json' \\\n```\n\n> Please note the use of keyword **Bearer** before the token value.\n\n\nYou can read more about api key authentication scheme [here](https://swagger.io/docs/specification/authentication/api-keys/).\n",
+      "name": "Authorization",
+      "type": "apiKey",
+      "in": "header"
+    }
+  },
   "paths": {
     "/enterprise/": {
       "get": {
@@ -103,6 +109,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Enterprise"
         ]
@@ -126,6 +137,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Enterprise"
         ]
@@ -155,6 +171,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Enterprise"
         ]
@@ -172,7 +193,7 @@
     },
     "/enterprise/{enterprise_id}/application/": {
       "get": {
-        "operationId": "list",
+        "operationId": "getAllApplications",
         "summary": "List apps in enterprise",
         "description": "Returns Application list",
         "produces": [
@@ -242,6 +263,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Application"
         ]
@@ -258,7 +284,7 @@
     },
     "/enterprise/{enterprise_id}/application/{application_id}/": {
       "get": {
-        "operationId": "get",
+        "operationId": "getApplication",
         "summary": "Get application information",
         "description": "Returns Application instance",
         "produces": [
@@ -273,12 +299,17 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Application"
         ]
       },
       "delete": {
-        "operationId": "delete",
+        "operationId": "deleteApplication",
         "summary": "Delete an application",
         "description": "Empty response",
         "produces": [
@@ -290,6 +321,11 @@
             "description": "successful operation"
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Application"
         ]
@@ -384,6 +420,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Application"
         ]
@@ -423,6 +464,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Application"
         ]
@@ -440,6 +486,11 @@
             "description": "successful operations"
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Application"
         ]
@@ -512,8 +563,13 @@
           "multipart/form-data",
           "application/x-www-form-urlencoded"
         ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
-          "Enterprise Application"
+          "Application"
         ]
       },
       "parameters": [
@@ -528,9 +584,6 @@
     },
     "/enterprise/{enterprise_id}/device/": {
       "get": {
-        "tags": [
-          "Device"
-        ],
         "summary": "Fetch all devices in an enterprise",
         "description": "Returns a list of devices",
         "operationId": "getAllDevices",
@@ -604,6 +657,14 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Device"
+        ],
         "x-code-samples": [
           {
             "lang": "Shell",
@@ -622,9 +683,6 @@
     },
     "/enterprise/{enterprise_id}/device/{device_id}/": {
       "get": {
-        "tags": [
-          "Device"
-        ],
         "summary": "Fetch device details by ID",
         "description": "Returns details of a device",
         "operationId": "getDeviceById",
@@ -666,6 +724,14 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Device"
+        ],
         "x-code-samples": [
           {
             "lang": "Shell",
@@ -684,7 +750,7 @@
     },
     "/enterprise/{enterprise_id}/device/{device_id}/app/": {
       "get": {
-        "operationId": "device_app_list",
+        "operationId": "getDeviceApps",
         "summary": "List all device apps",
         "description": "Returns DeviceApp list",
         "produces": [
@@ -761,6 +827,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Device App"
         ]
@@ -784,7 +855,7 @@
     },
     "/enterprise/{enterprise_id}/device/{device_id}/app/{app_id}/": {
       "get": {
-        "operationId": "device_app_by_id",
+        "operationId": "getDeviceAppById",
         "summary": "Get app information",
         "description": "Returns DeviceApp instance",
         "produces": [
@@ -799,6 +870,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Device App"
         ]
@@ -830,9 +906,6 @@
     },
     "/enterprise/{enterprise_id}/device/{device_id}/command/": {
       "post": {
-        "tags": [
-          "Commands"
-        ],
         "summary": "Run commands on device",
         "description": "Fire commands on device like lock, ping etc",
         "operationId": "runCommand",
@@ -873,12 +946,20 @@
               "$ref": "#/definitions/DeviceCommand"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Commands"
+        ]
       }
     },
     "/enterprise/{enterprise_id}/device/{device_id}/install/": {
       "get": {
-        "operationId": "device_app_install_list",
+        "operationId": "getAppInstalls",
         "summary": "List installed apps",
         "description": "Returns AppInstall list",
         "produces": [
@@ -962,8 +1043,13 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
-          "Device App"
+          "Device"
         ]
       },
       "parameters": [
@@ -1033,6 +1119,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Device"
         ]
@@ -1119,6 +1210,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Device Group"
         ]
@@ -1179,6 +1275,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Device Group"
         ]
@@ -1208,6 +1309,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Device Group"
         ]
@@ -1237,6 +1343,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Device Group"
         ]
@@ -1254,6 +1365,11 @@
             "description": "successful operation"
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Device Group"
         ]
@@ -1341,6 +1457,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Policy"
         ]
@@ -1370,6 +1491,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Policy"
         ]
@@ -1401,6 +1527,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Policy"
         ]
@@ -1430,6 +1561,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Policy"
         ]
@@ -1459,6 +1595,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Policy"
         ]
@@ -1476,6 +1617,11 @@
             "description": "successful operation"
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Policy"
         ]
@@ -1496,237 +1642,6 @@
           "type": "string"
         }
       ]
-    },
-    "/v0/device-command/{command_id}/": {
-      "get": {
-        "operationId": "getDeviceCommand",
-        "summary": "Get command information",
-        "description": "Returns DeviceCommand instance",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/DeviceCommand"
-            }
-          }
-        },
-        "tags": [
-          "v0",
-          "Device Commands"
-        ]
-      },
-      "parameters": [
-        {
-          "name": "command_id",
-          "in": "path",
-          "description": "A UUID string identifying this device command.",
-          "required": true,
-          "type": "string",
-          "format": "uuid"
-        }
-      ]
-    },
-    "/v0/device-command/install/": {
-      "post": {
-        "operationId": "installDeviceApp",
-        "summary": "Install an app on device",
-        "description": "Creates DeviceCommand instance",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "data",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeviceCommandRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/DeviceCommand"
-            }
-          }
-        },
-        "tags": [
-          "v0",
-          "Device Commands"
-        ]
-      },
-      "parameters": []
-    },
-    "/v0/device-command/lock/": {
-      "post": {
-        "operationId": "lockDevice",
-        "summary": "Lock a device",
-        "description": "Creates DeviceCommand instance",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "data",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeviceCommandRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/DeviceCommand"
-            }
-          }
-        },
-        "tags": [
-          "v0",
-          "Device Commands"
-        ]
-      },
-      "parameters": []
-    },
-    "/v0/device-command/reboot/": {
-      "post": {
-        "operationId": "rebootDevice",
-        "summary": "Reboot a device",
-        "description": "Creates DeviceCommand instance",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "data",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeviceCommandRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/DeviceCommand"
-            }
-          }
-        },
-        "tags": [
-          "v0",
-          "Device Commands"
-        ]
-      },
-      "parameters": []
-    },
-    "/v0/group-command/{command_id}/": {
-      "get": {
-        "operationId": "getGroupCommand",
-        "summary": "Get command information",
-        "description": "Returns GroupCommand instance",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/GroupCommand"
-            }
-          }
-        },
-        "tags": [
-          "v0",
-          "Group Commands"
-        ]
-      },
-      "parameters": [
-        {
-          "name": "command_id",
-          "in": "path",
-          "description": "A UUID string identifying this device group command.",
-          "required": true,
-          "type": "string",
-          "format": "uuid"
-        }
-      ]
-    },
-    "/v0/group-command/lock/": {
-      "post": {
-        "operationId": "lockGroup",
-        "summary": "Lock devices in a group",
-        "description": "Creates GroupCommand instance",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "data",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GroupCommandRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/GroupCommand"
-            }
-          }
-        },
-        "tags": [
-          "v0",
-          "Group Commands"
-        ]
-      },
-      "parameters": []
-    },
-    "/v0/group-command/reboot/": {
-      "post": {
-        "operationId": "rebootGroup",
-        "summary": "Reboot devices in a group",
-        "description": "Creates GroupCommand instance",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "data",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GroupCommandRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/GroupCommand"
-            }
-          }
-        },
-        "tags": [
-          "v0",
-          "Group Commands"
-        ]
-      },
-      "parameters": []
     }
   },
   "definitions": {
@@ -2477,29 +2392,6 @@
         "INSTALL"
       ]
     },
-    "DeviceCommandRequest": {
-      "required": [
-        "enterprise",
-        "device"
-      ],
-      "type": "object",
-      "properties": {
-        "enterprise": {
-          "title": "Enterprise",
-          "type": "string",
-          "format": "uuid"
-        },
-        "device": {
-          "title": "Device",
-          "type": "string",
-          "format": "uuid"
-        },
-        "command_args": {
-          "title": "Command args",
-          "type": "string"
-        }
-      }
-    },
     "DeviceCustom": {
       "title": "Device",
       "required": [
@@ -3148,104 +3040,6 @@
           "title": "Enterprise",
           "type": "string",
           "format": "uuid"
-        }
-      }
-    },
-    "GroupCommand": {
-      "required": [
-        "command",
-        "enterprise",
-        "group"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "title": "Id",
-          "type": "string",
-          "format": "uuid",
-          "readOnly": true
-        },
-        "schedule": {
-          "title": "Schedule",
-          "type": "string"
-        },
-        "command": {
-          "$ref": "#/definitions/DeviceCommandEnum"
-        },
-        "command_args": {
-          "title": "Command args",
-          "type": "string",
-          "x-nullable": true
-        },
-        "state": {
-          "title": "State",
-          "type": "string",
-          "enum": [
-            "Command Initiated",
-            "Command Success",
-            "Command Failure",
-            "Command Scheduled"
-          ]
-        },
-        "details": {
-          "title": "Details",
-          "type": "string",
-          "x-nullable": true
-        },
-        "created_on": {
-          "title": "Created on",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updated_on": {
-          "title": "Updated on",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "is_active": {
-          "title": "Is active",
-          "type": "boolean"
-        },
-        "enterprise": {
-          "title": "Enterprise",
-          "type": "string",
-          "format": "url"
-        },
-        "group": {
-          "title": "Group",
-          "type": "string",
-          "format": "url"
-        },
-        "issued_by": {
-          "title": "Issued by",
-          "type": "string",
-          "format": "url",
-          "x-nullable": true
-        }
-      }
-    },
-    "GroupCommandRequest": {
-      "required": [
-        "enterprise",
-        "group"
-      ],
-      "type": "object",
-      "properties": {
-        "enterprise": {
-          "title": "Enterprise",
-          "type": "string",
-          "format": "uuid"
-        },
-        "group": {
-          "title": "Group",
-          "type": "string",
-          "format": "uuid"
-        },
-        "command_args": {
-          "title": "Command args",
-          "type": "string"
         }
       }
     },
