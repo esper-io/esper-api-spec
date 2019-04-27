@@ -498,7 +498,12 @@
           "201": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/Application"
+              "type": "object",
+              "properties": {
+                "application": {
+                  "$ref": "#/definitions/Application"
+                }
+              }
             }
           }
         },
@@ -821,6 +826,54 @@
           "type": "string"
         }
       ]
+    },
+    "/enterprise/{enterprise_id}/device/{device_id}/command/": {
+      "post": {
+        "tags": [
+          "Commands"
+        ],
+        "summary": "Run commands on device",
+        "description": "Fire commands on device like lock, ping etc",
+        "operationId": "runCommand",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "enterprise_id",
+            "in": "path",
+            "description": "ID of the enterprise",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "ID of the device",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "command",
+            "in": "body",
+            "description": "command name to fire",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommandRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceCommand"
+            }
+          }
+        }
+      }
     },
     "/enterprise/{enterprise_id}/device/{device_id}/install/": {
       "get": {
@@ -1761,8 +1814,11 @@
           "format": "uuid",
           "readOnly": true
         },
-        "version": {
-          "$ref": "#/definitions/AppVersion"
+        "versions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationVersion"
+          }
         },
         "application_name": {
           "title": "Application name",
@@ -1823,6 +1879,54 @@
         },
         "enterprise": {
           "title": "Enterprise",
+          "type": "string",
+          "format": "url"
+        }
+      }
+    },
+    "ApplicationVersion": {
+      "title": "Version",
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "version_code": {
+          "title": "Version code",
+          "type": "string",
+          "maxLength": 50,
+          "minLength": 1
+        },
+        "build_number": {
+          "title": "Build number",
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "hash_string": {
+          "title": "Hash string",
+          "type": "string"
+        },
+        "min_sdk_version": {
+          "title": "Min sdk version",
+          "type": "string",
+          "maxLength": 10,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "target_sdk_version": {
+          "title": "Target sdk version",
+          "type": "string",
+          "maxLength": 10,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "download_url": {
+          "title": "Url",
           "type": "string",
           "format": "url"
         }
@@ -2009,9 +2113,28 @@
         }
       }
     },
+    "CommandRequest": {
+      "required": [
+        "command"
+      ],
+      "type": "object",
+      "properties": {
+        "command_args": {
+          "title": "Command args",
+          "type": "string"
+        },
+        "command": {
+          "$ref": "#/definitions/DeviceCommandEnum"
+        }
+      }
+    },
     "Device": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
         "url": {
           "type": "string",
           "format": "url"
@@ -2346,7 +2469,7 @@
     },
     "DeviceCommandEnum": {
       "type": "string",
-      "description": "\n* REBOOT: Reboot device\n* LOCK:  Lock device screen\n* INSTALL:  Install an app version\n",
+      "description": "\n* REBOOT: Reboot device\n* LOCK:  Lock device screen\n* INSTALL:  Install an app on device\n",
       "enum": [
         "REBOOT",
         "LOCK",
@@ -3118,6 +3241,10 @@
           "title": "Group",
           "type": "string",
           "format": "uuid"
+        },
+        "command_args": {
+          "title": "Command args",
+          "type": "string"
         }
       }
     },
