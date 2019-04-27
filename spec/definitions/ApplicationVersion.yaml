@@ -1,0 +1,38 @@
+title: Version
+type: object
+properties:
+  id:
+    title: Id
+    type: string
+    format: uuid
+    readOnly: true
+  version_code:
+    title: Version code
+    type: string
+    maxLength: 50
+    minLength: 1
+  build_number:
+    title: Build number
+    type: string
+    maxLength: 100
+    minLength: 1
+    x-nullable: true
+  hash_string:
+    title: Hash string
+    type: string
+  min_sdk_version:
+    title: Min sdk version
+    type: string
+    maxLength: 10
+    minLength: 1
+    x-nullable: true
+  target_sdk_version:
+    title: Target sdk version
+    type: string
+    maxLength: 10
+    minLength: 1
+    x-nullable: true
+  download_url:
+    title: Url
+    type: string
+    format: url

@@ -11,3 +11,6 @@ properties:
     title: Group
     type: string
     format: uuid
+  command_args:
+    title: Command args
+    type: string

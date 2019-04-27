@@ -9,8 +9,10 @@ properties:
     type: string
     format: uuid
     readOnly: true
-  version:
-    $ref: '#/definitions/AppVersion'
+  versions:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationVersion'
   application_name:
     title: Application name
     type: string

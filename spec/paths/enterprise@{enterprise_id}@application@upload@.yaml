@@ -20,7 +20,10 @@ post:
     '201':
       description: successful operation
       schema:
-        $ref: '#/definitions/Application'
+        type: object
+        properties:
+          application:
+            $ref: '#/definitions/Application'
   consumes:
     - multipart/form-data
     - application/x-www-form-urlencoded

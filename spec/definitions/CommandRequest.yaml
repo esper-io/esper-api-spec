@@ -1,0 +1,9 @@
+required:
+  - command
+type: object
+properties:
+  command_args:
+    title: Command args
+    type: string
+  command:
+    $ref: '#/definitions/DeviceCommandEnum'
