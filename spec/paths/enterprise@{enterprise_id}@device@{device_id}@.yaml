@@ -1,6 +1,4 @@
 get:
-  tags:
-    - Device
   summary: Fetch device details by ID
   description: Returns details of a device
   operationId: getDeviceById
@@ -30,6 +28,10 @@ get:
       description: Unauthorized
       schema:
         $ref: '#/definitions/UnauthorizedResponse'
+  security:
+    - apiKey: []
+  tags:
+    - Device
   x-code-samples:
     - lang: Shell
       source: |

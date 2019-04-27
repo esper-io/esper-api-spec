@@ -1,6 +1,4 @@
 post:
-  tags:
-    - "Commands"
   summary: "Run commands on device"
   description: "Fire commands on device like lock, ping etc"
   operationId: "runCommand"
@@ -30,3 +28,7 @@ post:
       description: "successful operation"
       schema:
         $ref: "#/definitions/DeviceCommand"
+  security:
+    - apiKey: []
+  tags:
+    - "Commands"

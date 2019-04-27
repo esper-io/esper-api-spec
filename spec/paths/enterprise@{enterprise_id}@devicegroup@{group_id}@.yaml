@@ -10,6 +10,8 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/EnterpriseDeviceGroup'
+  security:
+    - apiKey: []
   tags:
     - Device Group
 put:
@@ -29,6 +31,8 @@ put:
       description: successful operation
       schema:
         $ref: '#/definitions/EnterpriseDeviceGroup'
+  security:
+    - apiKey: []
   tags:
     - Device Group
 patch:
@@ -48,6 +52,8 @@ patch:
       description: successful operation
       schema:
         $ref: '#/definitions/EnterpriseDeviceGroup'
+  security:
+    - apiKey: []
   tags:
     - Device Group
 delete:
@@ -60,6 +66,8 @@ delete:
   responses:
     '204':
       description: successful operation
+  security:
+    - apiKey: []
   tags:
     - Device Group
 parameters:

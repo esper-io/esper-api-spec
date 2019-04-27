@@ -44,6 +44,8 @@ get:
             type: array
             items:
               $ref: '#/definitions/EnterprisePolicy'
+  security:
+    - apiKey: []
   tags:
     - Policy
 post:
@@ -63,6 +65,8 @@ post:
       description: successful operation
       schema:
         $ref: '#/definitions/EnterprisePolicy'
+  security:
+    - apiKey: []
   tags:
     - Policy
 parameters:

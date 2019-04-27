@@ -10,6 +10,8 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/EnterprisePolicy'
+  security:
+    - apiKey: []
   tags:
     - Policy
 put:
@@ -29,6 +31,8 @@ put:
       description: successful operation
       schema:
         $ref: '#/definitions/EnterprisePolicy'
+  security:
+    - apiKey: []
   tags:
     - Policy
 patch:
@@ -48,6 +52,8 @@ patch:
       description: successful operation
       schema:
         $ref: '#/definitions/EnterprisePolicy'
+  security:
+    - apiKey: []
   tags:
     - Policy
 delete:
@@ -60,6 +66,8 @@ delete:
   responses:
     '204':
       description: successful operation
+  security:
+    - apiKey: []
   tags:
     - Policy
 parameters:

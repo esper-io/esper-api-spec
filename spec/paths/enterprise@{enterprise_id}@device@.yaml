@@ -1,6 +1,4 @@
 get:
-  tags:
-    - Device
   summary: Fetch all devices in an enterprise
   description: Returns a list of devices
   operationId: getAllDevices
@@ -53,6 +51,10 @@ get:
             type: array
             items:
               $ref: '#/definitions/Device'
+  security:
+    - apiKey: []
+  tags:
+    - Device
   x-code-samples:
     - lang: Shell
       source: |

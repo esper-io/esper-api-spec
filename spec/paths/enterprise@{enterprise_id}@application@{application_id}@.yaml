@@ -10,6 +10,8 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/Application'
+  security:
+    - apiKey: []
   tags:
     - Application
 delete:
@@ -22,6 +24,8 @@ delete:
   responses:
     '204':
       description: successful operation
+  security:
+    - apiKey: []
   tags:
     - Application
 parameters:

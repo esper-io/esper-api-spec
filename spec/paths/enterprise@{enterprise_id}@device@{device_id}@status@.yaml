@@ -33,6 +33,8 @@ get:
             type: array
             items:
               $ref: '#/definitions/DeviceStatus'
+  security:
+    - apiKey: []
   tags:
     - Device
 parameters:

@@ -49,6 +49,8 @@ get:
             type: array
             items:
               $ref: '#/definitions/AppVersion'
+  security:
+    - apiKey: []
   tags:
     - Application
 parameters:
