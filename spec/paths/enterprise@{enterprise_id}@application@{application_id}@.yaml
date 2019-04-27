@@ -1,5 +1,5 @@
 get:
-  operationId: get
+  operationId: getApplication
   summary: Get application information
   description: Returns Application instance
   produces:
@@ -15,7 +15,7 @@ get:
   tags:
     - Application
 delete:
-  operationId: delete
+  operationId: deleteApplication
   summary: Delete an application
   description: Empty response
   produces:

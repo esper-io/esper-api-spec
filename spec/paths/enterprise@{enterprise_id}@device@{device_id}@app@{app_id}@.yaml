@@ -1,5 +1,5 @@
 get:
-  operationId: device_app_by_id
+  operationId: getDeviceAppById
   summary: Get app information
   description: Returns DeviceApp instance
   produces:

@@ -1,34 +1,34 @@
 post:
-  summary: "Run commands on device"
-  description: "Fire commands on device like lock, ping etc"
-  operationId: "runCommand"
+  summary: Run commands on device
+  description: Fire commands on device like lock, ping etc
+  operationId: runCommand
   produces:
-    - "application/json"
+    - application/json
   parameters:
-    - name: "enterprise_id"
-      in: "path"
-      description: "ID of the enterprise"
+    - name: enterprise_id
+      in: path
+      description: ID of the enterprise
       required: true
-      type: "string"
-      format: "uuid"
-    - name: "device_id"
-      in: "path"
-      description: "ID of the device"
+      type: string
+      format: uuid
+    - name: device_id
+      in: path
+      description: ID of the device
       required: true
-      type: "string"
-      format: "uuid"
-    - name: "command"
-      in: "body"
-      description: "command name to fire"
+      type: string
+      format: uuid
+    - name: command
+      in: body
+      description: command name to fire
       required: true
       schema:
-        $ref: "#/definitions/CommandRequest"
+        $ref: '#/definitions/CommandRequest'
   responses:
     200:
-      description: "successful operation"
+      description: successful operation
       schema:
-        $ref: "#/definitions/DeviceCommand"
+        $ref: '#/definitions/DeviceCommand'
   security:
     - apiKey: []
   tags:
-    - "Commands"
+    - Commands

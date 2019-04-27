@@ -1,5 +1,5 @@
 get:
-  operationId: device_app_list
+  operationId: getDeviceApps
   summary: List all device apps
   description: Returns DeviceApp list
   produces:

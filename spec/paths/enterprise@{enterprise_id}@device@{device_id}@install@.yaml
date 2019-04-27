@@ -1,5 +1,5 @@
 get:
-  operationId: device_app_install_list
+  operationId: getAppInstalls
   summary:  List installed apps
   description: Returns AppInstall list
   produces:

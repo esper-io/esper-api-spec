@@ -1,5 +1,5 @@
 get:
-  operationId: list
+  operationId: getAllApplications
   summary: List apps in enterprise
   description: Returns Application list
   produces:
