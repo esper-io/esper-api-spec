@@ -123,7 +123,7 @@
     "/enterprise/{enterprise_id}/": {
       "get": {
         "operationId": "getEnterprise",
-        "summary": "Get your enteprise information",
+        "summary": "Get your enterprise information",
         "description": "Returns Enterprise instance",
         "produces": [
           "application/json"
@@ -716,12 +716,6 @@
           },
           "400": {
             "description": "Bad request"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/UnauthorizedResponse"
-            }
           }
         },
         "security": [
@@ -1661,9 +1655,7 @@
           "readOnly": true
         },
         "application": {
-          "title": "Application",
-          "type": "string",
-          "format": "uuid"
+          "$ref": "#/definitions/AppInstallApplication"
         },
         "install_state": {
           "$ref": "#/definitions/AppInstallStateEnum"
@@ -1702,10 +1694,31 @@
         }
       }
     },
+    "AppInstallApplication": {
+      "title": "Application",
+      "type": "object",
+      "properties": {
+        "application_name": {
+          "title": "Application name",
+          "type": "string"
+        },
+        "package_name": {
+          "title": "Package name",
+          "type": "string"
+        },
+        "version": {
+          "$ref": "#/definitions/AppInstallVersion"
+        },
+        "is_enabled": {
+          "title": "Is enabled",
+          "type": "boolean"
+        }
+      }
+    },
     "AppInstallStateEnum": {
       "title": "Install state",
       "type": "string",
-      "description": "Device App Install State\n* NOT_INSTALLED = \"Not Installed\"\n* INSTALL_IN_PROGRESS = \"Installation In-Progress\"\n* UNINSTALL_IN_PROGRESS = \"Uninstallation In-Progress\"\n* INSTALL_SUCCESS = \"Install Success\"\n* INSTALL_FAILED = \"Install Failed\"\n* UNINSTALL_SUCCESS = \"Uninstall Success\"\n* UNINSTALL_FAILED = \"Uninstall Failed\"\n",
+      "description": "Device App Install State\n\n``` * NOT_INSTALLED = \"Not Installed\"\n* INSTALL_IN_PROGRESS = \"Installation In-Progress\"\n* UNINSTALL_IN_PROGRESS = \"Uninstallation In-Progress\"\n* INSTALL_SUCCESS = \"Install Success\"\n* INSTALL_FAILED = \"Install Failed\"\n* UNINSTALL_SUCCESS = \"Uninstall Success\"\n* UNINSTALL_FAILED = \"Uninstall Failed\"\n```\n",
       "enum": [
         "NOT_INSTALLED",
         "INSTALL_IN_PROGRESS",
@@ -1715,6 +1728,29 @@
         "UNINSTALL_SUCCESS",
         "UNINSTALL_FAILED"
       ]
+    },
+    "AppInstallVersion": {
+      "title": "Version",
+      "type": "object",
+      "properties": {
+        "app_version_id": {
+          "title": "App version id",
+          "type": "string",
+          "format": "uuid"
+        },
+        "version_code": {
+          "title": "Version code",
+          "type": "string"
+        },
+        "build_number": {
+          "title": "Build number",
+          "type": "string"
+        },
+        "hash_string": {
+          "title": "Hash string",
+          "type": "string"
+        }
+      }
     },
     "Application": {
       "required": [
@@ -2385,7 +2421,7 @@
     },
     "DeviceCommandEnum": {
       "type": "string",
-      "description": "\n* REBOOT: Reboot device\n* LOCK:  Lock device screen\n* INSTALL:  Install an app on device\n",
+      "description": "Command Options\n``` * REBOOT: Reboot device\n* LOCK:  Lock device screen\n* INSTALL:  Install an app on device ```\n",
       "enum": [
         "REBOOT",
         "LOCK",
@@ -2666,7 +2702,7 @@
     },
     "EMMEnterpriseStateEnum": {
       "title": "State",
-      "description": "EMM enterprise workflow state\n* UNSPECIFIED = 1\n* BEGIN_SIGNUP = 2\n* COMPLETE_SIGNUP = 3\n* ENROLLED = 4\n* UNENROLLED = 5\n* ENROLL_FAILED = 10\n",
+      "description": "EMM enterprise workflow state\n``` * UNSPECIFIED = 1\n* BEGIN_SIGNUP = 2\n* COMPLETE_SIGNUP = 3\n* ENROLLED = 4\n* UNENROLLED = 5\n* ENROLL_FAILED = 10 ```\n",
       "type": "integer",
       "enum": [
         1,
@@ -3041,22 +3077,6 @@
           "type": "string",
           "format": "uuid"
         }
-      }
-    },
-    "UnauthorizedResponse": {
-      "description": "Represents an authorization error",
-      "type": "object",
-      "required": [
-        "detail"
-      ],
-      "properties": {
-        "detail": {
-          "description": "The error message.",
-          "type": "string"
-        }
-      },
-      "example": {
-        "detail": "Invalid username/password"
       }
     }
   }

@@ -127,7 +127,7 @@ paths:
   '/enterprise/{enterprise_id}/':
     get:
       operationId: getEnterprise
-      summary: Get your enteprise information
+      summary: Get your enterprise information
       description: Returns Enterprise instance
       produces:
         - application/json
@@ -550,10 +550,6 @@ paths:
             $ref: '#/definitions/Device'
         '400':
           description: Bad request
-        '401':
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/UnauthorizedResponse'
       security:
         - apiKey: []
       tags:
@@ -1199,9 +1195,7 @@ definitions:
         format: uuid
         readOnly: true
       application:
-        title: Application
-        type: string
-        format: uuid
+        $ref: '#/definitions/AppInstallApplication'
       install_state:
         $ref: '#/definitions/AppInstallStateEnum'
       reason_details:
@@ -1230,18 +1224,35 @@ definitions:
         title: Device
         type: string
         format: url
+  AppInstallApplication:
+    title: Application
+    type: object
+    properties:
+      application_name:
+        title: Application name
+        type: string
+      package_name:
+        title: Package name
+        type: string
+      version:
+        $ref: '#/definitions/AppInstallVersion'
+      is_enabled:
+        title: Is enabled
+        type: boolean
   AppInstallStateEnum:
     title: Install state
     type: string
     description: |
       Device App Install State
-      * NOT_INSTALLED = "Not Installed"
+
+      ``` * NOT_INSTALLED = "Not Installed"
       * INSTALL_IN_PROGRESS = "Installation In-Progress"
       * UNINSTALL_IN_PROGRESS = "Uninstallation In-Progress"
       * INSTALL_SUCCESS = "Install Success"
       * INSTALL_FAILED = "Install Failed"
       * UNINSTALL_SUCCESS = "Uninstall Success"
       * UNINSTALL_FAILED = "Uninstall Failed"
+      ```
     enum:
       - NOT_INSTALLED
       - INSTALL_IN_PROGRESS
@@ -1250,6 +1261,23 @@ definitions:
       - INSTALL_FAILED
       - UNINSTALL_SUCCESS
       - UNINSTALL_FAILED
+  AppInstallVersion:
+    title: Version
+    type: object
+    properties:
+      app_version_id:
+        title: App version id
+        type: string
+        format: uuid
+      version_code:
+        title: Version code
+        type: string
+      build_number:
+        title: Build number
+        type: string
+      hash_string:
+        title: Hash string
+        type: string
   Application:
     required:
       - application_name
@@ -1775,10 +1803,10 @@ definitions:
   DeviceCommandEnum:
     type: string
     description: |
-
-      * REBOOT: Reboot device
+      Command Options
+      ``` * REBOOT: Reboot device
       * LOCK:  Lock device screen
-      * INSTALL:  Install an app on device
+      * INSTALL:  Install an app on device ```
     enum:
       - REBOOT
       - LOCK
@@ -2018,12 +2046,12 @@ definitions:
     title: State
     description: |
       EMM enterprise workflow state
-      * UNSPECIFIED = 1
+      ``` * UNSPECIFIED = 1
       * BEGIN_SIGNUP = 2
       * COMPLETE_SIGNUP = 3
       * ENROLLED = 4
       * UNENROLLED = 5
-      * ENROLL_FAILED = 10
+      * ENROLL_FAILED = 10 ```
     type: integer
     enum:
       - 1
@@ -2325,14 +2353,3 @@ definitions:
         title: Enterprise
         type: string
         format: uuid
-  UnauthorizedResponse:
-    description: Represents an authorization error
-    type: object
-    required:
-      - detail
-    properties:
-      detail:
-        description: The error message.
-        type: string
-    example:
-      detail: Invalid username/password
