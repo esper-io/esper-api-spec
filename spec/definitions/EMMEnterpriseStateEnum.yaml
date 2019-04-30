@@ -2,6 +2,7 @@ title: State
 description: >
   EMM enterprise workflow state
 
+  ```
   * UNSPECIFIED = 1
 
   * BEGIN_SIGNUP = 2
@@ -13,7 +14,7 @@ description: >
   * UNENROLLED = 5
 
   * ENROLL_FAILED = 10
-
+  ```
 type: integer
 enum:
   - 1

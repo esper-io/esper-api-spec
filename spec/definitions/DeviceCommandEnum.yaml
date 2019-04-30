@@ -1,12 +1,14 @@
 type: string
 description: >
+  Command Options
 
+  ```
   * REBOOT: Reboot device
 
   * LOCK:  Lock device screen
 
   * INSTALL:  Install an app on device
-
+  ```
 enum:
   - REBOOT
   - LOCK

@@ -3,6 +3,8 @@ type: string
 description: >
   Device App Install State
 
+
+  ```
   * NOT_INSTALLED = "Not Installed"
 
   * INSTALL_IN_PROGRESS = "Installation In-Progress"
@@ -17,6 +19,7 @@ description: >
 
   * UNINSTALL_FAILED = "Uninstall Failed"
 
+  ```
 enum:
   - NOT_INSTALLED
   - INSTALL_IN_PROGRESS

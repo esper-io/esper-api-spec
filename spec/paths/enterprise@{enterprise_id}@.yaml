@@ -1,6 +1,6 @@
 get:
   operationId: getEnterprise
-  summary: Get your enteprise information
+  summary: Get your enterprise information
   description: Returns Enterprise instance
   produces:
     - application/json

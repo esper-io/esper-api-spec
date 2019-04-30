@@ -24,10 +24,6 @@ get:
         $ref: '#/definitions/Device'
     '400':
       description: Bad request
-    '401':
-      description: Unauthorized
-      schema:
-        $ref: '#/definitions/UnauthorizedResponse'
   security:
     - apiKey: []
   tags:

@@ -11,9 +11,7 @@ properties:
     format: uuid
     readOnly: true
   application:
-    title: Application
-    type: string
-    format: uuid
+    $ref: '#/definitions/AppInstallApplication'
   install_state:
     $ref: '#/definitions/AppInstallStateEnum'
   reason_details:
