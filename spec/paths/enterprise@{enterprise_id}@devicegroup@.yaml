@@ -43,7 +43,7 @@ get:
           results:
             type: array
             items:
-              $ref: '#/definitions/EnterpriseDeviceGroup'
+              $ref: '#/definitions/DeviceGroup'
   security:
     - apiKey: []
   tags:
@@ -59,12 +59,12 @@ post:
       in: body
       required: true
       schema:
-        $ref: '#/definitions/EnterpriseDeviceGroup'
+        $ref: '#/definitions/DeviceGroup'
   responses:
     '201':
       description: successful operation
       schema:
-        $ref: '#/definitions/EnterpriseDeviceGroup'
+        $ref: '#/definitions/DeviceGroup'
   security:
     - apiKey: []
   tags:
