@@ -1197,7 +1197,7 @@
                 "results": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/EnterpriseDeviceGroup"
+                    "$ref": "#/definitions/DeviceGroup"
                   }
                 }
               }
@@ -1226,7 +1226,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnterpriseDeviceGroup"
+              "$ref": "#/definitions/DeviceGroup"
             }
           }
         ],
@@ -1234,7 +1234,7 @@
           "201": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/EnterpriseDeviceGroup"
+              "$ref": "#/definitions/DeviceGroup"
             }
           }
         },
@@ -1270,7 +1270,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/EnterpriseDeviceGroup"
+              "$ref": "#/definitions/DeviceGroup"
             }
           }
         },
@@ -1296,7 +1296,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnterpriseDeviceGroup"
+              "$ref": "#/definitions/DeviceGroupUpdate"
             }
           }
         ],
@@ -1304,7 +1304,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/EnterpriseDeviceGroup"
+              "$ref": "#/definitions/DeviceGroup"
             }
           }
         },
@@ -1330,7 +1330,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnterpriseDeviceGroup"
+              "$ref": "#/definitions/DeviceGroupUpdate"
             }
           }
         ],
@@ -1338,7 +1338,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/EnterpriseDeviceGroup"
+              "$ref": "#/definitions/DeviceGroup"
             }
           }
         },
@@ -2433,38 +2433,29 @@
         "INSTALL"
       ]
     },
-    "DeviceCustom": {
-      "title": "Device",
+    "DeviceGroup": {
       "required": [
         "name",
-        "groups"
+        "enterprise"
       ],
       "type": "object",
       "properties": {
-        "name": {
-          "title": "Name",
-          "type": "string",
-          "maxLength": 255,
-          "minLength": 1
-        },
         "id": {
           "title": "Id",
           "type": "string",
           "format": "uuid",
           "readOnly": true
         },
-        "state": {
-          "title": "State",
+        "device_count": {
+          "title": "Device count",
           "type": "integer",
           "readOnly": true
         },
-        "suid": {
-          "title": "Suid",
-          "description": "Esper unique device id",
+        "name": {
+          "title": "Name",
           "type": "string",
           "maxLength": 255,
-          "minLength": 1,
-          "x-nullable": true
+          "minLength": 1
         },
         "created_on": {
           "title": "Created on",
@@ -2472,55 +2463,55 @@
           "format": "date-time",
           "readOnly": true
         },
-        "updated_on": {
-          "title": "Updated on",
+        "enterprise": {
+          "title": "Enterprise",
           "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "is_active": {
-          "title": "Is active",
-          "type": "boolean"
-        },
-        "groups": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeviceCustomGroup"
-          }
-        },
-        "device_name": {
-          "title": "Device name",
-          "type": "string",
-          "readOnly": true,
-          "minLength": 1
-        },
-        "provisioned_on": {
-          "title": "Provisioned on",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
+          "format": "url"
         }
       }
     },
-    "DeviceCustomGroup": {
+    "DeviceGroupUpdate": {
       "required": [
-        "name"
+        "name",
+        "enterprise"
       ],
       "type": "object",
       "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "device_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "uniqueItems": true
+        },
+        "device_count": {
+          "title": "Device count",
+          "type": "integer",
+          "readOnly": true
+        },
         "name": {
           "title": "Name",
-          "description": "Group name",
           "type": "string",
           "maxLength": 255,
           "minLength": 1
         },
-        "url": {
-          "title": "Url",
-          "description": "Group url",
+        "created_on": {
+          "title": "Created on",
           "type": "string",
-          "format": "url",
+          "format": "date-time",
           "readOnly": true
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "type": "string",
+          "format": "url"
         }
       }
     },
@@ -2551,113 +2542,6 @@
           "title": "Device",
           "type": "string",
           "format": "url"
-        },
-        "enterprise": {
-          "title": "Enterprise",
-          "type": "string",
-          "format": "url"
-        }
-      }
-    },
-    "DeviceStatusTiles": {
-      "required": [
-        "device",
-        "networkInfo",
-        "enterprise"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "title": "ID",
-          "type": "integer",
-          "readOnly": true
-        },
-        "device": {
-          "$ref": "#/definitions/DeviceCustom"
-        },
-        "networkInfo": {
-          "title": "NetworkInfo",
-          "type": "string"
-        },
-        "model": {
-          "title": "Model",
-          "type": "string",
-          "maxLength": 255,
-          "minLength": 1,
-          "x-nullable": true
-        },
-        "location": {
-          "title": "Location",
-          "type": "string",
-          "x-nullable": true
-        },
-        "battery_level": {
-          "title": "Battery level",
-          "type": "number",
-          "x-nullable": true
-        },
-        "security_state": {
-          "title": "Security state",
-          "type": "integer",
-          "description": "Security state enum\n* SECURE = 1\n* LOW_RISK = 10\n* MEDIUM_RISK = 20\n* HIGH_RISK = 30\n* DEVICE_STATE_UNSPECIFIED = 100\n",
-          "enum": [
-            1,
-            10,
-            20,
-            30,
-            100
-          ]
-        },
-        "security_reason": {
-          "title": "Security reason",
-          "type": "integer",
-          "description": "Security reason enum\n* BOOTLOADER_UNLOCKED = 1\n* CUSTOM_ROM_INSTALLED_OR_BOOTLOADER_UNLOCKED= 10\n* DEVICE_ROOTED_OR_TAMPERED = 20\n* OUTDATED_SECURITY_PATCHES = 30\n* ERROR_FETCHING_VALUES = 40\n* NOT_APPLICABLE = 50\n",
-          "enum": [
-            1,
-            10,
-            20,
-            30,
-            40,
-            50
-          ]
-        },
-        "security_advise": {
-          "title": "Security advise",
-          "type": "integer",
-          "description": "Security advice enum\n* LOCK_BOOTLOADER = 1\n* RESTORE_TO_FACTORY_ROM = 10\n* UPDATE_SECURITY_PATCHES = 20\n* NOT_APPLICABLE = 30\n",
-          "enum": [
-            1,
-            10,
-            20,
-            30
-          ]
-        },
-        "wifi_ssid": {
-          "title": "Wifi ssid",
-          "type": "string",
-          "maxLength": 255,
-          "minLength": 1,
-          "x-nullable": true
-        },
-        "updated_on": {
-          "title": "Updated on",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "created_on": {
-          "title": "Created on",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "is_active": {
-          "title": "Is active",
-          "type": "boolean"
-        },
-        "is_gms": {
-          "title": "Is gms",
-          "type": "boolean"
         },
         "enterprise": {
           "title": "Enterprise",
@@ -2871,58 +2755,6 @@
         "is_active": {
           "title": "Is active",
           "type": "boolean"
-        }
-      }
-    },
-    "EnterpriseDeviceGroup": {
-      "required": [
-        "name",
-        "enterprise"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "title": "Id",
-          "type": "string",
-          "format": "uuid",
-          "readOnly": true
-        },
-        "device_ids": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "uniqueItems": true
-        },
-        "device_tiles": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeviceStatusTiles"
-          },
-          "readOnly": true
-        },
-        "device_count": {
-          "title": "Device count",
-          "type": "integer",
-          "readOnly": true
-        },
-        "name": {
-          "title": "Name",
-          "type": "string",
-          "maxLength": 255,
-          "minLength": 1
-        },
-        "created_on": {
-          "title": "Created on",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "enterprise": {
-          "title": "Enterprise",
-          "type": "string",
-          "format": "url"
         }
       }
     },
