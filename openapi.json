@@ -1077,7 +1077,7 @@
             "in": "query",
             "description": "Flag to get latest event",
             "required": true,
-            "type": "number"
+            "type": "integer"
           }
         ],
         "responses": {
@@ -1238,6 +1238,11 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
         "tags": [
           "Device Group"
         ]
