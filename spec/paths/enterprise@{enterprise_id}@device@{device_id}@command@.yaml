@@ -1,6 +1,6 @@
 post:
   summary: Run commands on device
-  description: Fire commands on device like lock, ping etc
+  description: Fire commands on device like reboot, ping etc
   operationId: runCommand
   produces:
     - application/json
@@ -19,7 +19,7 @@ post:
       format: uuid
     - name: command
       in: body
-      description: command name to fire
+      description: command request body
       required: true
       schema:
         $ref: '#/definitions/CommandRequest'

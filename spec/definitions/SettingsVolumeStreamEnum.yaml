@@ -1,0 +1,16 @@
+type: integer
+description: |
+  Device settings volume stream enum
+
+  ```
+  * STREAM_RING = 0
+  * STREAM_NOTIFICATION = 1
+  * STREAM_ALARM = 2
+  * STREAM_MUSIC = 3
+  ```
+enum:
+  - 0
+  - 1
+  - 2
+  - 3
+

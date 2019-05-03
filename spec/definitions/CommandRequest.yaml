@@ -3,7 +3,6 @@ required:
 type: object
 properties:
   command_args:
-    title: Command args
-    type: string
+    $ref: '#/definitions/CommandArgs'
   command:
     $ref: '#/definitions/DeviceCommandEnum'

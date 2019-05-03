@@ -1,0 +1,13 @@
+type: integer
+description: |
+  Device settings rotate state enum
+
+  ```
+  * AUTO = 0
+  * PORTRAIT_ONLY = 1
+  * LANDSCAPE_ONLY = 2
+  ```
+enum:
+  - 0
+  - 1
+  - 2

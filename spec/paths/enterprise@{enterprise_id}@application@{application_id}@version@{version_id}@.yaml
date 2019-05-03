@@ -23,7 +23,7 @@ delete:
   parameters: []
   responses:
     '204':
-      description: successful operations
+      description: successful operation
   security:
     - apiKey: []
   tags:
