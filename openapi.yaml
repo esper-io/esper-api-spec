@@ -368,7 +368,7 @@ paths:
       parameters: []
       responses:
         '204':
-          description: successful operations
+          description: successful operation
       security:
         - apiKey: []
       tags:
@@ -697,7 +697,7 @@ paths:
   '/enterprise/{enterprise_id}/device/{device_id}/command/':
     post:
       summary: Run commands on device
-      description: 'Fire commands on device like lock, ping etc'
+      description: 'Fire commands on device like reboot, ping etc'
       operationId: runCommand
       produces:
         - application/json
@@ -716,7 +716,7 @@ paths:
           format: uuid
         - name: command
           in: body
-          description: command name to fire
+          description: command request body
           required: true
           schema:
             $ref: '#/definitions/CommandRequest'
@@ -729,6 +729,42 @@ paths:
         - apiKey: []
       tags:
         - Commands
+  '/enterprise/{enterprise_id}/device/{device_id}/command/{command_id}/':
+    get:
+      operationId: getCommand
+      summary: Get command status
+      description: Return DeviceCommand instance
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/DeviceCommand'
+      security:
+        - apiKey: []
+      tags:
+        - Commands
+    parameters:
+      - name: command_id
+        in: path
+        description: A UUID string identifying this device command.
+        required: true
+        type: string
+        format: uuid
+      - name: device_id
+        in: path
+        description: A UUID string identifying this application.
+        required: true
+        type: string
+        format: uuid
+      - name: enterprise_id
+        description: A UUID string identifying enterprise.
+        in: path
+        required: true
+        type: string
+        format: uuid
   '/enterprise/{enterprise_id}/device/{device_id}/install/':
     get:
       operationId: getAppInstalls
@@ -1531,14 +1567,48 @@ definitions:
         title: Application
         type: string
         format: url
+  CommandArgs:
+    title: Command args
+    type: object
+    properties:
+      wipe_external_storage:
+        type: boolean
+        default: false
+      wipe_FRP:
+        type: boolean
+        default: true
+      brightness_value:
+        type: integer
+        minimum: 1
+        maximum: 100
+      stream:
+        $ref: '#/definitions/SettingsVolumeStreamEnum'
+      volume_level:
+        type: integer
+        minimum: 0
+        maximum: 100
+      wifi_state:
+        type: boolean
+      bluetooth_state:
+        type: boolean
+      rotate_state:
+        $ref: '#/definitions/SettingsRotateStateEnum'
+      gps_state:
+        $ref: '#/definitions/SettingsGPSStateEnum'
+      screen_off_timeout:
+        description: Value in seconds
+        type: integer
+        minimum: 5000
+        maximum: 1800000
+      app_version:
+        type: string
   CommandRequest:
     required:
       - command
     type: object
     properties:
       command_args:
-        title: Command args
-        type: string
+        $ref: '#/definitions/CommandArgs'
       command:
         $ref: '#/definitions/DeviceCommandEnum'
   Device:
@@ -1806,13 +1876,36 @@ definitions:
     type: string
     description: |
       Command Options
-      ``` * REBOOT: Reboot device
+
+      ```
+      * REBOOT: Reboot device
       * LOCK:  Lock device screen
-      * INSTALL:  Install an app on device ```
+      * INSTALL:  Install an app on device
+      * UNINSTALL: Uninstall an app from device
+      * WIPE: Wipe device
+      * UPDATE_HEARTBEAT: Ping Device
+      * SET_WIFI_STATE: wifi on/off
+      * SET_BLUETOOTH_STATE: Bluetooth on/off
+      * SET_ROTATION_STATE: Auto rotate setting
+      * SET_GPS_STATE: GPS options
+      * SET_BRIGHTNESS_SCALE: Brightness control
+      * SET_STREAM_VOLUME: Volume control
+      * SET_SCREEN_OFF_TIMEOUT: Screen timeout setting
+      ```
     enum:
       - REBOOT
       - LOCK
       - INSTALL
+      - UPDATE_HEARTBEAT
+      - WIPE
+      - SET_WIFI_STATE
+      - SET_BLUETOOTH_STATE
+      - SET_ROTATION_STATE
+      - SET_GPS_STATE
+      - SET_BRIGHTNESS_SCALE
+      - SET_STREAM_VOLUME
+      - SET_SCREEN_OFF_TIMEOUT
+      - UNINSTALL
   DeviceGroup:
     required:
       - name
@@ -2203,3 +2296,49 @@ definitions:
         title: Enterprise
         type: string
         format: uuid
+  SettingsGPSStateEnum:
+    type: integer
+    description: |
+      Device settings GPS state enum
+
+      ```
+      * LOCATION_MODE_HIGH_ACCURACY = 0
+      * LOCATION_MODE_SENSORS_ONLY = 1
+      * LOCATION_MODE_BATTERY_SAVING = 2
+      * LOCATION_MODE_OFF = 3
+      ```
+    enum:
+      - 0
+      - 1
+      - 2
+      - 3
+  SettingsRotateStateEnum:
+    type: integer
+    description: |
+      Device settings rotate state enum
+
+      ```
+      * AUTO = 0
+      * PORTRAIT_ONLY = 1
+      * LANDSCAPE_ONLY = 2
+      ```
+    enum:
+      - 0
+      - 1
+      - 2
+  SettingsVolumeStreamEnum:
+    type: integer
+    description: |
+      Device settings volume stream enum
+
+      ```
+      * STREAM_RING = 0
+      * STREAM_NOTIFICATION = 1
+      * STREAM_ALARM = 2
+      * STREAM_MUSIC = 3
+      ```
+    enum:
+      - 0
+      - 1
+      - 2
+      - 3
