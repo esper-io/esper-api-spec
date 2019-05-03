@@ -2445,8 +2445,7 @@
           "minLength": 1
         },
         "command_args": {
-          "title": "Command args",
-          "type": "string"
+          "$ref": "#/definitions/CommandArgs"
         },
         "action": {
           "title": "Action",
