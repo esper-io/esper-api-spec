@@ -1,6 +1,3 @@
-required:
-  - name
-  - enterprise
 type: object
 properties:
   id:
@@ -32,3 +29,4 @@ properties:
     title: Enterprise
     type: string
     format: url
+    readOnly: true
