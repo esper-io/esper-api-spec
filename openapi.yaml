@@ -1908,7 +1908,6 @@ definitions:
   DeviceGroup:
     required:
       - name
-      - enterprise
     type: object
     properties:
       id:
@@ -1934,10 +1933,8 @@ definitions:
         title: Enterprise
         type: string
         format: url
+        readOnly: true
   DeviceGroupUpdate:
-    required:
-      - name
-      - enterprise
     type: object
     properties:
       id:
@@ -1969,6 +1966,7 @@ definitions:
         title: Enterprise
         type: string
         format: url
+        readOnly: true
   DeviceStatus:
     required:
       - data

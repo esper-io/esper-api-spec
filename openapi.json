@@ -2544,8 +2544,7 @@
     },
     "DeviceGroup": {
       "required": [
-        "name",
-        "enterprise"
+        "name"
       ],
       "type": "object",
       "properties": {
@@ -2575,15 +2574,12 @@
         "enterprise": {
           "title": "Enterprise",
           "type": "string",
-          "format": "url"
+          "format": "url",
+          "readOnly": true
         }
       }
     },
     "DeviceGroupUpdate": {
-      "required": [
-        "name",
-        "enterprise"
-      ],
       "type": "object",
       "properties": {
         "id": {
@@ -2620,7 +2616,8 @@
         "enterprise": {
           "title": "Enterprise",
           "type": "string",
-          "format": "url"
+          "format": "url",
+          "readOnly": true
         }
       }
     },
