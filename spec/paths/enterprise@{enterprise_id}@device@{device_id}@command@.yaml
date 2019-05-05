@@ -19,7 +19,7 @@ post:
       format: uuid
     - name: command
       in: body
-      description: command request body
+      description: Command request body
       required: true
       schema:
         $ref: '#/definitions/CommandRequest'

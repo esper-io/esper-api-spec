@@ -1,0 +1,15 @@
+type: string
+description: |
+  Group Command Options
+
+  ```
+  * REBOOT: Reboot device
+  * LOCK:  Lock device screen
+  * INSTALL:  Install an app on device
+  * UPDATE_HEARTBEAT: Ping Device
+  ```
+enum:
+  - REBOOT
+  - LOCK
+  - INSTALL
+  - UPDATE_HEARTBEAT

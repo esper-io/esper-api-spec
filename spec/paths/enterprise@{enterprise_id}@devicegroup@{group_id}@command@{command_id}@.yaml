@@ -1,7 +1,7 @@
 get:
-  operationId: getCommand
-  summary: Get command status
-  description: Return DeviceCommand instance
+  operationId: getGroupCommand
+  summary: Get group command status
+  description: Returns GroupCommand instance
   produces:
     - application/json
   parameters: []
@@ -9,11 +9,11 @@ get:
     '200':
       description: successful operation
       schema:
-        $ref: '#/definitions/DeviceCommand'
+        $ref: '#/definitions/GroupCommand'
   security:
     - apiKey: []
   tags:
-    - Commands
+    - Group Commands
 parameters:
   - name: command_id
     in: path
@@ -21,9 +21,9 @@ parameters:
     required: true
     type: string
     format: uuid
-  - name: device_id
+  - name: group_id
     in: path
-    description: A UUID string identifying this device.
+    description: A UUID string identifying this group.
     required: true
     type: string
     format: uuid

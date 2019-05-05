@@ -1,0 +1,35 @@
+post:
+  summary: Run commands on group devices
+  description: Fire commands on all the group devices
+  operationId: runGroupCommand
+  produces:
+    - application/json
+  parameters:
+    - name: data
+      in: body
+      description: Group command request
+      required: true
+      schema:
+        $ref: '#/definitions/GroupCommandRequest'
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/GroupCommand'
+  security:
+    - apiKey: []
+  tags:
+    - Group Commands
+parameters:
+- name: enterprise_id
+  in: path
+  description: ID of the enterprise
+  required: true
+  type: string
+  format: uuid
+- name: group_id
+  in: path
+  description: ID of the group
+  required: true
+  type: string
+  format: uuid
