@@ -66,6 +66,7 @@ x-tagGroups:
       - Device App
       - Device Group
       - Commands
+      - Group Commands
 securityDefinitions:
   apiKey:
     description: |
@@ -716,7 +717,7 @@ paths:
           format: uuid
         - name: command
           in: body
-          description: command request body
+          description: Command request body
           required: true
           schema:
             $ref: '#/definitions/CommandRequest'
@@ -755,7 +756,7 @@ paths:
         format: uuid
       - name: device_id
         in: path
-        description: A UUID string identifying this application.
+        description: A UUID string identifying this device.
         required: true
         type: string
         format: uuid
@@ -1056,6 +1057,78 @@ paths:
         in: path
         required: true
         type: string
+  '/enterprise/{enterprise_id}/devicegroup/{group_id}/command/':
+    post:
+      summary: Run commands on group devices
+      description: Fire commands on all the group devices
+      operationId: runGroupCommand
+      produces:
+        - application/json
+      parameters:
+        - name: data
+          in: body
+          description: Group command request
+          required: true
+          schema:
+            $ref: '#/definitions/GroupCommandRequest'
+      responses:
+        '201':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/GroupCommand'
+      security:
+        - apiKey: []
+      tags:
+        - Group Commands
+    parameters:
+      - name: enterprise_id
+        in: path
+        description: ID of the enterprise
+        required: true
+        type: string
+        format: uuid
+      - name: group_id
+        in: path
+        description: ID of the group
+        required: true
+        type: string
+        format: uuid
+  '/enterprise/{enterprise_id}/devicegroup/{group_id}/command/{command_id}/':
+    get:
+      operationId: getGroupCommand
+      summary: Get group command status
+      description: Returns GroupCommand instance
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/GroupCommand'
+      security:
+        - apiKey: []
+      tags:
+        - Group Commands
+    parameters:
+      - name: command_id
+        in: path
+        description: A UUID string identifying this device command.
+        required: true
+        type: string
+        format: uuid
+      - name: group_id
+        in: path
+        description: A UUID string identifying this group.
+        required: true
+        type: string
+        format: uuid
+      - name: enterprise_id
+        description: A UUID string identifying enterprise.
+        in: path
+        required: true
+        type: string
+        format: uuid
   '/enterprise/{enterprise_id}/policy/':
     get:
       operationId: getAllPolicies
@@ -2293,6 +2366,94 @@ definitions:
         title: Enterprise
         type: string
         format: uuid
+  GroupCommand:
+    required:
+      - command
+      - enterprise
+      - group
+    type: object
+    properties:
+      id:
+        title: Id
+        type: string
+        format: uuid
+        readOnly: true
+      schedule:
+        title: Schedule
+        type: string
+      command:
+        $ref: '#/definitions/GroupCommandEnum'
+      command_args:
+        $ref: '#/definitions/GroupCommandArgs'
+      state:
+        title: State
+        type: string
+        enum:
+          - Command Initiated
+          - Command Success
+          - Command Failure
+          - Command Scheduled
+      details:
+        title: Details
+        type: string
+        x-nullable: true
+      created_on:
+        title: Created on
+        type: string
+        format: date-time
+        readOnly: true
+      updated_on:
+        title: Updated on
+        type: string
+        format: date-time
+        readOnly: true
+      is_active:
+        title: Is active
+        type: boolean
+      enterprise:
+        title: Enterprise
+        type: string
+        format: url
+      group:
+        title: Group
+        type: string
+        format: url
+      issued_by:
+        title: Issued by
+        type: string
+        format: uri
+        x-nullable: true
+  GroupCommandArgs:
+    title: Command args
+    type: object
+    properties:
+      app_version:
+        type: string
+  GroupCommandEnum:
+    type: string
+    description: |
+      Group Command Options
+
+      ```
+      * REBOOT: Reboot device
+      * LOCK:  Lock device screen
+      * INSTALL:  Install an app on device
+      * UPDATE_HEARTBEAT: Ping Device
+      ```
+    enum:
+      - REBOOT
+      - LOCK
+      - INSTALL
+      - UPDATE_HEARTBEAT
+  GroupCommandRequest:
+    required:
+      - command
+    type: object
+    properties:
+      command_args:
+        $ref: '#/definitions/GroupCommandArgs'
+      command:
+        $ref: '#/definitions/GroupCommandEnum'
   SettingsGPSStateEnum:
     type: integer
     description: |
