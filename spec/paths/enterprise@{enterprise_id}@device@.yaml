@@ -16,6 +16,12 @@ get:
       description: Filter by device name
       required: false
       type: string
+    - name: group
+      in: query
+      description: Filter by group id
+      required: false
+      type: string
+      format: uuid
     - name: search
       in: query
       description: A search term. Search by device name or imei
