@@ -3,13 +3,21 @@ info:
   description: >
     # Introduction
 
+<<<<<<< HEAD
     Esper Manage APIs for Cloud are a set of REST-based APIs that help you programmatically control and monitor your enterprise's dedicated Esper endpoint. Using these APIs, one can orchestrate & manage devices that have been provisioned against your endpoint. Furthermore, this API allows you to manage android applications that get installed on such devices. To read more about the various capabilities of Esper endpoints and Esper managed devices, please visit esper.io.
     This guide describes all the available APIs in detail, along with code samples for you to quickly ramp up to using them.
 
 
     You can find out more about Esper at [https://esper.io](https://esper.io)
+=======
+    Esper Manage APIs for Cloud are a set of REST-based APIs that help you programmatically control and monitor your enterprise's dedicated Esper endpoint. Using these APIs, one can orchestrate & manage devices that have been provisioned against your endpoint. Furthermore, this API allows you to manage android applications that get installed on such devices. To read more about the various capabilities of Esper endpoints and Esper managed devices, please visit [esper.io](https://esper.io).
+    This guide describes all the available APIs in detail, along with code samples for you to quickly ramp up to using them.
 
+>>>>>>> f382dd7a18231f525709f47a86e8bfb28bafae97
 
+    You can find out more about Esper at [https://esper.io](https://esper.io)
+
+<<<<<<< HEAD
     You can use your favorite HTTP/REST library for your programming language to use Esper APIs, or you can use one of our SDKs (currently available in [python](https://github.com/esper-io/esper-client-py)).
 
 
@@ -17,12 +25,23 @@ info:
 
 
     To get started you need a developer account with [developer.esper.io](https://developer.esper.io/). Please register youself at https://developer.esper.io/register.
-
+=======
+>>>>>>> f382dd7a18231f525709f47a86e8bfb28bafae97
 
     We've done our best to keep this document up to date, but if you find any issues, please reach out to us at developer@esper.io.
 
+<<<<<<< HEAD
+    We've done our best to keep this document up to date, but if you find any issues, please reach out to us at developer@esper.io.
+=======
+>>>>>>> f382dd7a18231f525709f47a86e8bfb28bafae97
 
     # SDK
+
+<<<<<<< HEAD
+    # SDK
+=======
+      You are welcome to use your favorite HTTP/REST library for your programming language in order to use these APIs, or you can use our official SDK (currently available in [python](https://github.com/esper-io/esper-client-py)) to do so.
+>>>>>>> f382dd7a18231f525709f47a86e8bfb28bafae97
 
       You are welcome to use your favorite HTTP/REST library for your programming language in order to use these APIs, or you can use our official SDK (currently available in python) to do so.
 
@@ -31,57 +50,52 @@ info:
     Client needs to send authentication details to access APIs. Following
     authentication schemes are supported:
 
+    # Errors
 
-    #### Basic Authentication
-
-    Client can use username and password to authenticate. These are your
-    developer account credentials.
-
-    For example, the client sends HTTP requests with the Authorization header
-    that contains the word `Basic` followed by a space and a base64-encoded
-    string `username`:`password`.
+    The API uses standard HTTP status codes to indicate success or failure. All error responses will have a JSON body in the following format
 
 
-    ```bash
-
-    curl -X GET \
-      https://developer.esper.io/api/enterprise/<enterprise_id>/device/ \
-      -H 'Authorization: Basic cl0ZWFkbWluOnNpdG1pbjEyMyQ=' \
-      -H 'Content-Type: application/json' \
     ```
 
-    You can read more about basic authentication scheme 
-    [here](https://swagger.io/docs/specification/authentication/basic-authentication/)
+    {
+      "errors": [],
+      "message": "error message",
+      "status": 400
+    }
 
-
-    #### API Key
-
-    You can generate API keys for your application from Esper dashboard and send
-    them in header to authorize. For example:
-
-
-    ```bash
-
-    curl -X GET \
-      https://developer.esper.io/api/enterprise/<enterprise_id>/device/ \
-      -H 'API_KEY: abhbvksvdrkjsh' \
-      -H 'Content-Type: application/json' \
     ```
 
-    More details to come soon.
+    * `errors` -  List of error details
+
+    * `message` - Error description
+
+    * `status` - HTTP status code
+
+
   version: 1.0.0
   title: Esper Manage API
+<<<<<<< HEAD
   termsOfService: 'http://shoonya.io/terms/'
 #  x-logo:
 #    url: 'esper.svg'
 #  contact:
 #    email: developer@esper.io
+=======
+  termsOfService: 'http://esper.io/terms/'
+  contact:
+    email: developer@esper.io
+>>>>>>> f382dd7a18231f525709f47a86e8bfb28bafae97
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-host: developer.esper.io
+host: DOMAIN.shoonyacloud.com
 basePath: /api
 tags:
+  - name: Enterprise
+    description: APIs to manage your enterprise information
+    externalDocs:
+      description: Find out more about device management
+      url: 'https://docs.shoonyacloud.com'
   - name: Device
     description: APIs to fetch device information
     externalDocs:
@@ -94,12 +108,41 @@ tags:
       url: 'https://docs.shoonyacloud.com'
 schemes:
   - https
+<<<<<<< HEAD
   - http
 externalDocs:
 #  description: Find out more about Esper
 #  url: 'http://shoonya.io'
+=======
+>>>>>>> f382dd7a18231f525709f47a86e8bfb28bafae97
 x-tagGroups:
   - name: API Reference
     tags:
+      - Enterprise
+      - Application
+      - Policy
       - Device
+      - Device Group
       - Commands
+      - Group Commands
+securityDefinitions:
+  apiKey:
+    description: |
+      Access token for APIs. You need to generate this from your developer portal at DOMAIN.shoonyacloud.com. Please follow the instructions [here](https://docs.shoonyacloud.com) to generate an access token.
+      Once you have the access token, you need to send an authorization header as below
+
+      ```bash
+
+          curl -X GET \
+            https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/ \
+            -H 'Authorization: Bearer <ACCESS_TOKEN>' \
+            -H 'Content-Type: application/json' \
+      ```
+
+      > Please note the use of keyword **Bearer** before the token value.
+
+
+      You can read more about api key authentication scheme [here](https://swagger.io/docs/specification/authentication/api-keys/).
+    name: Authorization
+    type: apiKey
+    in: header

@@ -1,0 +1,64 @@
+required:
+  - name
+  - policy
+  - enterprise
+type: object
+properties:
+  url:
+    title: Url
+    type: string
+    format: url
+    readOnly: true
+  device_count:
+    title: Device count
+    type: integer
+    readOnly: true
+  is_default:
+    title: Is default
+    type: boolean
+    readOnly: true
+  is_template:
+    title: Is template
+    type: boolean
+    default: false
+  uuid:
+    title: Uuid
+    type: string
+    format: uuid
+    readOnly: true
+  name:
+    title: Name
+    type: string
+    maxLength: 255
+    minLength: 1
+  description:
+    title: Description
+    type: string
+    x-nullable: true
+  google_policy_id:
+    title: Google policy id
+    type: string
+    maxLength: 255
+    minLength: 1
+    x-nullable: true
+  policy:
+    title: Policy
+    description: Policy JSON string
+    type: string
+  created_on:
+    title: Created on
+    type: string
+    format: date-time
+    readOnly: true
+  updated_on:
+    title: Updated on
+    type: string
+    format: date-time
+    readOnly: true
+  is_active:
+    title: Is active
+    type: boolean
+  enterprise:
+    title: Enterprise
+    type: string
+    format: url

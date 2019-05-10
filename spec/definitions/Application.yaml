@@ -1,0 +1,66 @@
+required:
+  - application_name
+  - package_name
+  - enterprise
+type: object
+properties:
+  id:
+    title: Id
+    type: string
+    format: uuid
+    readOnly: true
+  versions:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationVersion'
+  application_name:
+    title: Application name
+    type: string
+    maxLength: 255
+    minLength: 1
+  package_name:
+    title: Package name
+    type: string
+    maxLength: 255
+    minLength: 1
+  developer:
+    title: Developer
+    type: string
+    maxLength: 255
+    minLength: 1
+    x-nullable: true
+  category:
+    title: Category
+    type: string
+    maxLength: 255
+    minLength: 1
+    x-nullable: true
+  content_rating:
+    title: Content rating
+    type: string
+    format: decimal
+  compatibility:
+    title: Compatibility
+    type: string
+    minLength: 1
+    x-nullable: true
+  created_on:
+    title: Created on
+    type: string
+    format: date-time
+    readOnly: true
+  updated_on:
+    title: Updated on
+    type: string
+    format: date-time
+    readOnly: true
+  is_active:
+    title: Is active
+    type: boolean
+  is_hidden:
+    title: Is hidden
+    type: boolean
+  enterprise:
+    title: Enterprise
+    type: string
+    format: url

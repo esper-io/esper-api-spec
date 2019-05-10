@@ -1,0 +1,16 @@
+title: Version
+type: object
+properties:
+  app_version_id:
+    title: App version id
+    type: string
+    format: uuid
+  version_code:
+    title: Version code
+    type: string
+  build_number:
+    title: Build number
+    type: string
+  hash_string:
+    title: Hash string
+    type: string

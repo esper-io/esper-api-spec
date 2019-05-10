@@ -1,0 +1,5 @@
+title: Command args
+type: object
+properties:
+  app_version:
+    type: string

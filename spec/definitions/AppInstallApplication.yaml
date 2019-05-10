@@ -1,0 +1,14 @@
+title: Application
+type: object
+properties:
+  application_name:
+    title: Application name
+    type: string
+  package_name:
+    title: Package name
+    type: string
+  version:
+    $ref: '#/definitions/AppInstallVersion'
+  is_enabled:
+    title: Is enabled
+    type: boolean

@@ -1,6 +1,4 @@
 get:
-  tags:
-    - Device
   summary: Fetch device details by ID
   description: Returns details of a device
   operationId: getDeviceById
@@ -26,15 +24,15 @@ get:
         $ref: '#/definitions/Device'
     '400':
       description: Bad request
-    '401':
-      description: Unauthorized
-      schema:
-        $ref: '#/definitions/UnauthorizedResponse'
+  security:
+    - apiKey: []
+  tags:
+    - Device
   x-code-samples:
     - lang: Shell
       source: |
         curl -X GET \
-          https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/ \
+          https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/ \
           -H 'Authorization: Basic c2lnNpdGVhZG1pbjEyMyQ=' \
           -H 'Content-Type: application/json'
     - lang: Python
@@ -43,7 +41,7 @@ get:
 
 
         url =
-        "https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/"
+        "https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/"
 
 
         payload = ""
@@ -62,7 +60,7 @@ get:
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
-          .url("https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>")
+          .url("https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>")
           .get()
           .addHeader("Content-Type", "application/json")
           .addHeader("Authorization", "Basic cOnNpdGVhZG1pbjEyMyQ=")

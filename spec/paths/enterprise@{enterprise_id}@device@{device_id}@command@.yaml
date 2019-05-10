@@ -1,8 +1,6 @@
 post:
-  tags:
-    - Commands
   summary: Run commands on device
-  description: 'Fire commands on device like lock, ping etc'
+  description: Fire commands on device like reboot, ping etc
   operationId: runCommand
   produces:
     - application/json
@@ -21,65 +19,16 @@ post:
       format: uuid
     - name: command
       in: body
-      description: command name to fire
+      description: Command request body
       required: true
       schema:
-        $ref: '#/definitions/DeviceCommandRequest'
+        $ref: '#/definitions/CommandRequest'
   responses:
-    '200':
+    200:
       description: successful operation
       schema:
-        $ref: '#/definitions/DeviceCommandResponse'
-    '400':
-      description: Bad request
-    '401':
-      description: Unauthorized
-      schema:
-        $ref: '#/definitions/UnauthorizedResponse'
-  x-code-samples:
-    - lang: Shell
-      source: |
-        curl -X POST \
-          https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/command/ \
-          -H 'Authorization: Basic c2l0ZWFNpdGVhZG1pbjEyMyQ=' \
-          -H 'Content-Type: application/json' \
-          -d '{"command": "UPDATE_HEARTBEAT"}'
-    - lang: Python
-      source: >
-        import requests
-
-
-        url =
-        "https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/command/"
-
-
-        payload = "{\"command\": \"UPDATE_HEARTBEAT\"}"
-
-        headers = {
-          'Content-Type': "application/json",
-          'Authorization': "Basic c2l0ZWFkbWdGVhZG1pbjEyMyQ="
-        }
-
-
-        response = requests.request("POST", url, data=payload, headers=headers)
-
-
-        print(response.text)
-    - lang: Java
-      source: >
-        OkHttpClient client = new OkHttpClient();
-
-
-        MediaType mediaType = MediaType.parse("application/json");
-
-        RequestBody body = RequestBody.create(mediaType, "{\"command\":
-        \"UPDATE_HEARTBEAT\"}");
-
-        Request request = new Request.Builder()
-          .url("https://developer.esper.io/api/enterprise/<enterprise_id>/device/<device_id>/command/")
-          .post(body)
-          .addHeader("Content-Type", "application/json")
-          .addHeader("Authorization", "Basic c2l0ZWFnNpdGVhZG1pbjEyMyQ=")
-          .build();
-
-        Response response = client.newCall(request).execute();
+        $ref: '#/definitions/DeviceCommand'
+  security:
+    - apiKey: []
+  tags:
+    - Commands

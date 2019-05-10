@@ -1,6 +1,4 @@
 get:
-  tags:
-    - Device
   summary: Fetch all devices in an enterprise
   description: Returns a list of devices
   operationId: getAllDevices
@@ -18,12 +16,28 @@ get:
       description: Filter by device name
       required: false
       type: string
+    - name: group
+      in: query
+      description: Filter by group id
+      required: false
+      type: string
+      format: uuid
+    - name: search
+      in: query
+      description: A search term. Search by device name or imei
+      required: false
+      type: string
     - name: limit
       in: query
-      description: Pagination
+      description: Number of results to return per page.
       required: false
       type: integer
       default: 20
+    - name: offset
+      in: query
+      description: The initial index from which to return the results.
+      required: false
+      type: integer
   responses:
     '200':
       description: successful operation
@@ -43,15 +57,15 @@ get:
             type: array
             items:
               $ref: '#/definitions/Device'
-    '401':
-      description: Unauthorized
-      schema:
-        $ref: '#/definitions/UnauthorizedResponse'
+  security:
+    - apiKey: []
+  tags:
+    - Device
   x-code-samples:
     - lang: Shell
       source: |
         curl -X GET \
-          https://developer.esper.io/api/enterprise/<enterprise_id>/device/ \
+          https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/ \
           -H 'Authorization: Basic cluOnNpdGVhZG1pbjEyMyQ=' \
           -H 'Content-Type: application/json'
     - lang: Python
@@ -60,7 +74,7 @@ get:
 
 
         url =
-        "https://developer.esper.io/api/enterprise/<enterprise_id>/device/"
+        "https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/"
 
 
         payload = ""
@@ -79,7 +93,7 @@ get:
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
-          .url("https://developer.esper.io/api/enterprise/<enterprise_id>/device/")
+          .url("https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/")
           .get()
           .addHeader("Content-Type", "application/json")
           .addHeader("Authorization", "Basic c2luOnNpdGVhZG1pbjEyMyQ=")

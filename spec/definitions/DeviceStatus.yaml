@@ -1,0 +1,26 @@
+required:
+  - data
+  - device
+  - enterprise
+type: object
+properties:
+  id:
+    title: ID
+    type: integer
+    readOnly: true
+  data:
+    title: Data
+    type: string
+  created_on:
+    title: Created on
+    type: string
+    format: date-time
+    readOnly: true
+  device:
+    title: Device
+    type: string
+    format: url
+  enterprise:
+    title: Enterprise
+    type: string
+    format: url

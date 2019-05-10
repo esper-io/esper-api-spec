@@ -1,0 +1,15 @@
+type: integer
+description: |
+  Device settings GPS state enum
+
+  ```
+  * LOCATION_MODE_HIGH_ACCURACY = 0
+  * LOCATION_MODE_SENSORS_ONLY = 1
+  * LOCATION_MODE_BATTERY_SAVING = 2
+  * LOCATION_MODE_OFF = 3
+  ```
+enum:
+  - 0
+  - 1
+  - 2
+  - 3

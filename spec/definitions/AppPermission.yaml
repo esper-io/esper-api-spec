@@ -1,0 +1,43 @@
+required:
+  - permission
+  - enterprise
+type: object
+properties:
+  id:
+    title: Id
+    type: string
+    format: uuid
+    readOnly: true
+  permission:
+    title: Permission
+    type: string
+    maxLength: 255
+    minLength: 1
+  grant_state:
+    title: Grant state
+    type: string
+    enum:
+      - Default
+      - Denied
+      - Granted
+  created_on:
+    title: Created on
+    type: string
+    format: date-time
+    readOnly: true
+  updated_on:
+    title: Updated on
+    type: string
+    format: date-time
+    readOnly: true
+  is_active:
+    title: Is active
+    type: boolean
+  enterprise:
+    title: Enterprise
+    type: string
+    format: url
+  app_version:
+    title: App version
+    type: string
+    format: url

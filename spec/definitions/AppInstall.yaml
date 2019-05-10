@@ -1,0 +1,42 @@
+required:
+  - application
+  - install_state
+  - enterprise
+  - device
+type: object
+properties:
+  id:
+    title: Id
+    type: string
+    format: uuid
+    readOnly: true
+  application:
+    $ref: '#/definitions/AppInstallApplication'
+  install_state:
+    $ref: '#/definitions/AppInstallStateEnum'
+  reason_details:
+    title: Reason details
+    type: string
+    minLength: 1
+    x-nullable: true
+  created_on:
+    title: Created on
+    type: string
+    format: date-time
+    readOnly: true
+  updated_on:
+    title: Updated on
+    type: string
+    format: date-time
+    readOnly: true
+  is_active:
+    title: Is active
+    type: boolean
+  enterprise:
+    title: Enterprise
+    type: string
+    format: url
+  device:
+    title: Device
+    type: string
+    format: url

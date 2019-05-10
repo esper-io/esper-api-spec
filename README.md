@@ -3,12 +3,11 @@
 
 ## Links
 
-- [Reference Documentation (ReDoc)](https://esper-io.github.io/esper-api-spec/)
-- OpenAPI Raw Files: [JSON](https://esper-io.github.io/esper-api-spec/openapi.json) [YAML](https://esper-io.github.io/esper-api-spec/openapi.yaml)
+- [API documentation (ReDoc)](https://esper-io.github.io/esper-api-spec/)
+- OpenAPI Specification file: [JSON](https://esper-io.github.io/esper-api-spec/openapi.json) [YAML](https://esper-io.github.io/esper-api-spec/openapi.yaml)
 
-**Warning:** All above links are updated only after Travis CI finishes deployment
+## Instructions of updating specification
 
-## Working on specification
 ### Install
 
 1. Install [Node JS](https://nodejs.org/)

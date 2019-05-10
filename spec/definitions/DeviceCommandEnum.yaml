@@ -1,4 +1,33 @@
 type: string
+description: |
+  Command Options
+
+  ```
+  * REBOOT: Reboot device
+  * LOCK:  Lock device screen
+  * INSTALL:  Install an app on device
+  * UNINSTALL: Uninstall an app from device
+  * WIPE: Wipe device
+  * UPDATE_HEARTBEAT: Ping Device
+  * SET_WIFI_STATE: wifi on/off
+  * SET_BLUETOOTH_STATE: Bluetooth on/off
+  * SET_ROTATION_STATE: Auto rotate setting
+  * SET_GPS_STATE: GPS options
+  * SET_BRIGHTNESS_SCALE: Brightness control
+  * SET_STREAM_VOLUME: Volume control
+  * SET_SCREEN_OFF_TIMEOUT: Screen timeout setting
+  ```
 enum:
-  - UPDATE_HEARTBEAT
+  - REBOOT
   - LOCK
+  - INSTALL
+  - UPDATE_HEARTBEAT
+  - WIPE
+  - SET_WIFI_STATE
+  - SET_BLUETOOTH_STATE
+  - SET_ROTATION_STATE
+  - SET_GPS_STATE
+  - SET_BRIGHTNESS_SCALE
+  - SET_STREAM_VOLUME
+  - SET_SCREEN_OFF_TIMEOUT
+  - UNINSTALL

@@ -1,0 +1,77 @@
+get:
+  operationId: getAllGroups
+  summary: List device groups
+  description: Returns EnterpriseDeviceGroup list
+  produces:
+      - application/json
+  parameters:
+    - name: name
+      in: query
+      description: filter by group name
+      required: false
+      type: string
+    - name: limit
+      in: query
+      description: Number of results to return per page.
+      required: false
+      type: integer
+      default: 20
+    - name: offset
+      in: query
+      description: The initial index from which to return the results.
+      required: false
+      type: integer
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        required:
+          - count
+          - results
+        type: object
+        properties:
+          count:
+            type: integer
+          next:
+            type: string
+            format: url
+            x-nullable: true
+          previous:
+            type: string
+            format: url
+            x-nullable: true
+          results:
+            type: array
+            items:
+              $ref: '#/definitions/DeviceGroup'
+  security:
+    - apiKey: []
+  tags:
+    - Device Group
+post:
+  operationId: createGroup
+  summary: Create a device group
+  description: Returns EnterpriseDeviceGroup instance
+  produces:
+      - application/json
+  parameters:
+    - name: data
+      in: body
+      required: true
+      schema:
+        $ref: '#/definitions/DeviceGroup'
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/DeviceGroup'
+  security:
+    - apiKey: []
+  tags:
+    - Device Group
+parameters:
+  - name: enterprise_id
+    description: A UUID string identifying enterprise.
+    in: path
+    required: true
+    type: string

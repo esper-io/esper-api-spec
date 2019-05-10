@@ -1,0 +1,61 @@
+get:
+  operationId: getAllApplications
+  summary: List apps in enterprise
+  description: Returns Application list
+  produces:
+    - application/json
+  parameters:
+    - name: application_name
+      in: query
+      description: filter by application name
+      required: false
+      type: string
+    - name: package_name
+      in: query
+      description: filter by package name
+      required: false
+      type: string
+    - name: limit
+      in: query
+      description: Number of results to return per page.
+      required: false
+      type: integer
+      default: 20
+    - name: offset
+      in: query
+      description: The initial index from which to return the results.
+      required: false
+      type: integer
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        required:
+          - count
+          - results
+        type: object
+        properties:
+          count:
+            type: integer
+          next:
+            type: string
+            format: url
+            x-nullable: true
+          previous:
+            type: string
+            format: url
+            x-nullable: true
+          results:
+            type: array
+            items:
+              $ref: '#/definitions/Application'
+  security:
+    - apiKey: []
+  tags:
+    - Application
+parameters:
+  - name: enterprise_id
+    description: A UUID string identifying this enterprise.
+    in: path
+    required: true
+    type: string

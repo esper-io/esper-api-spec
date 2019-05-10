@@ -1,0 +1,50 @@
+get:
+  operationId: getDeviceEvent
+  summary: Get latest device event
+  description: Returns DeviceStatus instance
+  produces:
+    - application/json
+  parameters:
+    - name: latest_event
+      in: query
+      description: Flag to get latest event
+      required: true
+      type: integer
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        required:
+          - count
+          - results
+        type: object
+        properties:
+          count:
+            type: integer
+          next:
+            type: string
+            format: url
+            x-nullable: true
+          previous:
+            type: string
+            format: url
+            x-nullable: true
+          results:
+            type: array
+            items:
+              $ref: '#/definitions/DeviceStatus'
+  security:
+    - apiKey: []
+  tags:
+    - Device
+parameters:
+  - name: enterprise_id
+    description: A UUID string identifying this enterprise.
+    in: path
+    required: true
+    type: string
+  - name: device_id
+    description: A UUID string identifying device.
+    in: path
+    required: true
+    type: string
