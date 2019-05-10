@@ -1,0 +1,71 @@
+body {
+    color: black !important;
+}
+.euquqW{
+    max-height: 100px !important;
+    max-width: 100px !important;
+    margin:  0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.shv3r-0  {
+    color: black !important;
+}
+
+.kmvDqY{
+    display: none ;
+}
+
+.shoonya-header {
+    z-index: 20;
+    right: 0;
+    height: 3.6rem;
+    background-color: #fff;
+    box-sizing: border-box;
+    border-bottom: 1px solid #eaecef;
+    padding: .7rem 1.5rem;
+    line-height: 2.2rem;
+
+}
+.shoonya-logo {
+    height: 2.2rem;
+    min-width: 2.2rem;
+    margin-right: .8rem;
+    vertical-align: top;
+}
+
+.ebXbwy {
+    background-color: #fcfcfc !important;
+}
+.egwcPy{
+    background-color: #fcfcfc !important;
+}
+
+.kkiuWB{
+    height: 45px !important;
+}
+
+.search-icon{
+     top: 15px !important;
+}
+.api-content .api-info > p {
+    display: none !important;
+}
+
+.cqXmTa{
+    padding-top: 25px !important;
+    padding-bottom: 5px !important;
+}
+@media print, screen and (max-width: 85rem) {
+    .diqfaT{
+        padding: 5px !important;
+    }
+}
+.iJUwRU {
+    border-radius: 15px !important;
+    padding: 20px !important;
+}
+.dyBbHm pre {
+    border-radius: 15px !important;
+    padding: 20px !important;
+}

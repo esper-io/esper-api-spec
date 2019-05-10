@@ -1,0 +1,3019 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "# Introduction\nEsper Manage APIs for Cloud are a set of REST-based APIs that help you programmatically control and monitor your enterprise's dedicated Esper endpoint. Using these APIs, one can orchestrate & manage devices that have been provisioned against your endpoint. Furthermore, this API allows you to manage android applications that get installed on such devices. To read more about the various capabilities of Esper endpoints and Esper managed devices, please visit [esper.io](https://esper.io). This guide describes all the available APIs in detail, along with code samples for you to quickly ramp up to using them.\n\nYou can find out more about Esper at [https://esper.io](https://esper.io)\n\nWe've done our best to keep this document up to date, but if you find any issues, please reach out to us at developer@esper.io.\n\n# SDK\n\n  You are welcome to use your favorite HTTP/REST library for your programming language in order to use these APIs, or you can use our official SDK (currently available in [python](https://github.com/esper-io/esper-client-py)) to do so.\n\n\n# Authentication\nClient needs to send authentication details to access APIs. Following authentication schemes are supported:\n# Errors\nThe API uses standard HTTP status codes to indicate success or failure. All error responses will have a JSON body in the following format\n\n```\n{\n  \"errors\": [],\n  \"message\": \"error message\",\n  \"status\": 400\n}\n```\n* `errors` -  List of error details\n* `message` - Error description\n* `status` - HTTP status code\n",
+    "version": "1.0.0",
+    "title": "Esper Manage API",
+    "termsOfService": "http://esper.io/terms/",
+    "contact": {
+      "email": "developer@esper.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "DOMAIN.shoonyacloud.com",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Enterprise",
+      "description": "APIs to manage your enterprise information",
+      "externalDocs": {
+        "description": "Find out more about device management",
+        "url": "https://docs.shoonyacloud.com"
+      }
+    },
+    {
+      "name": "Device",
+      "description": "APIs to fetch device information",
+      "externalDocs": {
+        "description": "Find out more about device management",
+        "url": "https://docs.shoonyacloud.com"
+      }
+    },
+    {
+      "name": "Commands",
+      "description": "APIs to run device commands",
+      "externalDocs": {
+        "description": "Find out more about device commands",
+        "url": "https://docs.shoonyacloud.com"
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "x-tagGroups": [
+    {
+      "name": "API Reference",
+      "tags": [
+        "Enterprise",
+        "Application",
+        "Policy",
+        "Device",
+        "Device Group",
+        "Commands",
+        "Group Commands"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "apiKey": {
+      "description": "Access token for APIs. You need to generate this from your developer portal at DOMAIN.shoonyacloud.com. Please follow the instructions [here](https://docs.shoonyacloud.com) to generate an access token.\nOnce you have the access token, you need to send an authorization header as below\n\n```bash\n\n    curl -X GET \\\n      https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/ \\\n      -H 'Authorization: Bearer <ACCESS_TOKEN>' \\\n      -H 'Content-Type: application/json' \\\n```\n\n> Please note the use of keyword **Bearer** before the token value.\n\n\nYou can read more about api key authentication scheme [here](https://swagger.io/docs/specification/authentication/api-keys/).\n",
+      "name": "Authorization",
+      "type": "apiKey",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/enterprise/": {
+      "get": {
+        "operationId": "getAllEnterprises",
+        "summary": "List all enterprises",
+        "description": "Returns Enterprise list",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Enterprise"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Enterprise"
+        ]
+      },
+      "parameters": []
+    },
+    "/enterprise/{enterprise_id}/": {
+      "get": {
+        "operationId": "getEnterprise",
+        "summary": "Get your enterprise information",
+        "description": "Returns Enterprise instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Enterprise"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Enterprise"
+        ]
+      },
+      "patch": {
+        "operationId": "partialUpdateEnterprise",
+        "summary": "Partial update enterprise information",
+        "description": "Returns updated enterprise",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnterpriseUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Enterprise"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Enterprise"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "enterprise_id",
+          "in": "path",
+          "description": "A UUID string identifying this enterprise.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "/enterprise/{enterprise_id}/application/": {
+      "get": {
+        "operationId": "getAllApplications",
+        "summary": "List apps in enterprise",
+        "description": "Returns Application list",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "application_name",
+            "in": "query",
+            "description": "filter by application name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "package_name",
+            "in": "query",
+            "description": "filter by package name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "required": false,
+            "type": "integer",
+            "default": 20
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Application"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Application"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "enterprise_id",
+          "description": "A UUID string identifying this enterprise.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/enterprise/{enterprise_id}/application/{application_id}/": {
+      "get": {
+        "operationId": "getApplication",
+        "summary": "Get application information",
+        "description": "Returns Application instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Application"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteApplication",
+        "summary": "Delete an application",
+        "description": "Empty response",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Application"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "application_id",
+          "in": "path",
+          "description": "A UUID string identifying this application.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "name": "enterprise_id",
+          "description": "A UUID string identifying enterprise.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/enterprise/{enterprise_id}/application/{application_id}/version/": {
+      "get": {
+        "operationId": "getAppVersions",
+        "summary": "List App versions",
+        "description": "Returns AppVersion list",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "version_code",
+            "in": "query",
+            "description": "filter by version code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "build_number",
+            "in": "query",
+            "description": "filter by build number",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "required": false,
+            "type": "integer",
+            "default": 20
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AppVersion"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Application"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "application_id",
+          "in": "path",
+          "description": "A UUID string identifying this application.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "name": "enterprise_id",
+          "description": "A UUID string identifying enterprise.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/enterprise/{enterprise_id}/application/{application_id}/version/{version_id}/": {
+      "get": {
+        "operationId": "getAppVersion",
+        "summary": "Get app version information",
+        "description": "Returns AppVersion instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AppVersion"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Application"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteAppVersion",
+        "summary": "Delete app version",
+        "description": "Empty response",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Application"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "description": "A UUID string identifying this app version.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "name": "application_id",
+          "in": "path",
+          "description": "A UUID string identifying this application.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "name": "enterprise_id",
+          "description": "A UUID string identifying enterprise.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/enterprise/{enterprise_id}/application/upload/": {
+      "post": {
+        "operationId": "upload",
+        "summary": "upload an application to enterprise",
+        "description": "Returns application",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "enterprise",
+            "description": "enterprise id",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "app_file",
+            "description": "valid APK file",
+            "in": "formData",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "application": {
+                  "$ref": "#/definitions/Application"
+                }
+              }
+            }
+          }
+        },
+        "consumes": [
+          "multipart/form-data",
+          "application/x-www-form-urlencoded"
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Application"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "enterprise_id",
+          "description": "A UUID string identifying this enterprise.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/enterprise/{enterprise_id}/device/": {
+      "get": {
+        "summary": "Fetch all devices in an enterprise",
+        "description": "Returns a list of devices",
+        "operationId": "getAllDevices",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "enterprise_id",
+            "in": "path",
+            "description": "ID of the enterprise",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Filter by device name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "group",
+            "in": "query",
+            "description": "Filter by group id",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "A search term. Search by device name or imei",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "required": false,
+            "type": "integer",
+            "default": 20
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "url"
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "url"
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Device"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Device"
+        ],
+        "x-code-samples": [
+          {
+            "lang": "Shell",
+            "source": "curl -X GET \\\n  https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/ \\\n  -H 'Authorization: Basic cluOnNpdGVhZG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json'\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/\"\n\npayload = \"\"\nheaders = {\n    'Content-Type': \"application/json\",\n    'Authorization': \"Basic cbWluOnNpdGVhZG1pbjEyMyQ=\",\n    }\n\nresponse = requests.request(\"GET\", url, data=payload, headers=headers)\n\nprint(response.text)\n"
+          },
+          {
+            "lang": "Java",
+            "source": "OkHttpClient client = new OkHttpClient();\n\nRequest request = new Request.Builder()\n  .url(\"https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/\")\n  .get()\n  .addHeader(\"Content-Type\", \"application/json\")\n  .addHeader(\"Authorization\", \"Basic c2luOnNpdGVhZG1pbjEyMyQ=\")\n  .build();\n\nResponse response = client.newCall(request).execute();\n"
+          }
+        ]
+      }
+    },
+    "/enterprise/{enterprise_id}/device/{device_id}/": {
+      "get": {
+        "summary": "Fetch device details by ID",
+        "description": "Returns details of a device",
+        "operationId": "getDeviceById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "enterprise_id",
+            "in": "path",
+            "description": "ID of the enterprise",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "ID of the device",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Device"
+        ],
+        "x-code-samples": [
+          {
+            "lang": "Shell",
+            "source": "curl -X GET \\\n  https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/ \\\n  -H 'Authorization: Basic c2lnNpdGVhZG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json'\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/\"\n\npayload = \"\"\nheaders = {\n    'Content-Type': \"application/json\",\n    'Authorization': \"Basic cbWluOnNpdGVhZG1pbjEyMyQ=\",\n    }\n\nresponse = requests.request(\"GET\", url, data=payload, headers=headers)\n\nprint(response.text)\n"
+          },
+          {
+            "lang": "Java",
+            "source": "OkHttpClient client = new OkHttpClient();\n\nRequest request = new Request.Builder()\n  .url(\"https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>\")\n  .get()\n  .addHeader(\"Content-Type\", \"application/json\")\n  .addHeader(\"Authorization\", \"Basic cOnNpdGVhZG1pbjEyMyQ=\")\n  .build();\n\nResponse response = client.newCall(request).execute();\n"
+          }
+        ]
+      }
+    },
+    "/enterprise/{enterprise_id}/device/{device_id}/command/": {
+      "post": {
+        "summary": "Run commands on device",
+        "description": "Fire commands on device like reboot, ping etc",
+        "operationId": "runCommand",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "enterprise_id",
+            "in": "path",
+            "description": "ID of the enterprise",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "ID of the device",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "command",
+            "in": "body",
+            "description": "Command request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommandRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceCommand"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Commands"
+        ]
+      }
+    },
+    "/enterprise/{enterprise_id}/device/{device_id}/command/{command_id}/": {
+      "get": {
+        "operationId": "getCommand",
+        "summary": "Get command status",
+        "description": "Return DeviceCommand instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceCommand"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Commands"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "command_id",
+          "in": "path",
+          "description": "A UUID string identifying this device command.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "name": "device_id",
+          "in": "path",
+          "description": "A UUID string identifying this device.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "name": "enterprise_id",
+          "description": "A UUID string identifying enterprise.",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "/enterprise/{enterprise_id}/device/{device_id}/install/": {
+      "get": {
+        "operationId": "getAppInstalls",
+        "summary": "List installed apps",
+        "description": "Returns AppInstall list",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device",
+            "in": "query",
+            "description": "filter by device id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "package_name",
+            "in": "query",
+            "description": "filter by package name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "application_name",
+            "in": "query",
+            "description": "filter by application name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "install_state",
+            "in": "query",
+            "description": "filter by install state",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "required": false,
+            "type": "integer",
+            "default": 20
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/AppInstall"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Device"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "enterprise_id",
+          "description": "A UUID string identifying this enterprise.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "device_id",
+          "description": "A UUID string identifying device.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/enterprise/{enterprise_id}/device/{device_id}/status/": {
+      "get": {
+        "operationId": "getDeviceEvent",
+        "summary": "Get latest device event",
+        "description": "Returns DeviceStatus instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "latest_event",
+            "in": "query",
+            "description": "Flag to get latest event",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeviceStatus"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Device"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "enterprise_id",
+          "description": "A UUID string identifying this enterprise.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "device_id",
+          "description": "A UUID string identifying device.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/enterprise/{enterprise_id}/devicegroup/": {
+      "get": {
+        "operationId": "getAllGroups",
+        "summary": "List device groups",
+        "description": "Returns EnterpriseDeviceGroup list",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "filter by group name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "required": false,
+            "type": "integer",
+            "default": 20
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeviceGroup"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Device Group"
+        ]
+      },
+      "post": {
+        "operationId": "createGroup",
+        "summary": "Create a device group",
+        "description": "Returns EnterpriseDeviceGroup instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Device Group"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "enterprise_id",
+          "description": "A UUID string identifying enterprise.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/enterprise/{enterprise_id}/devicegroup/{group_id}/": {
+      "get": {
+        "operationId": "getGroupById",
+        "summary": "Get device group information",
+        "description": "Returns EnterpriseDeviceGroup instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Device Group"
+        ]
+      },
+      "put": {
+        "operationId": "updateGroup",
+        "summary": "Update device group",
+        "description": "Returns EnterpriseDeviceGroup instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceGroupUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Device Group"
+        ]
+      },
+      "patch": {
+        "operationId": "partialUpdateGroup",
+        "summary": "Partial update group",
+        "description": "Returns EnterpriseDeviceGroup instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceGroupUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeviceGroup"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Device Group"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteGroup",
+        "summary": "Delete a device group",
+        "description": "Emtpy response",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Device Group"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "group_id",
+          "in": "path",
+          "description": "A UUID string identifying this enterprise device group.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "name": "enterprise_id",
+          "description": "A UUID string identifying enterprise.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/enterprise/{enterprise_id}/devicegroup/{group_id}/command/": {
+      "post": {
+        "summary": "Run commands on group devices",
+        "description": "Fire commands on all the group devices",
+        "operationId": "runGroupCommand",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Group command request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GroupCommandRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/GroupCommand"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Group Commands"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "enterprise_id",
+          "in": "path",
+          "description": "ID of the enterprise",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "name": "group_id",
+          "in": "path",
+          "description": "ID of the group",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "/enterprise/{enterprise_id}/devicegroup/{group_id}/command/{command_id}/": {
+      "get": {
+        "operationId": "getGroupCommand",
+        "summary": "Get group command status",
+        "description": "Returns GroupCommand instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/GroupCommand"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Group Commands"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "command_id",
+          "in": "path",
+          "description": "A UUID string identifying this device command.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "name": "group_id",
+          "in": "path",
+          "description": "A UUID string identifying this group.",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "name": "enterprise_id",
+          "description": "A UUID string identifying enterprise.",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "/enterprise/{enterprise_id}/policy/": {
+      "get": {
+        "operationId": "getAllPolicies",
+        "summary": "List enterprise policies",
+        "description": "Returns EnterprisePolicy list",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "filter by name (starts with)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "required": false,
+            "type": "integer",
+            "default": 20
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "required": [
+                "count",
+                "results"
+              ],
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "url",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EnterprisePolicy"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Policy"
+        ]
+      },
+      "post": {
+        "operationId": "createPolicy",
+        "summary": "Create a policy",
+        "description": "Return EnterprisePolicy instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Policy"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "enterprise_id",
+          "description": "A UUID string identifying enterprise.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/enterprise/{enterprise_id}/policy/{policy_id}/": {
+      "get": {
+        "operationId": "getPolicyById",
+        "summary": "Get policy details",
+        "description": "Returns EnterprisePolicy instance",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Policy"
+        ]
+      },
+      "put": {
+        "operationId": "updatePolicy",
+        "summary": "Update/Replace information",
+        "description": "Returns updated policy",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Policy"
+        ]
+      },
+      "patch": {
+        "operationId": "partialUpdatePolicy",
+        "summary": "Partial update policy",
+        "description": "Returns updated policy",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Policy"
+        ]
+      },
+      "delete": {
+        "operationId": "deletePolicy",
+        "summary": "Delete a policy",
+        "description": "Empty response",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Policy"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "policy_id",
+          "in": "path",
+          "description": "A unique integer value identifying this enterprise policy.",
+          "required": true,
+          "type": "integer"
+        },
+        {
+          "name": "enterprise_id",
+          "description": "A UUID string identifying enterprise.",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "AppInstall": {
+      "required": [
+        "application",
+        "install_state",
+        "enterprise",
+        "device"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "application": {
+          "$ref": "#/definitions/AppInstallApplication"
+        },
+        "install_state": {
+          "$ref": "#/definitions/AppInstallStateEnum"
+        },
+        "reason_details": {
+          "title": "Reason details",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "is_active": {
+          "title": "Is active",
+          "type": "boolean"
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "type": "string",
+          "format": "url"
+        },
+        "device": {
+          "title": "Device",
+          "type": "string",
+          "format": "url"
+        }
+      }
+    },
+    "AppInstallApplication": {
+      "title": "Application",
+      "type": "object",
+      "properties": {
+        "application_name": {
+          "title": "Application name",
+          "type": "string"
+        },
+        "package_name": {
+          "title": "Package name",
+          "type": "string"
+        },
+        "version": {
+          "$ref": "#/definitions/AppInstallVersion"
+        },
+        "is_enabled": {
+          "title": "Is enabled",
+          "type": "boolean"
+        }
+      }
+    },
+    "AppInstallStateEnum": {
+      "title": "Install state",
+      "type": "string",
+      "description": "Device App Install State\n\n``` * NOT_INSTALLED = \"Not Installed\"\n* INSTALL_IN_PROGRESS = \"Installation In-Progress\"\n* UNINSTALL_IN_PROGRESS = \"Uninstallation In-Progress\"\n* INSTALL_SUCCESS = \"Install Success\"\n* INSTALL_FAILED = \"Install Failed\"\n* UNINSTALL_SUCCESS = \"Uninstall Success\"\n* UNINSTALL_FAILED = \"Uninstall Failed\"\n```\n",
+      "enum": [
+        "NOT_INSTALLED",
+        "INSTALL_IN_PROGRESS",
+        "UNINSTALL_IN_PROGRESS",
+        "INSTALL_SUCCESS",
+        "INSTALL_FAILED",
+        "UNINSTALL_SUCCESS",
+        "UNINSTALL_FAILED"
+      ]
+    },
+    "AppInstallVersion": {
+      "title": "Version",
+      "type": "object",
+      "properties": {
+        "app_version_id": {
+          "title": "App version id",
+          "type": "string",
+          "format": "uuid"
+        },
+        "version_code": {
+          "title": "Version code",
+          "type": "string"
+        },
+        "build_number": {
+          "title": "Build number",
+          "type": "string"
+        },
+        "hash_string": {
+          "title": "Hash string",
+          "type": "string"
+        }
+      }
+    },
+    "Application": {
+      "required": [
+        "application_name",
+        "package_name",
+        "enterprise"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "versions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationVersion"
+          }
+        },
+        "application_name": {
+          "title": "Application name",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "package_name": {
+          "title": "Package name",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "developer": {
+          "title": "Developer",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "category": {
+          "title": "Category",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "content_rating": {
+          "title": "Content rating",
+          "type": "string",
+          "format": "decimal"
+        },
+        "compatibility": {
+          "title": "Compatibility",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "is_active": {
+          "title": "Is active",
+          "type": "boolean"
+        },
+        "is_hidden": {
+          "title": "Is hidden",
+          "type": "boolean"
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "type": "string",
+          "format": "url"
+        }
+      }
+    },
+    "ApplicationVersion": {
+      "title": "Version",
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "version_code": {
+          "title": "Version code",
+          "type": "string",
+          "maxLength": 50,
+          "minLength": 1
+        },
+        "build_number": {
+          "title": "Build number",
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "hash_string": {
+          "title": "Hash string",
+          "type": "string"
+        },
+        "min_sdk_version": {
+          "title": "Min sdk version",
+          "type": "string",
+          "maxLength": 10,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "target_sdk_version": {
+          "title": "Target sdk version",
+          "type": "string",
+          "maxLength": 10,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "download_url": {
+          "title": "Url",
+          "type": "string",
+          "format": "url"
+        }
+      }
+    },
+    "AppPermission": {
+      "required": [
+        "permission",
+        "enterprise"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "permission": {
+          "title": "Permission",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "grant_state": {
+          "title": "Grant state",
+          "type": "string",
+          "enum": [
+            "Default",
+            "Denied",
+            "Granted"
+          ]
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "is_active": {
+          "title": "Is active",
+          "type": "boolean"
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "type": "string",
+          "format": "url"
+        },
+        "app_version": {
+          "title": "App version",
+          "type": "string",
+          "format": "url"
+        }
+      }
+    },
+    "AppVersion": {
+      "title": "Version",
+      "required": [
+        "permissions",
+        "version_code",
+        "enterprise"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "installed_count": {
+          "title": "Installed count",
+          "type": "integer",
+          "readOnly": true
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppPermission"
+          }
+        },
+        "app_file": {
+          "title": "App file",
+          "type": "string",
+          "readOnly": true,
+          "format": "url"
+        },
+        "app_icon": {
+          "title": "App icon",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true,
+          "format": "url"
+        },
+        "version_code": {
+          "title": "Version code",
+          "type": "string",
+          "maxLength": 50,
+          "minLength": 1
+        },
+        "build_number": {
+          "title": "Build number",
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "size_in_mb": {
+          "title": "Size in mb",
+          "type": "number"
+        },
+        "hash_string": {
+          "title": "Hash string",
+          "type": "string"
+        },
+        "release_name": {
+          "title": "Release name",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "release_comments": {
+          "title": "Release comments",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "release_track": {
+          "title": "Release track",
+          "type": "string",
+          "enum": [
+            "Alpha",
+            "Beta",
+            "Production"
+          ],
+          "x-nullable": true
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "min_sdk_version": {
+          "title": "Min sdk version",
+          "type": "string",
+          "maxLength": 10,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "target_sdk_version": {
+          "title": "Target sdk version",
+          "type": "string",
+          "maxLength": 10,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "is_enabled": {
+          "title": "Is enabled",
+          "type": "boolean"
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "type": "string",
+          "format": "url"
+        },
+        "application": {
+          "title": "Application",
+          "type": "string",
+          "format": "url"
+        }
+      }
+    },
+    "CommandArgs": {
+      "title": "Command args",
+      "type": "object",
+      "properties": {
+        "wipe_external_storage": {
+          "type": "boolean",
+          "default": false
+        },
+        "wipe_FRP": {
+          "type": "boolean",
+          "default": true
+        },
+        "brightness_value": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "stream": {
+          "$ref": "#/definitions/SettingsVolumeStreamEnum"
+        },
+        "volume_level": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "wifi_state": {
+          "type": "boolean"
+        },
+        "bluetooth_state": {
+          "type": "boolean"
+        },
+        "rotate_state": {
+          "$ref": "#/definitions/SettingsRotateStateEnum"
+        },
+        "gps_state": {
+          "$ref": "#/definitions/SettingsGPSStateEnum"
+        },
+        "screen_off_timeout": {
+          "description": "Value in seconds",
+          "type": "integer",
+          "minimum": 5000,
+          "maximum": 1800000
+        },
+        "app_version": {
+          "type": "string"
+        }
+      }
+    },
+    "CommandRequest": {
+      "required": [
+        "command"
+      ],
+      "type": "object",
+      "properties": {
+        "command_args": {
+          "$ref": "#/definitions/CommandArgs"
+        },
+        "command": {
+          "$ref": "#/definitions/DeviceCommandEnum"
+        }
+      }
+    },
+    "Device": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "url": {
+          "type": "string",
+          "format": "url"
+        },
+        "device_name": {
+          "type": "string"
+        },
+        "policy_name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current status of device"
+        },
+        "state": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current state of device"
+        },
+        "current_command": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Current command associated with device"
+        },
+        "suid": {
+          "type": "string",
+          "description": "Device generated unique id"
+        },
+        "fcm_id": {
+          "type": "string"
+        },
+        "enterprise": {
+          "type": "string",
+          "format": "url"
+        },
+        "policy": {
+          "type": "string",
+          "format": "url"
+        },
+        "user": {
+          "type": "string",
+          "format": "url"
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "url"
+          }
+        },
+        "api_level": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "template_name": {
+          "type": "string"
+        },
+        "mqtt_id": {
+          "type": "string"
+        },
+        "softwareInfo": {
+          "type": "object"
+        },
+        "hardwareInfo": {
+          "type": "object"
+        },
+        "displays": {
+          "type": "object"
+        },
+        "networkInfo": {
+          "type": "object"
+        },
+        "memoryInfo": {
+          "type": "object"
+        },
+        "audioConstraints": {
+          "type": "object"
+        },
+        "provisioned_on": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "emm_device": {
+          "$ref": "#/definitions/EmmDevice"
+        },
+        "is_gms": {
+          "type": "boolean",
+          "default": true
+        },
+        "is_active": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "DeviceCommand": {
+      "required": [
+        "command",
+        "enterprise",
+        "device"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "current_base_uri": {
+          "title": "Current base uri",
+          "type": "string",
+          "minLength": 1
+        },
+        "command_args": {
+          "$ref": "#/definitions/CommandArgs"
+        },
+        "action": {
+          "title": "Action",
+          "type": "string",
+          "enum": [
+            "acknowledge",
+            "in_progress",
+            "success",
+            "failed"
+          ]
+        },
+        "schedule": {
+          "title": "Schedule",
+          "type": "string"
+        },
+        "group_schedule_id": {
+          "title": "Group schedule id",
+          "type": "string",
+          "format": "uuid"
+        },
+        "command": {
+          "$ref": "#/definitions/DeviceCommandEnum"
+        },
+        "state": {
+          "title": "State",
+          "type": "string",
+          "enum": [
+            "Command Initiated",
+            "Command Acknowledged",
+            "Command In Progress",
+            "Command TimeOut",
+            "Command Success",
+            "Command Failure",
+            "Command Scheduled"
+          ]
+        },
+        "details": {
+          "title": "Details",
+          "type": "string",
+          "x-nullable": true
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "type": "string",
+          "format": "url"
+        },
+        "device": {
+          "title": "Device",
+          "type": "string",
+          "format": "url"
+        },
+        "group_command": {
+          "title": "Group command",
+          "type": "string",
+          "format": "url",
+          "x-nullable": true
+        },
+        "issued_by": {
+          "title": "Issued by",
+          "type": "string",
+          "format": "url",
+          "x-nullable": true
+        }
+      }
+    },
+    "DeviceCommandEnum": {
+      "type": "string",
+      "description": "Command Options\n\n```\n* REBOOT: Reboot device\n* LOCK:  Lock device screen\n* INSTALL:  Install an app on device\n* UNINSTALL: Uninstall an app from device\n* WIPE: Wipe device\n* UPDATE_HEARTBEAT: Ping Device\n* SET_WIFI_STATE: wifi on/off\n* SET_BLUETOOTH_STATE: Bluetooth on/off\n* SET_ROTATION_STATE: Auto rotate setting\n* SET_GPS_STATE: GPS options\n* SET_BRIGHTNESS_SCALE: Brightness control\n* SET_STREAM_VOLUME: Volume control\n* SET_SCREEN_OFF_TIMEOUT: Screen timeout setting\n```\n",
+      "enum": [
+        "REBOOT",
+        "LOCK",
+        "INSTALL",
+        "UPDATE_HEARTBEAT",
+        "WIPE",
+        "SET_WIFI_STATE",
+        "SET_BLUETOOTH_STATE",
+        "SET_ROTATION_STATE",
+        "SET_GPS_STATE",
+        "SET_BRIGHTNESS_SCALE",
+        "SET_STREAM_VOLUME",
+        "SET_SCREEN_OFF_TIMEOUT",
+        "UNINSTALL"
+      ]
+    },
+    "DeviceGroup": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "device_count": {
+          "title": "Device count",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "title": "Name",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "type": "string",
+          "format": "url",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceGroupUpdate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "device_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "uniqueItems": true
+        },
+        "device_count": {
+          "title": "Device count",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "title": "Name",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "type": "string",
+          "format": "url",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceStatus": {
+      "required": [
+        "data",
+        "device",
+        "enterprise"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "data": {
+          "title": "Data",
+          "type": "string"
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "device": {
+          "title": "Device",
+          "type": "string",
+          "format": "url"
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "type": "string",
+          "format": "url"
+        }
+      }
+    },
+    "EmmDevice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "google_device_id": {
+          "type": "string"
+        },
+        "managementType": {
+          "type": "string"
+        },
+        "device": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "google_user": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "policy": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "is_active": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "EMMEnterpriseStateEnum": {
+      "title": "State",
+      "description": "EMM enterprise workflow state\n``` * UNSPECIFIED = 1\n* BEGIN_SIGNUP = 2\n* COMPLETE_SIGNUP = 3\n* ENROLLED = 4\n* UNENROLLED = 5\n* ENROLL_FAILED = 10 ```\n",
+      "type": "integer",
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        10
+      ]
+    },
+    "Enterprise": {
+      "required": [
+        "name",
+        "short_code",
+        "details"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "description": "Enterprise id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "url": {
+          "title": "Url",
+          "type": "string",
+          "format": "url",
+          "readOnly": true
+        },
+        "name": {
+          "title": "Name",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "display_name": {
+          "title": "Display name",
+          "type": "string",
+          "maxLength": 50,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "short_code": {
+          "title": "Short code",
+          "type": "string",
+          "maxLength": 10,
+          "minLength": 1
+        },
+        "mdm_service": {
+          "title": "Mdm service",
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "details": {
+          "$ref": "#/definitions/EnterpriseDetail"
+        },
+        "default_policy": {
+          "title": "Default policy",
+          "description": "Policy associated with enteprise",
+          "type": "integer"
+        },
+        "emm": {
+          "$ref": "#/definitions/GoogleEnterprise"
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "is_active": {
+          "title": "Is active",
+          "type": "boolean"
+        }
+      }
+    },
+    "EnterpriseDetail": {
+      "title": "Details",
+      "required": [
+        "registered_name",
+        "registered_address",
+        "location",
+        "zipcode",
+        "contact_email"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "registered_name": {
+          "title": "Registered name",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "registered_address": {
+          "title": "Registered address",
+          "type": "string",
+          "minLength": 1
+        },
+        "location": {
+          "title": "Location",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "zipcode": {
+          "title": "Zipcode",
+          "type": "string",
+          "maxLength": 8,
+          "minLength": 1
+        },
+        "contact_person": {
+          "title": "Contact person",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "contact_number": {
+          "title": "Contact number",
+          "type": "string",
+          "maxLength": 20,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "contact_email": {
+          "title": "Contact email",
+          "type": "string",
+          "format": "email",
+          "maxLength": 254,
+          "minLength": 1
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "is_active": {
+          "title": "Is active",
+          "type": "boolean"
+        }
+      }
+    },
+    "EnterprisePolicy": {
+      "required": [
+        "name",
+        "policy",
+        "enterprise"
+      ],
+      "type": "object",
+      "properties": {
+        "url": {
+          "title": "Url",
+          "type": "string",
+          "format": "url",
+          "readOnly": true
+        },
+        "device_count": {
+          "title": "Device count",
+          "type": "integer",
+          "readOnly": true
+        },
+        "is_default": {
+          "title": "Is default",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "is_template": {
+          "title": "Is template",
+          "type": "boolean",
+          "default": false
+        },
+        "uuid": {
+          "title": "Uuid",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "name": {
+          "title": "Name",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "x-nullable": true
+        },
+        "google_policy_id": {
+          "title": "Google policy id",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "policy": {
+          "title": "Policy",
+          "description": "Policy JSON string",
+          "type": "string"
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "is_active": {
+          "title": "Is active",
+          "type": "boolean"
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "type": "string",
+          "format": "url"
+        }
+      }
+    },
+    "EnterpriseUpdate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "display_name": {
+          "title": "Display name",
+          "type": "string",
+          "maxLength": 50,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "short_code": {
+          "title": "Short code",
+          "type": "string",
+          "maxLength": 10,
+          "minLength": 1
+        },
+        "details": {
+          "$ref": "#/definitions/EnterpriseDetail"
+        }
+      }
+    },
+    "GoogleEnterprise": {
+      "title": "Emm",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "google_enterprise_id": {
+          "title": "Google enterprise id",
+          "type": "string",
+          "maxLength": 50,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "name": {
+          "title": "Name",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "state": {
+          "$ref": "#/definitions/EMMEnterpriseStateEnum"
+        },
+        "callback_url": {
+          "title": "Callback url",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "signup_url": {
+          "title": "Signup url",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "completion_token": {
+          "title": "Completion token",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "enterprise_token": {
+          "title": "Enterprise token",
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "is_active": {
+          "title": "Is active",
+          "type": "boolean"
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
+    "GroupCommand": {
+      "required": [
+        "command",
+        "enterprise",
+        "group"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "schedule": {
+          "title": "Schedule",
+          "type": "string"
+        },
+        "command": {
+          "$ref": "#/definitions/GroupCommandEnum"
+        },
+        "command_args": {
+          "$ref": "#/definitions/GroupCommandArgs"
+        },
+        "state": {
+          "title": "State",
+          "type": "string",
+          "enum": [
+            "Command Initiated",
+            "Command Success",
+            "Command Failure",
+            "Command Scheduled"
+          ]
+        },
+        "details": {
+          "title": "Details",
+          "type": "string",
+          "x-nullable": true
+        },
+        "created_on": {
+          "title": "Created on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "is_active": {
+          "title": "Is active",
+          "type": "boolean"
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "type": "string",
+          "format": "url"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string",
+          "format": "url"
+        },
+        "issued_by": {
+          "title": "Issued by",
+          "type": "string",
+          "format": "uri",
+          "x-nullable": true
+        }
+      }
+    },
+    "GroupCommandArgs": {
+      "title": "Command args",
+      "type": "object",
+      "properties": {
+        "app_version": {
+          "type": "string"
+        }
+      }
+    },
+    "GroupCommandEnum": {
+      "type": "string",
+      "description": "Group Command Options\n\n```\n* REBOOT: Reboot device\n* LOCK:  Lock device screen\n* INSTALL:  Install an app on device\n* UPDATE_HEARTBEAT: Ping Device\n```\n",
+      "enum": [
+        "REBOOT",
+        "LOCK",
+        "INSTALL",
+        "UPDATE_HEARTBEAT"
+      ]
+    },
+    "GroupCommandRequest": {
+      "required": [
+        "command"
+      ],
+      "type": "object",
+      "properties": {
+        "command_args": {
+          "$ref": "#/definitions/GroupCommandArgs"
+        },
+        "command": {
+          "$ref": "#/definitions/GroupCommandEnum"
+        }
+      }
+    },
+    "SettingsGPSStateEnum": {
+      "type": "integer",
+      "description": "Device settings GPS state enum\n\n```\n* LOCATION_MODE_HIGH_ACCURACY = 0\n* LOCATION_MODE_SENSORS_ONLY = 1\n* LOCATION_MODE_BATTERY_SAVING = 2\n* LOCATION_MODE_OFF = 3\n```\n",
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "SettingsRotateStateEnum": {
+      "type": "integer",
+      "description": "Device settings rotate state enum\n\n```\n* AUTO = 0\n* PORTRAIT_ONLY = 1\n* LANDSCAPE_ONLY = 2\n```\n",
+      "enum": [
+        0,
+        1,
+        2
+      ]
+    },
+    "SettingsVolumeStreamEnum": {
+      "type": "integer",
+      "description": "Device settings volume stream enum\n\n```\n* STREAM_RING = 0\n* STREAM_NOTIFICATION = 1\n* STREAM_ALARM = 2\n* STREAM_MUSIC = 3\n```\n",
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ]
+    }
+  }
+}
