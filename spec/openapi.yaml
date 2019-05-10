@@ -3,45 +3,24 @@ info:
   description: >
     # Introduction
 
-<<<<<<< HEAD
+
     Esper Manage APIs for Cloud are a set of REST-based APIs that help you programmatically control and monitor your enterprise's dedicated Esper endpoint. Using these APIs, one can orchestrate & manage devices that have been provisioned against your endpoint. Furthermore, this API allows you to manage android applications that get installed on such devices. To read more about the various capabilities of Esper endpoints and Esper managed devices, please visit esper.io.
     This guide describes all the available APIs in detail, along with code samples for you to quickly ramp up to using them.
 
 
     You can find out more about Esper at [https://esper.io](https://esper.io)
-=======
-    Esper Manage APIs for Cloud are a set of REST-based APIs that help you programmatically control and monitor your enterprise's dedicated Esper endpoint. Using these APIs, one can orchestrate & manage devices that have been provisioned against your endpoint. Furthermore, this API allows you to manage android applications that get installed on such devices. To read more about the various capabilities of Esper endpoints and Esper managed devices, please visit [esper.io](https://esper.io).
-    This guide describes all the available APIs in detail, along with code samples for you to quickly ramp up to using them.
 
->>>>>>> f382dd7a18231f525709f47a86e8bfb28bafae97
 
     You can find out more about Esper at [https://esper.io](https://esper.io)
 
-<<<<<<< HEAD
-    You can use your favorite HTTP/REST library for your programming language to use Esper APIs, or you can use one of our SDKs (currently available in [python](https://github.com/esper-io/esper-client-py)).
-
-
-    This guide documents all the instructions for using Esper API, along with code samples in python and Java. If you find any issues using our API, please reach out to us at developer@esper.io
-
-
-    To get started you need a developer account with [developer.esper.io](https://developer.esper.io/). Please register youself at https://developer.esper.io/register.
-=======
->>>>>>> f382dd7a18231f525709f47a86e8bfb28bafae97
 
     We've done our best to keep this document up to date, but if you find any issues, please reach out to us at developer@esper.io.
 
-<<<<<<< HEAD
-    We've done our best to keep this document up to date, but if you find any issues, please reach out to us at developer@esper.io.
-=======
->>>>>>> f382dd7a18231f525709f47a86e8bfb28bafae97
 
     # SDK
 
-<<<<<<< HEAD
+
     # SDK
-=======
-      You are welcome to use your favorite HTTP/REST library for your programming language in order to use these APIs, or you can use our official SDK (currently available in [python](https://github.com/esper-io/esper-client-py)) to do so.
->>>>>>> f382dd7a18231f525709f47a86e8bfb28bafae97
 
       You are welcome to use your favorite HTTP/REST library for your programming language in order to use these APIs, or you can use our official SDK (currently available in python) to do so.
 
@@ -74,17 +53,11 @@ info:
 
   version: 1.0.0
   title: Esper Manage API
-<<<<<<< HEAD
   termsOfService: 'http://shoonya.io/terms/'
 #  x-logo:
 #    url: 'esper.svg'
 #  contact:
 #    email: developer@esper.io
-=======
-  termsOfService: 'http://esper.io/terms/'
-  contact:
-    email: developer@esper.io
->>>>>>> f382dd7a18231f525709f47a86e8bfb28bafae97
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
@@ -108,13 +81,10 @@ tags:
       url: 'https://docs.shoonyacloud.com'
 schemes:
   - https
-<<<<<<< HEAD
   - http
 externalDocs:
 #  description: Find out more about Esper
 #  url: 'http://shoonya.io'
-=======
->>>>>>> f382dd7a18231f525709f47a86e8bfb28bafae97
 x-tagGroups:
   - name: API Reference
     tags:
