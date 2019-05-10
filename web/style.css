@@ -17,15 +17,21 @@ body {
 }
 
 .shoonya-header {
-    height: 96px;
-    background-color: #624487;
+    z-index: 20;
+    right: 0;
+    height: 3.6rem;
+    background-color: #fff;
+    box-sizing: border-box;
+    border-bottom: 1px solid #eaecef;
+    padding: .7rem 1.5rem;
+    line-height: 2.2rem;
+
 }
 .shoonya-logo {
-    width: 180px;
-    height: 44px;
-    top: 25px;
-    left: 45px;
-    position: relative;
+    height: 2.2rem;
+    min-width: 2.2rem;
+    margin-right: .8rem;
+    vertical-align: top;
 }
 
 .ebXbwy {
@@ -49,4 +55,17 @@ body {
 .cqXmTa{
     padding-top: 25px !important;
     padding-bottom: 5px !important;
+}
+@media print, screen and (max-width: 85rem) {
+    .diqfaT{
+        padding: 5px !important;
+    }
+}
+.iJUwRU {
+    border-radius: 15px !important;
+    padding: 20px !important;
+}
+.dyBbHm pre {
+    border-radius: 15px !important;
+    padding: 20px !important;
 }
