@@ -3,12 +3,8 @@ info:
   description: >
     # Introduction
 
-
-    Esper Manage APIs for Cloud are a set of REST-based APIs that help you programmatically control and monitor your enterprise's dedicated Esper endpoint. Using these APIs, one can orchestrate & manage devices that have been provisioned against your endpoint. Furthermore, this API allows you to manage android applications that get installed on such devices. To read more about the various capabilities of Esper endpoints and Esper managed devices, please visit esper.io.
+    Esper Manage APIs for Cloud are a set of REST-based APIs that help you programmatically control and monitor your enterprise's dedicated Esper endpoint. Using these APIs, one can orchestrate & manage devices that have been provisioned against your endpoint. Furthermore, this API allows you to manage android applications that get installed on such devices. To read more about the various capabilities of Esper endpoints and Esper managed devices, please visit [esper.io](https://esper.io).
     This guide describes all the available APIs in detail, along with code samples for you to quickly ramp up to using them.
-
-
-    You can find out more about Esper at [https://esper.io](https://esper.io)
 
 
     You can find out more about Esper at [https://esper.io](https://esper.io)
@@ -19,10 +15,8 @@ info:
 
     # SDK
 
+      You are welcome to use your favorite HTTP/REST library for your programming language in order to use these APIs, or you can use our official SDK (currently available in [python](https://github.com/esper-io/esper-client-py)) to do so.
 
-    # SDK
-
-      You are welcome to use your favorite HTTP/REST library for your programming language in order to use these APIs, or you can use our official SDK (currently available in python) to do so.
 
     # Authentication
 
@@ -53,11 +47,9 @@ info:
 
   version: 1.0.0
   title: Esper Manage API
-  termsOfService: 'http://shoonya.io/terms/'
-#  x-logo:
-#    url: 'esper.svg'
-#  contact:
-#    email: developer@esper.io
+  termsOfService: 'http://esper.io/terms/'
+  contact:
+    email: developer@esper.io
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
@@ -81,10 +73,6 @@ tags:
       url: 'https://docs.shoonyacloud.com'
 schemes:
   - https
-  - http
-externalDocs:
-#  description: Find out more about Esper
-#  url: 'http://shoonya.io'
 x-tagGroups:
   - name: API Reference
     tags:
