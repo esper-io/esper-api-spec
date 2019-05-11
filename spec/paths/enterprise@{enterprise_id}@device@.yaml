@@ -31,7 +31,7 @@ get:
       in: query
       description: filter by device state
       required: false
-      type: number
+      type: integer
     - name: brand
       in: query
       description: filter by branch
