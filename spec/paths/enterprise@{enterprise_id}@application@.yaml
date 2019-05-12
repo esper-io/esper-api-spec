@@ -19,7 +19,7 @@ get:
       in: query
       description: filter default esper apps
       required: false
-      type: string
+      type: boolean
     - name: limit
       in: query
       description: Number of results to return per page.
