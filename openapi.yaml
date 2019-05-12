@@ -187,6 +187,11 @@ paths:
           description: filter by package name
           required: false
           type: string
+        - name: is_hidden
+          in: query
+          description: filter default esper apps
+          required: false
+          type: string
         - name: limit
           in: query
           description: Number of results to return per page.
@@ -198,6 +203,7 @@ paths:
           description: The initial index from which to return the results.
           required: false
           type: integer
+          default: 0
       responses:
         '200':
           description: successful operation

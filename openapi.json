@@ -215,6 +215,13 @@
             "type": "string"
           },
           {
+            "name": "is_hidden",
+            "in": "query",
+            "description": "filter default esper apps",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "limit",
             "in": "query",
             "description": "Number of results to return per page.",
@@ -227,7 +234,8 @@
             "in": "query",
             "description": "The initial index from which to return the results.",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "default": 0
           }
         ],
         "responses": {
