@@ -219,7 +219,7 @@
             "in": "query",
             "description": "filter default esper apps",
             "required": false,
-            "type": "string"
+            "type": "boolean"
           },
           {
             "name": "limit",
