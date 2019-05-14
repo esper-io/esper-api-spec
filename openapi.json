@@ -392,7 +392,8 @@
             "in": "query",
             "description": "The initial index from which to return the results.",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "default": 0
           }
         ],
         "responses": {
@@ -671,7 +672,7 @@
             "description": "The initial index from which to return the results.",
             "required": false,
             "type": "integer",
-            "default": 10
+            "default": 0
           }
         ],
         "responses": {
@@ -943,7 +944,8 @@
             "in": "query",
             "description": "The initial index from which to return the results.",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "default": 0
           }
         ],
         "responses": {
@@ -1110,7 +1112,8 @@
             "in": "query",
             "description": "The initial index from which to return the results.",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "default": 0
           }
         ],
         "responses": {
