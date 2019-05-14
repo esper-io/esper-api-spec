@@ -58,7 +58,7 @@ get:
       description: The initial index from which to return the results.
       required: false
       type: integer
-      default: 10
+      default: 0
   responses:
     '200':
       description: successful operation
