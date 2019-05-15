@@ -540,14 +540,6 @@
         ],
         "parameters": [
           {
-            "name": "enterprise",
-            "description": "enterprise id",
-            "in": "formData",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
             "name": "app_file",
             "description": "valid APK file",
             "in": "formData",
