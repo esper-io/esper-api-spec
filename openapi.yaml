@@ -39,7 +39,7 @@ host: foo.esper.cloud
 basePath: /api
 tags:
   - name: Enterprise
-    description: The Esper Enterprise APIs to manage the account information set up for your company’s account. Read our Esper Manage documentationor use the Esper Manage Dashboard through the Esper Developer Console
+    description: The Esper Enterprise APIs to manage the account information set up for your company’s account. Read our Esper Manage documentation or use the Esper Manage Dashboard through the Esper Developer Console
     externalDocs:
       description: Find out more about enterprise management
       url: 'https://docs.shoonyacloud.com/enterprise-configuration/'
