@@ -702,20 +702,6 @@
         ],
         "tags": [
           "Device"
-        ],
-        "x-code-samples": [
-          {
-            "lang": "Shell",
-            "source": "curl -X GET \\\n  https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/ \\\n  -H 'Authorization: Basic cluOnNpdGVhZG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json'\n"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/\"\n\npayload = \"\"\nheaders = {\n    'Content-Type': \"application/json\",\n    'Authorization': \"Basic cbWluOnNpdGVhZG1pbjEyMyQ=\",\n    }\n\nresponse = requests.request(\"GET\", url, data=payload, headers=headers)\n\nprint(response.text)\n"
-          },
-          {
-            "lang": "Java",
-            "source": "OkHttpClient client = new OkHttpClient();\n\nRequest request = new Request.Builder()\n  .url(\"https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/\")\n  .get()\n  .addHeader(\"Content-Type\", \"application/json\")\n  .addHeader(\"Authorization\", \"Basic c2luOnNpdGVhZG1pbjEyMyQ=\")\n  .build();\n\nResponse response = client.newCall(request).execute();\n"
-          }
         ]
       }
     },
@@ -763,20 +749,6 @@
         ],
         "tags": [
           "Device"
-        ],
-        "x-code-samples": [
-          {
-            "lang": "Shell",
-            "source": "curl -X GET \\\n  https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/ \\\n  -H 'Authorization: Basic c2lnNpdGVhZG1pbjEyMyQ=' \\\n  -H 'Content-Type: application/json'\n"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>/\"\n\npayload = \"\"\nheaders = {\n    'Content-Type': \"application/json\",\n    'Authorization': \"Basic cbWluOnNpdGVhZG1pbjEyMyQ=\",\n    }\n\nresponse = requests.request(\"GET\", url, data=payload, headers=headers)\n\nprint(response.text)\n"
-          },
-          {
-            "lang": "Java",
-            "source": "OkHttpClient client = new OkHttpClient();\n\nRequest request = new Request.Builder()\n  .url(\"https://DOMAIN.shoonyacloud.com/api/enterprise/<enterprise_id>/device/<device_id>\")\n  .get()\n  .addHeader(\"Content-Type\", \"application/json\")\n  .addHeader(\"Authorization\", \"Basic cOnNpdGVhZG1pbjEyMyQ=\")\n  .build();\n\nResponse response = client.newCall(request).execute();\n"
-          }
         ]
       }
     },
