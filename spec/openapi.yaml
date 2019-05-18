@@ -17,7 +17,7 @@ info:
 
     # Authentication
 
-    The client needs to send authentication details to access the Esper APIs by generating and applying an API key. Be sure to sign up for yourfree trial account with Esper Dev to generate your key:
+    The client needs to send authentication details to access the Esper APIs by generating and applying an API key. Be sure to sign up for your free trial account with Esper Dev to generate your key:
 
 
     # Errors
