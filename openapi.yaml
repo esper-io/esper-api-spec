@@ -12,7 +12,7 @@ info:
 
 
     # Authentication
-    The client needs to send authentication details to access the Esper APIs by generating and applying an API key. Be sure to sign up for yourfree trial account with Esper Dev to generate your key:
+    The client needs to send authentication details to access the Esper APIs by generating and applying an API key. Be sure to sign up for your free trial account with Esper Dev to generate your key:
 
     # Errors
     The APIs use standard HTTP status codes to indicate success or failure. All error responses will have a JSON body in the following format:
