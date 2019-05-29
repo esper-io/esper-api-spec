@@ -3,7 +3,7 @@ info:
   description: |
     # Introduction
     Esper APIs are a set of REST-based APIs that help you programmatically control and monitor Android-based Dedicated Devices running the Esper agent using Esper Manage. With these APIs, you can orchestrate and manage devices that have been provisioned against your Esper Manage environment. Furthermore, these APIs allows you to manage the Android applications installed on your Dedicated Device fleet. To read more about the various capabilities of Esper APIs and Esper managed devices, please visit [esper.io](https://esper.io). This guide describes all the available APIs in detail, along with code samples for you to quickly ramp up to using them.\
-    To use these APIs you will need to create a developer account with Esper and get access to the Esper Dev Console and the Esper ManageDashboard. You can find out more about Esper and sign up for free at [dev.esper.io](https://dev.esper.io)\
+    To use these APIs you will need to create a developer account with Esper and get access to the Esper Dev Console and the Esper ManageDashboard. You can find out more about Esper and sign up for free at [esper.io/signup](https://esper.io/signup)\
     We've done our best to keep this document up to date, but if you find any issues, please reach out to us at developer@esper.io.
 
     # SDK
