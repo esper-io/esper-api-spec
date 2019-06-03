@@ -1904,6 +1904,9 @@
         },
         "app_version": {
           "type": "string"
+        },
+        "package_name": {
+          "type": "string"
         }
       }
     },
@@ -2132,7 +2135,7 @@
     },
     "DeviceCommandEnum": {
       "type": "string",
-      "description": "Command Options\n\n```\n* REBOOT: Reboot device\n* LOCK:  Lock device screen\n* INSTALL:  Install an app on device\n* UNINSTALL: Uninstall an app from device\n* WIPE: Wipe device\n* UPDATE_HEARTBEAT: Ping Device\n* SET_WIFI_STATE: wifi on/off\n* SET_BLUETOOTH_STATE: Bluetooth on/off\n* SET_ROTATION_STATE: Auto rotate setting\n* SET_GPS_STATE: GPS options\n* SET_BRIGHTNESS_SCALE: Brightness control\n* SET_STREAM_VOLUME: Volume control\n* SET_SCREEN_OFF_TIMEOUT: Screen timeout setting\n```\n",
+      "description": "Command Options\n\n```\n* REBOOT: Reboot device\n* LOCK:  Lock device screen\n* INSTALL:  Install an app on device\n* UNINSTALL: Uninstall an app from device\n* WIPE: Wipe device\n* UPDATE_HEARTBEAT: Ping Device\n* SET_WIFI_STATE: wifi on/off\n* SET_BLUETOOTH_STATE: Bluetooth on/off\n* SET_ROTATION_STATE: Auto rotate setting\n* SET_GPS_STATE: GPS options\n* SET_BRIGHTNESS_SCALE: Brightness control\n* SET_STREAM_VOLUME: Volume control\n* SET_SCREEN_OFF_TIMEOUT: Screen timeout setting\n* ADD_TO_WHITELIST: Whitelist an installed sytem app\n```\n",
       "enum": [
         "REBOOT",
         "LOCK",
@@ -2146,7 +2149,8 @@
         "SET_BRIGHTNESS_SCALE",
         "SET_STREAM_VOLUME",
         "SET_SCREEN_OFF_TIMEOUT",
-        "UNINSTALL"
+        "UNINSTALL",
+        "ADD_TO_WHITELIST"
       ]
     },
     "DeviceGroup": {

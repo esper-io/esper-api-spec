@@ -1382,6 +1382,8 @@ definitions:
         maximum: 1800000
       app_version:
         type: string
+      package_name:
+        type: string
   CommandRequest:
     required:
       - command
@@ -1568,6 +1570,7 @@ definitions:
       * SET_BRIGHTNESS_SCALE: Brightness control
       * SET_STREAM_VOLUME: Volume control
       * SET_SCREEN_OFF_TIMEOUT: Screen timeout setting
+      * ADD_TO_WHITELIST: Whitelist an installed sytem app
       ```
     enum:
       - REBOOT
@@ -1583,6 +1586,7 @@ definitions:
       - SET_STREAM_VOLUME
       - SET_SCREEN_OFF_TIMEOUT
       - UNINSTALL
+      - ADD_TO_WHITELIST
   DeviceGroup:
     required:
       - name
