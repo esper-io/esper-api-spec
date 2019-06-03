@@ -32,3 +32,5 @@ properties:
     maximum: 1800000
   app_version:
     type: string
+  package_name:
+    type: string
