@@ -1,0 +1,71 @@
+get:
+  operationId: getDeviceApps
+  summary: List all device apps
+  description: Returns DeviceApp list
+  produces:
+    - application/json
+  parameters:
+    - name: package_name
+      in: query
+      description: Filter by Package name
+      required: false
+      type: string
+    - name: whitelisted
+      in: query
+      description: Whitelist filter
+      required: false
+      type: string
+    - name: search
+      in: query
+      description: A search term. Search by app_name.
+      required: false
+      type: string
+    - name: limit
+      in: query
+      description: Number of results to return per page.
+      required: false
+      type: integer
+      default: 20
+    - name: offset
+      in: query
+      description: The initial index from which to return the results.
+      required: false
+      type: integer
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        required:
+          - count
+          - results
+        type: object
+        properties:
+          count:
+            type: integer
+          next:
+            type: string
+            format: url
+            x-nullable: true
+          previous:
+            type: string
+            format: url
+            x-nullable: true
+          results:
+            type: array
+            items:
+              $ref: '#/definitions/DeviceApp'
+  security:
+    - apiKey: []
+  tags:
+    - Device
+parameters:
+  - name: enterprise_id
+    description: A UUID string identifying this enterprise.
+    in: path
+    required: true
+    type: string
+  - name: device_id
+    description: A UUID string identifying device.
+    in: path
+    required: true
+    type: string
