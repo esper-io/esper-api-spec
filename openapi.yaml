@@ -562,6 +562,112 @@ paths:
         - apiKey: []
       tags:
         - Device
+  '/enterprise/{enterprise_id}/device/{device_id}/app/':
+    get:
+      operationId: getDeviceApps
+      summary: List all device apps
+      description: Returns DeviceApp list
+      produces:
+        - application/json
+      parameters:
+        - name: package_name
+          in: query
+          description: Filter by Package name
+          required: false
+          type: string
+        - name: whitelisted
+          in: query
+          description: Whitelist filter
+          required: false
+          type: string
+        - name: search
+          in: query
+          description: A search term. Search by app_name.
+          required: false
+          type: string
+        - name: limit
+          in: query
+          description: Number of results to return per page.
+          required: false
+          type: integer
+          default: 20
+        - name: offset
+          in: query
+          description: The initial index from which to return the results.
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            required:
+              - count
+              - results
+            type: object
+            properties:
+              count:
+                type: integer
+              next:
+                type: string
+                format: url
+                x-nullable: true
+              previous:
+                type: string
+                format: url
+                x-nullable: true
+              results:
+                type: array
+                items:
+                  $ref: '#/definitions/DeviceApp'
+      security:
+        - apiKey: []
+      tags:
+        - Device
+    parameters:
+      - name: enterprise_id
+        description: A UUID string identifying this enterprise.
+        in: path
+        required: true
+        type: string
+      - name: device_id
+        description: A UUID string identifying device.
+        in: path
+        required: true
+        type: string
+  '/enterprise/{enterprise_id}/device/{device_id}/app/{app_id}/':
+    get:
+      operationId: getDeviceAppById
+      summary: Get device app details
+      description: Returns DeviceApp instance
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/DeviceApp'
+      security:
+        - apiKey: []
+      tags:
+        - Device
+    parameters:
+      - name: app_id
+        in: path
+        description: A UUID string identifying this device app.
+        required: true
+        type: string
+        format: uuid
+      - name: enterprise_id
+        description: A UUID string identifying this device.
+        in: path
+        required: true
+        type: string
+      - name: device_id
+        description: A UUID string identifying this enteprise.
+        in: path
+        required: true
+        type: string
   '/enterprise/{enterprise_id}/device/{device_id}/command/':
     post:
       summary: Run commands on device
@@ -1473,6 +1579,120 @@ definitions:
       is_active:
         type: boolean
         default: true
+  DeviceApp:
+    required:
+      - app_name
+      - package_name
+      - device
+    type: object
+    properties:
+      id:
+        title: Id
+        type: string
+        format: uuid
+        readOnly: true
+      permissions:
+        type: array
+        items:
+          $ref: '#/definitions/DeviceAppPermission'
+      app_name:
+        title: App name
+        type: string
+        minLength: 1
+      package_name:
+        title: Package name
+        type: string
+        maxLength: 255
+        minLength: 1
+      whitelisted:
+        title: Whitelisted
+        type: boolean
+      is_data_clearable:
+        title: Data clearable
+        type: boolean
+      is_uninstallable:
+        title: Uninstallable
+        type: boolean
+      product_id:
+        title: Product id
+        type: string
+        maxLength: 255
+        minLength: 1
+        x-nullable: true
+      version_code:
+        title: Version code
+        type: string
+        maxLength: 128
+        minLength: 1
+        x-nullable: true
+      version_name:
+        title: Version name
+        type: string
+        maxLength: 128
+        minLength: 1
+        x-nullable: true
+      created_on:
+        title: Created on
+        type: string
+        format: date-time
+        readOnly: true
+      updated_on:
+        title: Updated on
+        type: string
+        format: date-time
+        readOnly: true
+      is_active:
+        title: Is active
+        type: boolean
+      device:
+        title: Device
+        type: string
+        format: uuid
+  DeviceAppPermission:
+    required:
+      - permission
+    type: object
+    properties:
+      id:
+        title: Id
+        type: string
+        format: uuid
+        readOnly: true
+      permission:
+        title: Permission
+        type: string
+        maxLength: 255
+        minLength: 1
+      grant_state:
+        title: Grant state
+        type: integer
+        description: |
+          * PERMISSION_GRANT_STATE_DEFAULT = 0
+          * PERMISSION_GRANT_STATE_DENIED = 1
+          * PERMISSION_GRANT_STATE_GRANTED = 2
+
+          For state details check [Android docs](https://developer.android.com/reference/android/app/admin/DevicePolicyManager#PERMISSION_GRANT_STATE_DEFAULT)
+        enum:
+          - 0
+          - 1
+          - 2
+      created_on:
+        title: Created on
+        type: string
+        format: date-time
+        readOnly: true
+      updated_on:
+        title: Updated on
+        type: string
+        format: date-time
+        readOnly: true
+      is_active:
+        title: Is active
+        type: boolean
+      app:
+        title: App
+        type: string
+        format: uuid
   DeviceCommand:
     required:
       - command
