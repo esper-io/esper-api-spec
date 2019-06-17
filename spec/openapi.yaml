@@ -57,32 +57,32 @@ tags:
     description: The Esper Enterprise APIs to manage the account information set up for your company’s account. Read our Esper Manage documentation or use the Esper Manage Dashboard through the Esper Developer Console
     externalDocs:
       description: Find out more about enterprise management
-      url: 'https://docs.shoonyacloud.com/enterprise-configuration/'
+      url: 'https://docs.esper.io/home/devconsole/enterprise-configuration/'
   - name: Application
     description: APIs for application management
     externalDocs:
       description: Find out more about device management
-      url: 'https://docs.shoonyacloud.com/app-management/'
+      url: 'https://docs.esper.io/home/devconsole/app-management/'
   - name: Device
     description: APIs for device management
     externalDocs:
       description: Find out more about device management
-      url: 'https://docs.shoonyacloud.com/device-management/'
+      url: 'https://docs.esper.io/home/devconsole/device-management/'
   - name: Device Group
     description: APIs for device group management
     externalDocs:
       description: Find out more about device group management
-      url: 'https://docs.shoonyacloud.com/group-management/'
+      url: 'https://docs.esper.io/home/devconsole/group-management/'
   - name: Commands
     description: APIs to run device commands
     externalDocs:
       description: Find out more about device management
-      url: 'https://docs.shoonyacloud.com/device-management/'
+      url: 'https://docs.esper.io/home/devconsole/device-management/'
   - name: Group Commands
     description: APIs to run group commands. Command will be run on all the active devices in a group
     externalDocs:
       description: Find out more about device group management
-      url: 'https://docs.shoonyacloud.com/group-management/'
+      url: 'https://docs.esper.io/home/devconsole/group-management/'
 schemes:
   - https
 x-tagGroups:
