@@ -1,0 +1,68 @@
+required:
+  - app_name
+  - package_name
+  - device
+type: object
+properties:
+  id:
+    title: Id
+    type: string
+    format: uuid
+    readOnly: true
+  permissions:
+    type: array
+    items:
+      $ref: '#/definitions/DeviceAppPermission'
+  app_name:
+    title: App name
+    type: string
+    minLength: 1
+  package_name:
+    title: Package name
+    type: string
+    maxLength: 255
+    minLength: 1
+  whitelisted:
+    title: Whitelisted
+    type: boolean
+  is_data_clearable:
+    title: Data clearable
+    type: boolean
+  is_uninstallable:
+    title: Uninstallable
+    type: boolean
+  product_id:
+    title: Product id
+    type: string
+    maxLength: 255
+    minLength: 1
+    x-nullable: true
+  version_code:
+    title: Version code
+    type: string
+    maxLength: 128
+    minLength: 1
+    x-nullable: true
+  version_name:
+    title: Version name
+    type: string
+    maxLength: 128
+    minLength: 1
+    x-nullable: true
+  created_on:
+    title: Created on
+    type: string
+    format: date-time
+    readOnly: true
+  updated_on:
+    title: Updated on
+    type: string
+    format: date-time
+    readOnly: true
+  is_active:
+    title: Is active
+    type: boolean
+  device:
+    title: Device
+    type: string
+    format: uuid

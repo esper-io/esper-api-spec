@@ -1,0 +1,47 @@
+required:
+  - permission
+type: object
+properties:
+  id:
+    title: Id
+    type: string
+    format: uuid
+    readOnly: true
+  permission:
+    title: Permission
+    type: string
+    maxLength: 255
+    minLength: 1
+  grant_state:
+    title: Grant state
+    type: integer
+    description: >
+      * PERMISSION_GRANT_STATE_DEFAULT = 0
+
+      * PERMISSION_GRANT_STATE_DENIED = 1
+
+      * PERMISSION_GRANT_STATE_GRANTED = 2
+
+
+      For state details check [Android docs](https://developer.android.com/reference/android/app/admin/DevicePolicyManager#PERMISSION_GRANT_STATE_DEFAULT)
+    enum:
+      - 0
+      - 1
+      - 2
+  created_on:
+    title: Created on
+    type: string
+    format: date-time
+    readOnly: true
+  updated_on:
+    title: Updated on
+    type: string
+    format: date-time
+    readOnly: true
+  is_active:
+    title: Is active
+    type: boolean
+  app:
+    title: App
+    type: string
+    format: uuid

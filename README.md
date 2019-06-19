@@ -1,28 +1,28 @@
-# Esper Manage OpenAPI Specification
-[![Build Status](https://travis-ci.com/esper-io/esper-api-spec.svg?branch=master)](https://travis-ci.com/esper-io/esper-api-spec)
+# Esper API Specification
+[![Build Status](https://travis-ci.com/esper-io/esper-api-spec.svg?branch=master)](https://travis-ci.com/esper-io/esper-api-spec) [![Gitter](https://badges.gitter.im/esper-dev/community.svg)](https://gitter.im/esper-dev/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-## Links
+Open API specification for Esper APIs. 
 
-- [API documentation (ReDoc)](https://esper-io.github.io/esper-api-spec/)
-- OpenAPI Specification file: [JSON](https://esper-io.github.io/esper-api-spec/openapi.json) [YAML](https://esper-io.github.io/esper-api-spec/openapi.yaml)
+## Quick links
 
-## Instructions of updating specification
+- [API documentation](https://api.esper.io)
+- OpenAPI Specification file
+    - [JSON](https://api.esper.io/openapi.json)
+    - [YAML](https://api.esper.io/openapi.yaml)
 
-### Install
+### Setup
 
 1. Install [Node JS](https://nodejs.org/)
 2. Clone repo and run `npm install` in the repo root
 
 ### Usage
 
-#### `npm start`
-Starts the development server.
-
-#### `npm run build`
-Bundles the spec and prepares web_deploy folder with static assets.
-
 #### `npm test`
 Validates the spec.
 
-#### `npm run gh-pages`
-Deploys docs to GitHub Pages. You don't need to run it manually if you have Travis CI configured.
+#### `npm start`
+Starts the development server.
+
+### Issues
+
+For any issues related to API usage or specification, feel free to open an issue [here](https://github.com/esper-io/esper-api-spec/issues). You can also reach out to us at [Gitter](https://gitter.im/esper-dev/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link)

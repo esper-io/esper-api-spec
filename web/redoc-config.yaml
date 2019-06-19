@@ -2,3 +2,4 @@ theme:
   colors:
     primary:
       main: '#32329f'
+redocURL: ./assets/redoc.standalone.js
