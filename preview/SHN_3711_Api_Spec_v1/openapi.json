@@ -2828,10 +2828,6 @@
           "minLength": 1,
           "x-nullable": true
         },
-        "is_active": {
-          "title": "Is active",
-          "type": "boolean"
-        },
         "created_on": {
           "title": "Created on",
           "type": "string",
