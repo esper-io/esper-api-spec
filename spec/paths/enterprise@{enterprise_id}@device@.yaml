@@ -34,7 +34,7 @@ get:
       type: integer
     - name: brand
       in: query
-      description: filter by branch
+      description: filter by brand
       required: false
       type: string
     - name: is_gms
