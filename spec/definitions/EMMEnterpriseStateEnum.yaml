@@ -15,11 +15,11 @@ description: >
 
   * ENROLL_FAILED = 10
   ```
-type: integer
+type: string
 enum:
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
-  - 10
+  - UNSPECIFIED
+  - BEGIN_SIGNUP
+  - COMPLETE_SIGNUP
+  - ENROLLED
+  - UNENROLLED
+  - ENROLL_FAILED

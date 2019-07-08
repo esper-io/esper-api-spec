@@ -59,6 +59,3 @@ properties:
     type: string
     format: date-time
     readOnly: true
-  is_active:
-    title: Is active
-    type: boolean
