@@ -14,7 +14,7 @@ properties:
     minLength: 1
   grant_state:
     title: Grant state
-    type: integer
+    type: string
     description: >
       * PERMISSION_GRANT_STATE_DEFAULT = 0
 
