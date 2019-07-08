@@ -655,7 +655,7 @@
           {
             "name": "brand",
             "in": "query",
-            "description": "filter by branch",
+            "description": "filter by brand",
             "required": false,
             "type": "string"
           },
@@ -2301,9 +2301,9 @@
           "type": "integer",
           "description": "* PERMISSION_GRANT_STATE_DEFAULT = 0\n* PERMISSION_GRANT_STATE_DENIED = 1\n* PERMISSION_GRANT_STATE_GRANTED = 2\n\nFor state details check [Android docs](https://developer.android.com/reference/android/app/admin/DevicePolicyManager#PERMISSION_GRANT_STATE_DEFAULT)\n",
           "enum": [
-            0,
-            1,
-            2
+            "PERMISSION_GRANT_STATE_DEFAULT",
+            "PERMISSION_GRANT_STATE_DENIED",
+            "PERMISSION_GRANT_STATE_GRANTED"
           ]
         },
         "created_on": {

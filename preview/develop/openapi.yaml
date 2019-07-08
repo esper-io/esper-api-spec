@@ -483,7 +483,7 @@ paths:
           type: integer
         - name: brand
           in: query
-          description: filter by branch
+          description: filter by brand
           required: false
           type: string
         - name: is_gms
@@ -1673,9 +1673,9 @@ definitions:
 
           For state details check [Android docs](https://developer.android.com/reference/android/app/admin/DevicePolicyManager#PERMISSION_GRANT_STATE_DEFAULT)
         enum:
-          - 0
-          - 1
-          - 2
+          - PERMISSION_GRANT_STATE_DEFAULT
+          - PERMISSION_GRANT_STATE_DENIED
+          - PERMISSION_GRANT_STATE_GRANTED
       created_on:
         title: Created on
         type: string
