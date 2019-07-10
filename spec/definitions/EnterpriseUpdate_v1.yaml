@@ -1,0 +1,55 @@
+type: object
+properties:
+  name:
+    title: Name
+    type: string
+    maxLength: 255
+    minLength: 1
+  display_name:
+    title: Display name
+    type: string
+    maxLength: 50
+    minLength: 1
+    x-nullable: true
+  short_code:
+    title: Short code
+    type: string
+    maxLength: 10
+    minLength: 1
+  registered_name:
+    title: Registered name
+    type: string
+    maxLength: 255
+    minLength: 1
+  registered_address:
+    title: Registered address
+    type: string
+    minLength: 1
+  location:
+    title: Location
+    type: string
+    maxLength: 255
+    minLength: 1
+  zipcode:
+    title: Zipcode
+    type: string
+    maxLength: 8
+    minLength: 1
+  contact_person:
+    title: Contact person
+    type: string
+    maxLength: 255
+    minLength: 1
+    x-nullable: true
+  contact_number:
+    title: Contact number
+    type: string
+    maxLength: 20
+    minLength: 1
+    x-nullable: true
+  contact_email:
+    title: Contact email
+    type: string
+    format: email
+    maxLength: 254
+    minLength: 1
