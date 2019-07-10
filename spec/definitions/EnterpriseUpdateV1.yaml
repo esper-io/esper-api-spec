@@ -1,16 +1,11 @@
 type: object
 properties:
+  id
   name:
     title: Name
     type: string
     maxLength: 255
     minLength: 1
-  display_name:
-    title: Display name
-    type: string
-    maxLength: 50
-    minLength: 1
-    x-nullable: true
   short_code:
     title: Short code
     type: string

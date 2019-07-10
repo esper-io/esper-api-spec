@@ -59,10 +59,12 @@ properties:
     minLength: 1
   google_enterprise_id:
     title: Google enterprise id
+    description: This field will be present if the enterprise is emm enrolled
     type: string
     maxLength: 50
     minLength: 1
     x-nullable: true
+    readOnly: true
   created_on:
     title: Created on
     type: string
