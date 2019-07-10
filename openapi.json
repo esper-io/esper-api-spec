@@ -2298,7 +2298,7 @@
         },
         "grant_state": {
           "title": "Grant state",
-          "type": "integer",
+          "type": "string",
           "description": "* PERMISSION_GRANT_STATE_DEFAULT = 0\n* PERMISSION_GRANT_STATE_DENIED = 1\n* PERMISSION_GRANT_STATE_GRANTED = 2\n\nFor state details check [Android docs](https://developer.android.com/reference/android/app/admin/DevicePolicyManager#PERMISSION_GRANT_STATE_DEFAULT)\n",
           "enum": [
             "PERMISSION_GRANT_STATE_DEFAULT",
