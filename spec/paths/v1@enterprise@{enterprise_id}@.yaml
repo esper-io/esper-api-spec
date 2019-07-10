@@ -9,7 +9,7 @@ get:
     '200':
       description: successful operation
       schema:
-        $ref: '#/definitions/Enterprise_v1'
+        $ref: '#/definitions/EnterpriseV1'
   security:
     - apiKey: []
   tags:
@@ -25,12 +25,12 @@ patch:
       in: body
       required: true
       schema:
-        $ref: '#/definitions/EnterpriseUpdate_v1'
+        $ref: '#/definitions/EnterpriseUpdateV1'
   responses:
     '200':
       description: successful operation
       schema:
-        $ref: '#/definitions/Enterprise_v1'
+        $ref: '#/definitions/EnterpriseV1'
   security:
     - apiKey: []
   tags:
