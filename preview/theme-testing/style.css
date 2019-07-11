@@ -1,0 +1,209 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700&display=swap");
+body {
+  color: #2c3e50 !important;
+  font-family: "Nunito Sans", sans-serif !important;
+}
+.euquqW {
+  max-height: 100px !important;
+  max-width: 100px !important;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.shv3r-0 {
+  color: #2c3e50 !important;
+}
+
+.kmvDqY {
+  display: none;
+}
+
+.shoonya-header {
+  z-index: 20;
+  right: 0;
+  height: 3.6rem;
+  background: #7a55a5 !important;
+  border: none;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.145));
+  box-sizing: border-box;
+  border-bottom: 1px solid #eaecef;
+  padding: 0.7rem 1.5rem;
+  line-height: 2.2rem;
+}
+.shoonya-logo {
+  height: 2.2rem;
+  min-width: 2.2rem;
+  margin-right: 0.8rem;
+  vertical-align: top;
+}
+
+.ebXbwy {
+  background-color: #fcfcfc !important;
+}
+.egwcPy {
+  background-color: #fcfcfc !important;
+}
+
+.kkiuWB {
+  height: 45px !important;
+}
+
+.search-icon {
+  top: 15px !important;
+}
+.api-content .api-info > p {
+  display: none !important;
+}
+
+.cqXmTa {
+  padding-top: 25px !important;
+  padding-bottom: 5px !important;
+}
+@media print, screen and (max-width: 85rem) {
+  .diqfaT {
+    padding: 5px !important;
+  }
+}
+.cqXmTa:last-child {
+  min-height: auto !important;
+  height: auto !important;
+}
+.sc-10atcbm-2.fSEbYg {
+  font-size: 14px;
+}
+
+.menu-content {
+  width: 15rem !important;
+  background-color: #fafafa !important;
+}
+
+.menu-content .scrollbar-container {
+  padding-right: 1rem;
+}
+.hsnYXF {
+  height: 4rem;
+  margin-top: 1rem;
+  position: relative;
+}
+.menu-content input {
+  border: 2px #e1e1e1 solid;
+  border-radius: 8px;
+  width: 14rem;
+  height: 2rem !important;
+  padding-left: 2rem;
+  font-weight: 500;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.menu-content i {
+  right: 1rem;
+  top: 0.5em;
+}
+
+.menu-content input:hover {
+  border: 2px #2c3e50 solid;
+}
+
+.menu-content input:focus {
+  border: 2px #7a55a5 solid;
+}
+
+.sc-10atcbm-3.-depth1 {
+  /* margin-right: 2rem; */
+  border-radius: 0rem 1rem 1rem 0rem;
+}
+
+.sc-10atcbm-3.-depth1:hover {
+  /* margin-right: 2rem; */
+  border-radius: 0rem 1rem 1rem 0rem;
+}
+
+.sc-10atcbm-3.-depth1.active {
+  font-weight: 600;
+  color: #7a55a5;
+}
+.sc-10atcbm-3.-depth1 {
+  font-family: "Nunito Sans", sans-serif !important;
+  font-weight: 600;
+}
+
+.sc-10atcbm-3.active {
+  background-color: #dddddd;
+  border-radius: 0rem 1rem 1rem 0rem;
+  /* margin-right: 2rem; */
+  border-left: 5px #7a55a5 solid;
+}
+
+.sc-10atcbm-2.fSEbYg {
+  border-radius: 0rem 1rem 1rem 0rem;
+  /* margin-right: 2rem; */
+}
+
+.menu-content svg {
+  left: 1.2rem;
+  top: 0.5rem !important;
+}
+/* ------------------- section beginning ----------------- */
+.dykNiJ {
+  background: white;
+}
+.dykNiJ .diqfaT {
+  width: 100%;
+}
+/* ------------------ section start --------------------------- */
+/* ----------------------Code box --------------------*/
+.sc-6itmo6-2.sc-6itmo6-3.iJUwRU {
+  background: #4f566b;
+  margin-left: 4rem;
+  margin-right: 5rem;
+}
+.sc-6itmo6-2.sc-6itmo6-3.iJUwRU .jmkkdP {
+  background-color: #3c4257;
+  border-radius: 5px;
+}
+.sc-6itmo6-2.sc-6itmo6-3.iJUwRU .jmkkdP .LxZmB {
+  font-family: "Nunito Sans";
+  letter-spacing: 0.5px;
+}
+.sc-6itmo6-2.sc-6itmo6-3.iJUwRU .jmkkdP .http-verb {
+  border-radius: 5px;
+  font-weight: bold;
+}
+.sc-6itmo6-2.sc-6itmo6-3.iJUwRU .jmkkdP .http-verb.get {
+  background-color: #85d996;
+}
+.sc-6itmo6-2.sc-6itmo6-3.iJUwRU .jmkkdP .http-verb.post {
+  background-color: #a4cdfe;
+}
+
+.sc-6itmo6-2.sc-6itmo6-3.iJUwRU .react-tabs__tab-panel {
+  background: #3c4257;
+  border-radius: 5px;
+}
+
+.iJUwRU {
+  border-radius: 5px !important;
+  padding: 20px !important;
+}
+pre {
+  border-radius: 5px !important;
+  padding: 20px !important;
+}
+.csNTMr {
+  background-color: white;
+}
+/* ------------- section border bottom -------- */
+.csNTMr:not(:last-of-type)::after {
+  border-bottom: none !important;
+}
+
+
+.gtvzhS {
+    height: fit-content !important;
+    width: fit-content !important;
+    padding: 0.1rem 0.5rem;
+    border-radius: 3px !important;
+    font-size: 0.6em !important;
+    font-weight: bold !important;
+}

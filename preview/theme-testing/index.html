@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Esper API Doc</title>
+    <!-- needed for adaptive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <!--
+    ReDoc uses font options from the parent element
+    So override default browser styles
+    -->
+    <style>
+      body,p{
+        margin: 0;
+        padding: 0;
+        font-family: 'Nunito Sans', sans-serif !important;
+      }
+      h1, h2, h3, h4, h5 {
+        font-weight: 600 !important;
+        font-family: 'Nunito Sans', sans-serif !important;
+      }
+    </style>
+    
+  </head>
+  <body>
+
+  <header class="shoonya-header">
+
+      <!-- png -->
+     <div style="float: left;"><a href="https://esper.io">
+        <img src="esper.svg" class="shoonya-logo" />
+      </a>
+      <span style="    color: white;
+      padding-top: 0.5rem;
+      line-height: 2.7;">
+        API Reference
+      </span>
+    </div>
+    <div style="float: right;">
+    
+      <a
+      href="https://blog.esper.io"
+      target="_blank"
+      style="    color: white;
+  padding-top: 0.5rem;
+  line-height: 2.7;
+    text-decoration: none;
+  margin-left: 2rem; "
+    >
+      Blog
+    </a>
+  
+    <a
+    href="https://docs.esper.io"
+    target="_blank"
+      style="    color: white;
+  padding-top: 0.5rem;
+  line-height: 2.7;
+  margin-left: 1rem;
+    text-decoration: none;
+  margin-right: 1rem;"
+    >
+      Docs
+  </a>
+    </div>
+  </header>
+
+    <div id="redoc_container"></div>
+    <script src="./assets/redoc.standalone.js"></script>
+    <script>
+      Redoc.init(
+        './openapi.json',
+        {"theme":{"colors":{"primary":{"main":"#32329f"}}},"redocURL":"./assets/redoc.standalone.js"},
+        document.getElementById("redoc_container")
+      );
+    </script>
+  </body>
+</html>
