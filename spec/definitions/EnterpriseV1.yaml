@@ -57,9 +57,9 @@ properties:
     format: email
     maxLength: 254
     minLength: 1
-  google_enterprise_id:
-    title: Google enterprise id
-    description: This field will be present if the enterprise is emm enrolled
+  emm:
+    title: Emm
+    description: This field will have the google enterprise id if the enterprise is enrolled in emm
     type: string
     maxLength: 50
     minLength: 1

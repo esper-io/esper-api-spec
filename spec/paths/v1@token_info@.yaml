@@ -1,0 +1,16 @@
+get:
+  operationId: getTokenInfo
+  summary: Get your token information
+  description: Gives token information
+  produces:
+    - application/json
+  parameters: []
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/TokenInfoV1'
+  security:
+    - apiKey: []
+  tags:
+    - TokenInfo
