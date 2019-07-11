@@ -25,12 +25,12 @@ patch:
       in: body
       required: true
       schema:
-        $ref: '#/definitions/V1/EnterpriseUpdateV1'
+        $ref: '#/definitions/EnterpriseUpdateV1'
   responses:
     '200':
       description: successful operation
       schema:
-        $ref: '#/definitions/V1/EnterpriseV1'
+        $ref: '#/definitions/EnterpriseV1'
   security:
     - apiKey: []
   tags:
