@@ -68,7 +68,7 @@ properties:
     minLength: 1
   emm:
     title: Emm
-    description: This field will have the google enterprise id if the enterprise is enrolled in emm
+    description: This field will have details about emm enrollment if the enterprise is emm enrolled
     type: string
     maxLength: 50
     minLength: 1
