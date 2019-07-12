@@ -30,12 +30,12 @@ properties:
     minLength: 1
   registered_address:
     title: Registered address
-    desciption: Registered address of the enterprise.
+    description: Registered address of the enterprise.
     type: string
     minLength: 1
   location:
     title: Enterprise location
-    desciption: City, State, Country location of the enterprise
+    description: City, State, Country location of the enterprise
     type: string
     maxLength: 255
     minLength: 1

@@ -57,7 +57,7 @@ properties:
     readOnly: true
   updated_on:
     title: Updated on
-    desciption: Date and time of when this resource was updated
+    description: Date and time of when this resource was updated
     type: string
     format: date-time
     readOnly: true
