@@ -2,48 +2,51 @@ type: object
 properties:
   id
   name:
-    title: Name
+    title: Enterprise Name
+    description: Name of the enterprise
     type: string
     maxLength: 255
     minLength: 1
-  short_code:
-    title: Short code
-    type: string
-    maxLength: 10
-    minLength: 1
   registered_name:
     title: Registered name
+    description: Registered Name of the enterprise
     type: string
     maxLength: 255
     minLength: 1
   registered_address:
     title: Registered address
+    desciption: Registered address of the enterprise.
     type: string
     minLength: 1
   location:
-    title: Location
+    title: Enterprise location
+    desciption: City, State, Country location of the enterprise
     type: string
     maxLength: 255
     minLength: 1
   zipcode:
-    title: Zipcode
+    title: Enterprise zipcode
+    description: Description of the enterprise
     type: string
     maxLength: 8
     minLength: 1
   contact_person:
     title: Contact person
+    description: Person who is the point of contact for the enterprise
     type: string
     maxLength: 255
     minLength: 1
     x-nullable: true
   contact_number:
     title: Contact number
+    description: Contact number of the enterprise
     type: string
     maxLength: 20
     minLength: 1
     x-nullable: true
   contact_email:
     title: Contact email
+    description: Contact email address of the enterprise
     type: string
     format: email
     maxLength: 254

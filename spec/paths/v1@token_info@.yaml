@@ -1,6 +1,6 @@
 get:
   operationId: getTokenInfo
-  summary: Get your token information
+  summary: API to get  resource information associated with your token like your enterprise, user etc
   description: Gives token information
   produces:
     - application/json
@@ -13,4 +13,4 @@ get:
   security:
     - apiKey: []
   tags:
-    - TokenInfo
+    - Token

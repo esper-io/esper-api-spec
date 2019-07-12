@@ -5,49 +5,59 @@ type: object
 properties:
   id:
     title: Id
+    description: Token id
     type: string
     format: integer
     readOnly: true
   enterprise:
-    title: Enterprise
+    title: Enterprise id
+    description: Id of the enterprise resource
     type: string
-    format : uuid
+    format: uuid
     readOnly: true
   user:
-    title : User id
-    type : string
-    readOnly : true
-  developerapp:
-    title : Developer app
-    type : string
-    format : uuid
-    readOnly : true
+    title: User id
+    description: Id of the user resource
+    type: string
+    readOnly: true
+  developer_app:
+    title: Developer app id
+    description: Id of the developer app resource that you created using the esper dev console
+    type: string
+    format: uuid
+    readOnly: true
   source_refresh_token:
-    title : Refresh token
-    type : string
-    readOnly : true
-  token :
-    title : Token
-    type : string
-    readOnly : true
+    title: Refresh token
+    description: The refresh token is used to refresh your expired API token
+    type: string
+    readOnly: true
+  token:
+    title: API Token
+    description: API token for accessing esper APIs
+    type: string
+    readOnly: true
   expires_on:
-    title : Expires on
-    type : string
-    format : date-time
-    readOnly : true
-  scope :
-    title : Scope
+    title: API token expiry
+    description: Date and time of when your API token will get expired
+    type: string
+    format: date-time
+    readOnly: true
+  scope:
+    title: Scope of API token
+    description: This defines what access scopes does your API token has
     type: array
     items:
       type: string
-    readOnly : true
+    readOnly: true
   created_on:
     title: Created on
+    description: Date and time of when this resource was created
     type: string
     format: date-time
     readOnly: true
   updated_on:
     title: Updated on
+    desciption: Date and time of when this resource was updated
     type: string
     format: date-time
     readOnly: true
