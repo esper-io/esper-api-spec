@@ -25,6 +25,7 @@ properties:
   registered_name:
     title: Registered name of the enterprise
     description: Registered Name of the enterprise
+    title: Registered name
     type: string
     maxLength: 255
     minLength: 1
@@ -32,6 +33,7 @@ properties:
     title: Registered address
     description: Registered address of the enterprise.
     type: string
+    max_length: 255
     minLength: 1
   location:
     title: Enterprise location
