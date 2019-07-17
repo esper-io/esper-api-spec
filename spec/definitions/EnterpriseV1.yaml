@@ -33,7 +33,7 @@ properties:
     title: Registered address
     description: Registered address of the enterprise.
     type: string
-    max_length: 255
+    maxLength: 255
     minLength: 1
   location:
     title: Enterprise location

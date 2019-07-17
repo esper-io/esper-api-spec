@@ -22,6 +22,7 @@ properties:
     title: Registered address
     description: Registered address of the enterprise.
     type: string
+    maxLength: 255
     minLength: 1
   location:
     title: Enterprise location
