@@ -1533,6 +1533,33 @@
           "format": "uuid"
         }
       ]
+    },
+    "/v1/token_info/": {
+      "get": {
+        "operationId": "getTokenInfo",
+        "summary": "API to get resource information associated with your token like your enterprise, user etc",
+        "description": "Gives token information",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/TokenInfoV1"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Token"
+        ]
+      }
     }
   },
   "definitions": {
@@ -2245,7 +2272,7 @@
         },
         "grant_state": {
           "title": "Grant state",
-          "type": "integer",
+          "type": "string",
           "description": "* PERMISSION_GRANT_STATE_DEFAULT = 0\n* PERMISSION_GRANT_STATE_DENIED = 1\n* PERMISSION_GRANT_STATE_GRANTED = 2\n\nFor state details check [Android docs](https://developer.android.com/reference/android/app/admin/DevicePolicyManager#PERMISSION_GRANT_STATE_DEFAULT)\n",
           "enum": [
             "PERMISSION_GRANT_STATE_DEFAULT",
@@ -2613,7 +2640,7 @@
         },
         "default_policy": {
           "title": "Default policy",
-          "description": "Policy associated with enteprise",
+          "description": "Policy associated with enterprise",
           "type": "integer"
         },
         "emm": {
@@ -2719,50 +2746,51 @@
     "EnterpriseUpdateV1": {
       "type": "object",
       "properties": {
+        "id": {
+          "title": "Id",
+          "description": "Id of the enterprise",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
         "name": {
-          "title": "Name",
+          "title": "Enterprise Name",
+          "description": "Name of the enterprise",
           "type": "string",
           "maxLength": 255,
           "minLength": 1
         },
-        "display_name": {
-          "title": "Display name",
-          "type": "string",
-          "maxLength": 50,
-          "minLength": 1,
-          "x-nullable": true
-        },
-        "short_code": {
-          "title": "Short code",
-          "type": "string",
-          "maxLength": 10,
-          "minLength": 1
-        },
         "registered_name": {
           "title": "Registered name",
+          "description": "Registered Name of the enterprise",
           "type": "string",
           "maxLength": 255,
           "minLength": 1
         },
         "registered_address": {
           "title": "Registered address",
+          "description": "Registered address of the enterprise.",
           "type": "string",
+          "maxLength": 255,
           "minLength": 1
         },
         "location": {
-          "title": "Location",
+          "title": "Enterprise location",
+          "description": "City, State, Country location of the enterprise",
           "type": "string",
           "maxLength": 255,
           "minLength": 1
         },
         "zipcode": {
-          "title": "Zipcode",
+          "title": "Enterprise zipcode",
+          "description": "Description of the enterprise",
           "type": "string",
           "maxLength": 8,
           "minLength": 1
         },
         "contact_person": {
           "title": "Contact person",
+          "description": "Person who is the point of contact for the enterprise",
           "type": "string",
           "maxLength": 255,
           "minLength": 1,
@@ -2770,6 +2798,7 @@
         },
         "contact_number": {
           "title": "Contact number",
+          "description": "Contact number of the enterprise",
           "type": "string",
           "maxLength": 20,
           "minLength": 1,
@@ -2777,6 +2806,7 @@
         },
         "contact_email": {
           "title": "Contact email",
+          "description": "Contact email address of the enterprise",
           "type": "string",
           "format": "email",
           "maxLength": 254,
@@ -2794,48 +2824,57 @@
       "properties": {
         "id": {
           "title": "Id",
-          "description": "Enterprise id",
+          "description": "Id of the enterprise",
           "type": "string",
           "format": "uuid",
           "readOnly": true
         },
         "name": {
           "title": "Name",
+          "description": "Name of the enterprise",
           "type": "string",
           "maxLength": 255,
           "minLength": 1
         },
         "short_code": {
           "title": "Short code",
+          "description": "A short 10-char representation of the enterprise, separated by hyphens. Field is optional, as system will auto-generate a value if none is provided.",
           "type": "string",
           "maxLength": 10,
-          "minLength": 1
+          "minLength": 1,
+          "readOnly": true
         },
         "registered_name": {
-          "title": "Registered name",
+          "title": "Registered name of the enterprise",
+          "description": "Registered Name of the enterprise",
           "type": "string",
           "maxLength": 255,
           "minLength": 1
         },
         "registered_address": {
           "title": "Registered address",
+          "description": "Registered address of the enterprise.",
           "type": "string",
+          "maxLength": 255,
           "minLength": 1
         },
         "location": {
-          "title": "Location",
+          "title": "Enterprise location",
+          "description": "City, State, Country location of the enterprise",
           "type": "string",
           "maxLength": 255,
           "minLength": 1
         },
         "zipcode": {
-          "title": "Zipcode",
+          "title": "Enterprise zipcode",
+          "description": "Description of the enterprise",
           "type": "string",
           "maxLength": 8,
           "minLength": 1
         },
         "contact_person": {
           "title": "Contact person",
+          "description": "Person who is the point of contact for the enterprise",
           "type": "string",
           "maxLength": 255,
           "minLength": 1,
@@ -2843,6 +2882,7 @@
         },
         "contact_number": {
           "title": "Contact number",
+          "description": "Contact number of the enterprise",
           "type": "string",
           "maxLength": 20,
           "minLength": 1,
@@ -2850,26 +2890,36 @@
         },
         "contact_email": {
           "title": "Contact email",
+          "description": "Contact email address of the enterprise",
           "type": "string",
           "format": "email",
           "maxLength": 254,
           "minLength": 1
         },
-        "google_enterprise_id": {
-          "title": "Google enterprise id",
-          "type": "string",
+        "emm": {
+          "title": "Google EMM",
+          "description": "This field will have details about emm enrollment if the enterprise is emm enrolled",
+          "type": "object",
+          "properties": {
+            "google_enterprise_id": {
+              "type": "string"
+            }
+          },
           "maxLength": 50,
           "minLength": 1,
-          "x-nullable": true
+          "x-nullable": true,
+          "readOnly": true
         },
         "created_on": {
           "title": "Created on",
+          "description": "Date and time of when this resource was created",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "updated_on": {
           "title": "Updated on",
+          "description": "Date and time of when this resource was updated",
           "type": "string",
           "format": "date-time",
           "readOnly": true
@@ -3087,6 +3137,84 @@
         2,
         3
       ]
+    },
+    "TokenInfoV1": {
+      "required": [
+        "id",
+        "enterprise"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "description": "Token id",
+          "type": "string",
+          "format": "integer",
+          "readOnly": true
+        },
+        "enterprise": {
+          "title": "Enterprise id",
+          "description": "Id of the enterprise resource",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "user": {
+          "title": "User id",
+          "description": "Id of the user resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "developer_app": {
+          "title": "Developer app id",
+          "description": "Id of the developer app resource that you created using the esper dev console",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "source_refresh_token": {
+          "title": "Refresh token",
+          "description": "The refresh token is used to refresh your expired API token",
+          "type": "string",
+          "readOnly": true
+        },
+        "token": {
+          "title": "API Token",
+          "description": "API token for accessing esper APIs",
+          "type": "string",
+          "readOnly": true
+        },
+        "expires_on": {
+          "title": "API token expiry",
+          "description": "Date and time of when your API token will get expired",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "scope": {
+          "title": "Scope of API token",
+          "description": "This defines what access scopes does your API token has",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "created_on": {
+          "title": "Created on",
+          "description": "Date and time of when this resource was created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "description": "Date and time of when this resource was updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
     }
   }
 }
