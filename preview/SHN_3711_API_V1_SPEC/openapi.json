@@ -77,7 +77,8 @@
         "Device",
         "Device Group",
         "Commands",
-        "Group Commands"
+        "Group Commands",
+        "Token"
       ]
     }
   ],

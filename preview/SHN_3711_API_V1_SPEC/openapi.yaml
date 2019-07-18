@@ -79,6 +79,7 @@ x-tagGroups:
       - Device Group
       - Commands
       - Group Commands
+      - Token
 securityDefinitions:
   apiKey:
     description: |
