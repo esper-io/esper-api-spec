@@ -43,7 +43,7 @@ properties:
     minLength: 1
   zipcode:
     title: Enterprise zipcode
-    description: Description of the enterprise
+    description: Zip code of enterprise location
     type: string
     maxLength: 8
     minLength: 1
