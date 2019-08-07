@@ -1069,7 +1069,7 @@ paths:
         required: true
         type: string
         format: uuid
-  /v1/token_info/:
+  /v1/token-info/:
     get:
       operationId: getTokenInfo
       summary: 'API to get resource information associated with your token like your enterprise, user etc'
@@ -2156,7 +2156,7 @@ definitions:
         minLength: 1
       zipcode:
         title: Enterprise zipcode
-        description: Description of the enterprise
+        description: Zip code of enterprise location
         type: string
         maxLength: 8
         minLength: 1
