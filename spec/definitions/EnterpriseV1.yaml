@@ -1,0 +1,93 @@
+required:
+  - id
+  - name
+  - short_code
+type: object
+properties:
+  id:
+    title: Id
+    description: Id of the enterprise
+    type: string
+    format: uuid
+    readOnly: true
+  name:
+    title: Name
+    description: Name of the enterprise
+    type: string
+    maxLength: 255
+    minLength: 1
+  short_code:
+    title: Short code
+    description:  A short 10-char representation of the enterprise, separated by hyphens. Field is optional, as system will auto-generate a value if none is provided.
+    type: string
+    maxLength: 10
+    minLength: 1
+    readOnly: true
+  registered_name:
+    title: Registered name of the enterprise
+    description: Registered Name of the enterprise
+    type: string
+    maxLength: 255
+    minLength: 1
+  registered_address:
+    title: Registered address
+    description: Registered address of the enterprise.
+    type: string
+    maxLength: 255
+    minLength: 1
+  location:
+    title: Enterprise location
+    description: City, State, Country location of the enterprise
+    type: string
+    maxLength: 255
+    minLength: 1
+  zipcode:
+    title: Enterprise zipcode
+    description: Zip code of enterprise location
+    type: string
+    maxLength: 8
+    minLength: 1
+  contact_person:
+    title: Contact person
+    description: Person who is the point of contact for the enterprise
+    type: string
+    maxLength: 255
+    minLength: 1
+    x-nullable: true
+  contact_number:
+    title: Contact number
+    description: Contact number of the enterprise
+    type: string
+    maxLength: 20
+    minLength: 1
+    x-nullable: true
+  contact_email:
+    title: Contact email
+    description: Contact email address of the enterprise
+    type: string
+    format: email
+    maxLength: 254
+    minLength: 1
+  emm:
+    title: Google EMM
+    description: This field will have details about emm enrollment if the enterprise is emm enrolled
+    type: object
+    properties:
+      google_enterprise_id:
+        type: string
+    maxLength: 50
+    minLength: 1
+    x-nullable: true
+    readOnly: true
+  created_on:
+    title: Created on
+    description: Date and time of when this resource was created
+    type: string
+    format: date-time
+    readOnly: true
+  updated_on:
+    title: Updated on
+    description: Date and time of when this resource was updated
+    type: string
+    format: date-time
+    readOnly: true
