@@ -41,7 +41,7 @@ properties:
     $ref: '#/definitions/EnterpriseDetail'
   default_policy:
     title: Default policy
-    description: Policy associated with enteprise
+    description: Policy associated with enterprise
     type: integer
   emm:
     $ref: '#/definitions/GoogleEnterprise'
