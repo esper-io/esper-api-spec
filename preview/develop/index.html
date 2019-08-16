@@ -42,9 +42,7 @@
           Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
       }
     </style>
-    {{
-      redocHead
-    }}
+    
   </head>
   <body>
     <header class="shoonya-header">
@@ -54,7 +52,15 @@
       </a>
     </header>
 
-    {{ redocBody }}
+    <div id="redoc_container"></div>
+    <script src="./assets/redoc.standalone.js"></script>
+    <script>
+      Redoc.init(
+        './openapi.json',
+        {"theme":{"colors":{"primary":{"main":"#32329f"}}},"redocURL":"./assets/redoc.standalone.js"},
+        document.getElementById("redoc_container")
+      );
+    </script>
     <!-- Start of HubSpot Embed Code -->
     <script
       type="text/javascript"
