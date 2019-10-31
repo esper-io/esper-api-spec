@@ -50,7 +50,7 @@ info:
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-host: foo.shoonyacloud.com
+host: foo.esper.cloud
 basePath: /api
 tags:
   - name: Enterprise
@@ -105,7 +105,7 @@ securityDefinitions:
       ```bash
 
           curl -X GET \
-            https://<domain>-api.shoonyacloud.com/api/enterprise/<enterprise_id>/device/ \
+            https://<domain>-api.esper.cloud/api/enterprise/<enterprise_id>/device/ \
             -H 'Authorization: Bearer <ACCESS_TOKEN>' \
             -H 'Content-Type: application/json' \
       ```
