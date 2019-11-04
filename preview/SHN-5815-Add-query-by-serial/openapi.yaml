@@ -396,6 +396,11 @@ paths:
           description: filter by imei
           required: false
           type: string
+        - name: serial
+          in: query
+          description: filter by serial number
+          required: false
+          type: string
         - name: state
           in: query
           description: filter by device state
