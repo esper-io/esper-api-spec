@@ -17,6 +17,7 @@ description: |
   * SET_STREAM_VOLUME: Volume control
   * SET_SCREEN_OFF_TIMEOUT: Screen timeout setting
   * ADD_TO_WHITELIST: Whitelist an installed sytem app
+  * CLEAR_APP_DATA: Clear app data
   ```
 enum:
   - REBOOT
@@ -33,3 +34,4 @@ enum:
   - SET_SCREEN_OFF_TIMEOUT
   - UNINSTALL
   - ADD_TO_WHITELIST
+  - CLEAR_APP_DATA
