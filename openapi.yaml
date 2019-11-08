@@ -396,6 +396,11 @@ paths:
           description: filter by imei
           required: false
           type: string
+        - name: serial
+          in: query
+          description: filter by serial number
+          required: false
+          type: string
         - name: state
           in: query
           description: filter by device state
@@ -1773,6 +1778,7 @@ definitions:
       * SET_STREAM_VOLUME: Volume control
       * SET_SCREEN_OFF_TIMEOUT: Screen timeout setting
       * ADD_TO_WHITELIST: Whitelist an installed sytem app
+      * CLEAR_APP_DATA: Clear app data
       ```
     enum:
       - REBOOT
@@ -1789,6 +1795,7 @@ definitions:
       - SET_SCREEN_OFF_TIMEOUT
       - UNINSTALL
       - ADD_TO_WHITELIST
+      - CLEAR_APP_DATA
   DeviceGroup:
     required:
       - name
