@@ -50,7 +50,7 @@ info:
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-host: foo.esper.cloud
+host: foo-api.esper.cloud
 basePath: /api
 tags:
   - name: Enterprise
@@ -99,7 +99,7 @@ securityDefinitions:
   apiKey:
     description: |
       #### API KEY - Access Token
-      Access token for APIs passed as authorization header in calls. You need to generate this from your Esper Dev Console at `<domain>-api.shoonyacloud.com` where foo is the sub-domain name you gave for your Esper Dev environment when you signed up for your Esper Dev account. Please follow the instructions [here](https://docs.esper.io/home/module/genapikey.html) to generate an access token.
+      Access token for APIs passed as authorization header in calls. You need to generate this from your Esper Dev Console at `<domain>-api.esper.cloud` where foo is the sub-domain name you gave for your Esper Dev environment when you signed up for your Esper Dev account. Please follow the instructions [here](https://docs.esper.io/home/module/genapikey.html) to generate an access token.
       Once you have the access token, you need to send an authorization header as below
 
       ```bash
