@@ -1,7 +1,7 @@
 get:
   operationId: getTokenInfo
-  summary: API to get resource information associated with your token like your enterprise, user etc
-  description: Gives token information
+  summary: Token Information
+  description: API to get resource information associated with your token like your enterprise, user etc
   produces:
     - application/json
   parameters: []
