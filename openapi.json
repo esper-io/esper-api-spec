@@ -20,16 +20,16 @@
       "name": "Enterprise",
       "description": "The Esper Enterprise APIs to manage the account information set up for your company’s account. Read our Esper Manage documentation or use the Esper Manage Dashboard through the Esper Developer Console",
       "externalDocs": {
-        "description": "Find out more about enterprise management",
-        "url": "https://docs.esper.io/home/devconsole/enterprise-configuration/"
+        "description": "Find out more about enterprise settings",
+        "url": "https://docs.esper.io/home/console.html#company-settings"
       }
     },
     {
       "name": "Application",
       "description": "APIs for application management",
       "externalDocs": {
-        "description": "Find out more about device management",
-        "url": "https://docs.esper.io/home/devconsole/app-management/"
+        "description": "Find out more about application management",
+        "url": "https://docs.esper.io/home/console.html#apps"
       }
     },
     {
@@ -37,7 +37,7 @@
       "description": "APIs for device management",
       "externalDocs": {
         "description": "Find out more about device management",
-        "url": "https://docs.esper.io/home/devconsole/device-management/"
+        "url": "https://docs.esper.io/home/console.html#devices"
       }
     },
     {
@@ -45,23 +45,31 @@
       "description": "APIs for device group management",
       "externalDocs": {
         "description": "Find out more about device group management",
-        "url": "https://docs.esper.io/home/devconsole/group-management/"
+        "url": "https://docs.esper.io/home/console.html#groups"
       }
     },
     {
       "name": "Commands",
       "description": "APIs to run device commands",
       "externalDocs": {
-        "description": "Find out more about device management",
-        "url": "https://docs.esper.io/home/devconsole/device-management/"
+        "description": "Find out more about device commands",
+        "url": "https://docs.esper.io/home/console/device-management/-/#device-actions"
       }
     },
     {
       "name": "Group Commands",
       "description": "APIs to run group commands. Command will be run on all the active devices in a group",
       "externalDocs": {
-        "description": "Find out more about device group management",
-        "url": "https://docs.esper.io/home/devconsole/group-management/"
+        "description": "Find out more in `Actions` of group commands",
+        "url": "https://docs.esper.io/home/console.html#groups"
+      }
+    },
+    {
+      "name": "Token",
+      "description": "Fetch API token information",
+      "externalDocs": {
+        "description": "Find out more about API get generation",
+        "url": "https://docs.esper.io/home/module/genapikey.html"
       }
     }
   ],
@@ -1545,8 +1553,8 @@
     "/v1/token-info/": {
       "get": {
         "operationId": "getTokenInfo",
-        "summary": "API to get resource information associated with your token like your enterprise, user etc",
-        "description": "Gives token information",
+        "summary": "Token Information",
+        "description": "API to get resource information associated with your token like your enterprise, user etc",
         "produces": [
           "application/json"
         ],
