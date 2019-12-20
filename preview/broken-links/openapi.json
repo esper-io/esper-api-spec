@@ -52,7 +52,7 @@
       "name": "Commands",
       "description": "APIs to run device commands",
       "externalDocs": {
-        "description": "Find out more about device commanda",
+        "description": "Find out more about device commands",
         "url": "https://docs.esper.io/home/console/device-management/-/#device-actions"
       }
     },

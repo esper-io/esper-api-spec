@@ -61,7 +61,7 @@ tags:
   - name: Commands
     description: APIs to run device commands
     externalDocs:
-      description: Find out more about device commanda
+      description: Find out more about device commands
       url: 'https://docs.esper.io/home/console/device-management/-/#device-actions'
   - name: Group Commands
     description: APIs to run group commands. Command will be run on all the active devices in a group
