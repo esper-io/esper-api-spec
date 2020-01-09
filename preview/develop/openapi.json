@@ -566,6 +566,13 @@
             "type": "string"
           },
           {
+            "name": "tags",
+            "in": "query",
+            "description": "A partial text search for device tags",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "limit",
             "in": "query",
             "description": "Number of results to return per page.",
