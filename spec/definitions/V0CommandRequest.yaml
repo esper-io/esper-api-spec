@@ -1,0 +1,90 @@
+type: object
+properties:
+  id:
+    title: Id
+    description: Unique command request identifier
+    type: string
+    format: uuid
+    readOnly: true
+
+  enterprise:
+    title: Enterperise ID
+    description: Esper account identifier
+    type: string
+    format: uuid
+    readOnly: true
+
+  command_type:
+    type: string
+    description: |
+      Identifies the type of command
+
+      ```
+      * DEVICE: command request is meant for devices
+      * GROUP: command request is meant for groups
+      * DYNAMIC: command request is meant for dynamic set of devices
+        i.e subset of devices from different groups or otherwise.
+      ```
+    enum:
+      - DEVICE
+      - GROUP
+      - DYNAMIC
+
+  devices:
+    type: array
+    description: list of devices to run commands
+    items:
+      type: string
+      format: uuid
+    minItems: 0
+    maxItems: 500
+
+  groups:
+    type: array
+    description: list of groups to run commands
+    items:
+      type: string
+      format: uuid
+    minItems: 0
+    maxItems: 500
+
+  device_type:
+    type: string
+    description: |
+      Type of devices to run commands on
+
+      ```
+      * active: Run commands on currently online devices
+      * inactive: Run commands on currently offline devices
+      * all: Run commands on all the devices.
+        Commands will be queued for offline devices until they come back online.
+      ```
+    default: active
+    enum:
+      - active
+      - inactive
+      - all
+
+  command:
+    $ref: '#/definitions/V0DeviceCommandEnum'
+
+  issued_by:
+    type: string
+    format: url
+    description: command is issued by this user
+    readOnly: true
+
+  created_on:
+    title: Created on
+    description: Timestamp of command request
+    type: string
+    format: date-time
+    readOnly: true
+
+  status:
+    title: Current Status
+    description: Show creent status of commands issued during in this request
+    type: array
+    items:
+      $ref: '#/definitions/V0CommandRequestStatus'
+    readOnly: true

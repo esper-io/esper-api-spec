@@ -1,0 +1,11 @@
+type: string
+description: |
+  Following commands are supported
+
+  ```
+  * REBOOT: Reboot a device
+  * UPDATE_HEARTBEAT: Ping a device
+  ```
+enum:
+  - REBOOT
+  - UPDATE_HEARTBEAT
