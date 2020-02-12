@@ -1135,6 +1135,158 @@ paths:
         - apiKey: []
       tags:
         - Commands 2.0
+  '/v0/enterprise/{enterprise_id}/command/{request_id}/status/':
+    get:
+      operationId: getCommandRequestStatus
+      summary: get status list for command request
+      description: API to get and filter command request status
+      produces:
+        - application/json
+      parameters:
+        - name: enterprise_id
+          in: path
+          description: ID of the enterprise
+          required: true
+          type: string
+          format: uuid
+        - name: request_id
+          in: path
+          description: ID for the command request
+          required: true
+          type: string
+          format: uuid
+        - name: device
+          in: query
+          description: Filter status result by device id.
+          required: false
+          type: string
+        - name: state
+          in: query
+          description: Filter by command state
+          required: false
+          type: string
+      responses:
+        '200':
+          description: on successful request
+          schema:
+            type: object
+            properties:
+              count:
+                type: integer
+                format: int64
+              next:
+                type: string
+                format: url
+              previous:
+                type: string
+                format: url
+              results:
+                type: array
+                items:
+                  $ref: '#/definitions/V0CommandStatus'
+      security:
+        - apiKey: []
+      tags:
+        - Commands 2.0
+  '/v0/enterprise/{enterprise_id}/command/{request_id}/status/{command_id}/':
+    patch:
+      operationId: partialUpdateCommandStatus
+      summary: Update command status
+      description: API to patch the state of command
+      produces:
+        - application/json
+      parameters:
+        - name: enterprise_id
+          in: path
+          description: ID of the enterprise
+          required: true
+          type: string
+          format: uuid
+        - name: request_id
+          in: path
+          description: ID for the command request
+          required: true
+          type: string
+          format: uuid
+        - name: command_id
+          in: path
+          description: ID for the command
+          required: true
+          type: string
+          format: uuid
+        - name: action
+          in: query
+          description: Action to be performed on device
+          required: true
+          type: string
+          enum:
+            - acknowledge
+            - in_progress
+            - success
+            - failed
+            - cancel
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/V0CommandStatusUpdate'
+      responses:
+        '200':
+          description: on successful update
+          schema:
+            $ref: '#/definitions/V0CommandStatus'
+      security:
+        - apiKey: []
+      tags:
+        - Commands 2.0
+  '/v0/enterprise/{enterprise_id}/device/{device_id}/command-history/':
+    get:
+      operationId: getDeviceCommandHistory
+      summary: get command history for device
+      description: API to get and filter deivce command history
+      produces:
+        - application/json
+      parameters:
+        - name: enterprise_id
+          in: path
+          description: Id of the enterprise
+          required: true
+          type: string
+          format: uuid
+        - name: device_id
+          in: path
+          description: Id for the command request
+          required: true
+          type: string
+          format: uuid
+        - name: state
+          in: query
+          description: Filter by command state
+          required: false
+          type: string
+      responses:
+        '200':
+          description: on successful request
+          schema:
+            type: object
+            properties:
+              count:
+                type: integer
+                format: int64
+              next:
+                type: string
+                format: url
+              previous:
+                type: string
+                format: url
+              results:
+                type: array
+                items:
+                  $ref: '#/definitions/V0CommandStatus'
+      security:
+        - apiKey: []
+      tags:
+        - Commands 2.0
   '/v1/enterprise/{enterprise_id}/':
     get:
       operationId: getEnterprise
@@ -2466,6 +2618,67 @@ definitions:
         description: No of commands currently in this  state
         type: integer
         format: int64
+  V0CommandStatus:
+    type: object
+    properties:
+      id:
+        title: Id
+        description: Unique command identifier
+        type: string
+        format: uuid
+        readOnly: true
+      request:
+        title: Reuqest Id
+        description: Request Id associated with this command
+        type: string
+        format: uuid
+        readOnly: true
+      device:
+        title: Device
+        description: Device associated with this command
+        type: string
+        format: url
+        readOnly: true
+      state:
+        type: string
+        description: Current state of the command
+        enum:
+          - Command Queued
+          - Command Initiated
+          - Command Acknowledged
+          - Command In Progress
+          - Command TimeOut
+          - Command Success
+          - Command Failure
+          - Command Scheduled
+          - Command Cancelled
+      reason:
+        type: string
+        description: details briefing the reason for current command state
+      created_on:
+        title: Created on
+        description: Timestamp of command creation
+        type: string
+        format: date-time
+        readOnly: true
+      updated_on:
+        title: Updated on
+        description: Last updated timestamp of command
+        type: string
+        format: date-time
+        readOnly: true
+  V0CommandStatusUpdate:
+    type: object
+    properties:
+      reason:
+        type: string
+        description: details briefing the reason for current command state
+      details:
+        type: object
+        properties:
+          reason:
+            type: string
+            description: details briefing the reason for current command state
   V0DeviceCommandEnum:
     type: string
     description: |
