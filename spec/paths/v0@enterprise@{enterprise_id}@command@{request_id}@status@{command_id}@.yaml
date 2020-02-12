@@ -1,0 +1,50 @@
+patch:
+  operationId: partialUpdateCommandStatus
+  summary: Update command status
+  description: API to patch the state of command
+  produces:
+    - application/json
+  parameters:
+    - name: enterprise_id
+      in: path
+      description: ID of the enterprise
+      required: true
+      type: string
+      format: uuid
+    - name: request_id
+      in: path
+      description: ID for the command request
+      required: true
+      type: string
+      format: uuid
+    - name: command_id
+      in: path
+      description: ID for the command
+      required: true
+      type: string
+      format: uuid
+    - name: action
+      in: query
+      description: Action to be performed on device
+      required: true
+      type: string
+      enum:
+        - acknowledge
+        - in_progress
+        - success
+        - failed
+        - cancel
+    - name: data
+      in: body
+      required: false
+      schema:
+        $ref: '#/definitions/V0CommandStatusUpdate'
+  responses:
+    '200':
+      description: on successful update
+      schema:
+        $ref: '#/definitions/V0CommandStatus'
+  security:
+    - apiKey: []
+  tags:
+    - Commands 2.0

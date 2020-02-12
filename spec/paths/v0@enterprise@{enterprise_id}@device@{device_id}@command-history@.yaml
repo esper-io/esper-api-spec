@@ -1,0 +1,47 @@
+get:
+  operationId: getDeviceCommandHistory
+  summary:  get command history for device
+  description: API to get and filter deivce command history
+  produces:
+    - application/json
+  parameters:
+    - name: enterprise_id
+      in: path
+      description: Id of the enterprise
+      required: true
+      type: string
+      format: uuid
+    - name: device_id
+      in: path
+      description: Id for the command request
+      required: true
+      type: string
+      format: uuid
+    - name: state
+      in: query
+      description: Filter by command state
+      required: false
+      type: string
+  responses:
+    '200':
+      description: on successful request
+      schema:
+        type: object
+        properties:
+          count:
+            type: integer
+            format: int64
+          next:
+            type: string
+            format: url
+          previous:
+            type: string
+            format: url
+          results:
+            type: array
+            items:
+              $ref: '#/definitions/V0CommandStatus'
+  security:
+    - apiKey: []
+  tags:
+    - Commands 2.0
