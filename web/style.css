@@ -1,19 +1,15 @@
 body {
     color: #2c3e50 !important;
 }
-.euquqW{
-    max-height: 100px !important;
-    max-width: 100px !important;
-    margin:  0 auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-.shv3r-0  {
-    color: #2c3e50 !important;
+
+.nGwee{
+    display: none ;
 }
 
-.kmvDqY{
-    display: none ;
+.iNzLCk {
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito Sans", sans-serif !important;
 }
 
 .shoonya-header {
@@ -27,6 +23,7 @@ body {
     line-height: 2.2rem;
 
 }
+
 .shoonya-logo {
     height: 2.2rem;
     min-width: 2.2rem;
@@ -34,45 +31,42 @@ body {
     vertical-align: top;
 }
 
-.ebXbwy {
+.menu-content {
     background-color: #fcfcfc !important;
+    border-right: 1px solid #eaecef;
 }
-.egwcPy{
-    background-color: #fcfcfc !important;
+.fLUKgj{
+    background-color: #fff !important;
 }
 
-.kkiuWB{
+.search-input {
     height: 45px !important;
+    margin: 0px !important;
+    width: 100% !important;
+    padding-left: 40px !important;
 }
 
 .search-icon{
      top: 15px !important;
 }
+.api-content {
+    padding-left: 5rem;
+}
 .api-content .api-info > p {
     display: none !important;
 }
 
-.cqXmTa{
-    padding-top: 25px !important;
-    padding-bottom: 5px !important;
-}
 @media print, screen and (max-width: 85rem) {
-    .diqfaT{
+    .api-info{
         padding: 5px !important;
     }
 }
-.iJUwRU {
+.dtUibw {
     border-radius: 15px !important;
     padding: 20px !important;
+    margin-right: 15px;
+    height: fit-content;
 }
-.dyBbHm pre {
-    border-radius: 15px !important;
-    padding: 20px !important;
-}
-.cqXmTa:last-child {
-    min-height: auto !important;
-    height: auto !important;
-}
-.sc-10atcbm-2.fSEbYg {
+.sc-ifAKCX.dluJDj  {
     font-size: 14px;
 }
