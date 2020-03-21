@@ -2091,6 +2091,10 @@
         "device_name": {
           "type": "string"
         },
+        "alias_name": {
+          "type": "string",
+          "description": "Device friendly name"
+        },
         "policy_name": {
           "type": "string"
         },
@@ -2133,6 +2137,12 @@
           "items": {
             "type": "string",
             "format": "url"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
         "api_level": {
