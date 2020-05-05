@@ -69,7 +69,7 @@ properties:
     $ref: '#/definitions/V0DeviceCommandEnum'
 
   command_args:
-    $ref: '#/definitions/V0ComamndArgs'
+    $ref: '#/definitions/V0CommandArgs'
 
   issued_by:
     type: string
