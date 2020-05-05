@@ -68,6 +68,9 @@ properties:
   command:
     $ref: '#/definitions/V0DeviceCommandEnum'
 
+  command_args:
+    $ref: '#/definitions/V0ComamndArgs'
+
   issued_by:
     type: string
     format: url

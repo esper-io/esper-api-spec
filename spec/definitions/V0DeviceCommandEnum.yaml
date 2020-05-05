@@ -5,7 +5,9 @@ description: |
   ```
   * REBOOT: Reboot a device
   * UPDATE_HEARTBEAT: Ping a device
+  * UPDATE_DEVICE_CONFIG: Push additional configurations to the Device
   ```
 enum:
   - REBOOT
   - UPDATE_HEARTBEAT
+  - UPDATE_DEVICE_CONFIG
