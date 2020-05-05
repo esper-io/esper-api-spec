@@ -3360,6 +3360,66 @@
         }
       }
     },
+    "V0CommandArgs": {
+      "title": "Command args",
+      "type": "object",
+      "properties": {
+        "wipe_external_storage": {
+          "type": "boolean",
+          "default": false
+        },
+        "wipe_FRP": {
+          "type": "boolean",
+          "default": true
+        },
+        "brightness_value": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "stream": {
+          "$ref": "#/definitions/SettingsVolumeStreamEnum"
+        },
+        "volume_level": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "wifi_state": {
+          "type": "boolean"
+        },
+        "bluetooth_state": {
+          "type": "boolean"
+        },
+        "rotate_state": {
+          "$ref": "#/definitions/SettingsRotateStateEnum"
+        },
+        "gps_state": {
+          "$ref": "#/definitions/SettingsGPSStateEnum"
+        },
+        "screen_off_timeout": {
+          "description": "Value in seconds",
+          "type": "integer",
+          "minimum": 5000,
+          "maximum": 1800000
+        },
+        "app_version": {
+          "type": "string"
+        },
+        "package_name": {
+          "type": "string"
+        },
+        "device_alias_name": {
+          "type": "string"
+        },
+        "device_name": {
+          "type": "string"
+        },
+        "custom_settings_config": {
+          "type": "object"
+        }
+      }
+    },
     "V0CommandRequest": {
       "type": "object",
       "properties": {
@@ -3418,6 +3478,9 @@
         },
         "command": {
           "$ref": "#/definitions/V0DeviceCommandEnum"
+        },
+        "command_args": {
+          "$ref": "#/definitions/V0CommandArgs"
         },
         "issued_by": {
           "type": "string",
@@ -3539,10 +3602,11 @@
     },
     "V0DeviceCommandEnum": {
       "type": "string",
-      "description": "Following commands are supported\n\n```\n* REBOOT: Reboot a device\n* UPDATE_HEARTBEAT: Ping a device\n```\n",
+      "description": "Following commands are supported\n\n```\n* REBOOT: Reboot a device\n* UPDATE_HEARTBEAT: Ping a device\n* UPDATE_DEVICE_CONFIG: Push additional configurations to the Device\n```\n",
       "enum": [
         "REBOOT",
-        "UPDATE_HEARTBEAT"
+        "UPDATE_HEARTBEAT",
+        "UPDATE_DEVICE_CONFIG"
       ]
     }
   }
