@@ -1,0 +1,54 @@
+type: object
+properties:
+  id:
+    title: Id
+    description: Unique command identifier
+    type: string
+    format: uuid
+    readOnly: true
+
+  request:
+    title: Request Id
+    description: Request Id associated with this command
+    type: string
+    format: uuid
+    readOnly: true
+
+  device:
+    title: Device
+    description: Device associated with this command
+    type: string
+    format: url
+    readOnly: true
+
+  state:
+    type: string
+    description: Current state of the command
+    enum:
+      - Command Queued
+      - Command Initiated
+      - Command Acknowledged
+      - Command In Progress
+      - Command TimeOut
+      - Command Success
+      - Command Failure
+      - Command Scheduled
+      - Command Cancelled
+
+  reason:
+    type: string
+    description: details briefing the reason for current command state
+
+  created_on:
+    title: Created on
+    description: Timestamp of command creation
+    type: string
+    format: date-time
+    readOnly: true
+
+  updated_on:
+    title: Updated on
+    description: Last updated timestamp of command
+    type: string
+    format: date-time
+    readOnly: true
