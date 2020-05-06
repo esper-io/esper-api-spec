@@ -3364,58 +3364,12 @@
       "title": "Command args",
       "type": "object",
       "properties": {
-        "wipe_external_storage": {
-          "type": "boolean",
-          "default": false
-        },
-        "wipe_FRP": {
-          "type": "boolean",
-          "default": true
-        },
-        "brightness_value": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 100
-        },
-        "stream": {
-          "$ref": "#/definitions/SettingsVolumeStreamEnum"
-        },
-        "volume_level": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 100
-        },
-        "wifi_state": {
-          "type": "boolean"
-        },
-        "bluetooth_state": {
-          "type": "boolean"
-        },
-        "rotate_state": {
-          "$ref": "#/definitions/SettingsRotateStateEnum"
-        },
-        "gps_state": {
-          "$ref": "#/definitions/SettingsGPSStateEnum"
-        },
-        "screen_off_timeout": {
-          "description": "Value in seconds",
-          "type": "integer",
-          "minimum": 5000,
-          "maximum": 1800000
-        },
-        "app_version": {
-          "type": "string"
-        },
-        "package_name": {
-          "type": "string"
-        },
         "device_alias_name": {
-          "type": "string"
-        },
-        "device_name": {
+          "description": "Alternate human-readable name for your Device",
           "type": "string"
         },
         "custom_settings_config": {
+          "description": "Managed configurations for your device (passed as JSON object)",
           "type": "object"
         }
       }
@@ -3482,6 +3436,12 @@
         "command_args": {
           "$ref": "#/definitions/V0CommandArgs"
         },
+        "schedule": {
+          "$ref": "#/definitions/V0CommandScheduleEnum"
+        },
+        "schedule_args": {
+          "$ref": "#/definitions/V0CommandScheduleArgs"
+        },
         "issued_by": {
           "type": "string",
           "format": "url",
@@ -3511,17 +3471,68 @@
       "properties": {
         "state": {
           "title": "Command State",
-          "description": "State of",
+          "description": "Current State of command",
           "type": "string",
           "format": "uuid"
         },
         "total": {
           "title": "Count",
-          "description": "No of commands currently in this  state",
+          "description": "No of commands currently in this state",
           "type": "integer",
           "format": "int64"
         }
       }
+    },
+    "V0CommandScheduleArgs": {
+      "title": "Command Schedule Arguments",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "start_datetime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end_datetime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "time_type": {
+          "$ref": "#/definitions/V0CommandScheduleArgsTimeTypeEnum"
+        },
+        "window_start_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "window_end_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "days": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "V0CommandScheduleArgsTimeTypeEnum": {
+      "type": "string",
+      "description": "The Time-Type argument, in Schedule args, is to indicate which timezone the Command Framework should utilize when scheduling the command.\nFollowing Schedule Args for Time-Type are supported:\n\n```\n* CONSOLE: Use the local timezone of the user creating the schedule.\n* DEVICE: Use the local timezone of the device, to which the command is issued, wherever it may be.\n```\n",
+      "enum": [
+        "console",
+        "device"
+      ]
+    },
+    "V0CommandScheduleEnum": {
+      "type": "string",
+      "description": "Following Schedule types are supported\n\n```\n* IMMEDIATE: Schedule the command to execcute Immediately\n* WINDOW: Schedule the command to execute within the given window\n* RECURRING: Schedule the command to execute repeatedly, within given parameters\n```\n",
+      "enum": [
+        "IMMEDIATE",
+        "WINDOW",
+        "RECURRING"
+      ]
     },
     "V0CommandStatus": {
       "type": "object",
@@ -3534,7 +3545,7 @@
           "readOnly": true
         },
         "request": {
-          "title": "Reuqest Id",
+          "title": "Request Id",
           "description": "Request Id associated with this command",
           "type": "string",
           "format": "uuid",
