@@ -8,7 +8,7 @@ properties:
     readOnly: true
 
   request:
-    title: Reuqest Id
+    title: Request Id
     description: Request Id associated with this command
     type: string
     format: uuid

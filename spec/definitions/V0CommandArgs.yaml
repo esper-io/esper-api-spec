@@ -1,42 +1,9 @@
 title: Command args
 type: object
 properties:
-  wipe_external_storage:
-    type: boolean
-    default: false
-  wipe_FRP:
-    type: boolean
-    default: true
-  brightness_value:
-    type: integer
-    minimum: 1
-    maximum: 100
-  stream:
-    $ref: '#/definitions/SettingsVolumeStreamEnum'
-  volume_level:
-    type: integer
-    minimum: 0
-    maximum: 100
-  wifi_state:
-    type: boolean
-  bluetooth_state:
-    type: boolean
-  rotate_state:
-    $ref: '#/definitions/SettingsRotateStateEnum'
-  gps_state:
-    $ref: '#/definitions/SettingsGPSStateEnum'
-  screen_off_timeout:
-    description: Value in seconds
-    type: integer
-    minimum: 5000
-    maximum: 1800000
-  app_version:
-    type: string
-  package_name:
-    type: string
   device_alias_name:
-    type: string
-  device_name:
+    description: Alternate human-readable name for your Device
     type: string
   custom_settings_config:
+    description: Managed configurations for your device (passed as JSON object)
     type: object

@@ -71,6 +71,12 @@ properties:
   command_args:
     $ref: '#/definitions/V0CommandArgs'
 
+  schedule:
+    $ref: '#/definitions/V0CommandScheduleEnum'
+
+  schedule_args:
+    $ref: '#/definitions/V0CommandScheduleArgs'
+
   issued_by:
     type: string
     format: url
