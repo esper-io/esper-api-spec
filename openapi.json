@@ -71,6 +71,14 @@
         "description": "Find out more about API get generation",
         "url": "https://docs.esper.io/home/module/genapikey.html"
       }
+    },
+    {
+      "name": "Commands 2.0",
+      "description": "Commands 2.0 is to provide advanced device commands capabilities like queuing, support for offline devices, dynamic device set for commands and command history. Commands 2.0 is in active development and support for all the commands will be added soon.",
+      "externalDocs": {
+        "description": "Find out more about commands 2.0",
+        "url": "https://docs.esper.io/"
+      }
     }
   ],
   "schemes": [
@@ -86,7 +94,8 @@
         "Device Group",
         "Commands",
         "Group Commands",
-        "Token"
+        "Token",
+        "Commands 2.0"
       ]
     }
   ],
@@ -1486,6 +1495,363 @@
         }
       ]
     },
+    "/v0/enterprise/{enterprise_id}/command/": {
+      "post": {
+        "summary": "Create a command request",
+        "description": "API to create a command request for the device.",
+        "operationId": "createCommand",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "enterprise_id",
+            "in": "path",
+            "description": "ID of the enterprise",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The request body to create a command for set of devices or groups",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/V0CommandRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "command request successfully created",
+            "schema": {
+              "$ref": "#/definitions/V0CommandRequest"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Commands 2.0"
+        ]
+      },
+      "get": {
+        "operationId": "listCommandRequest",
+        "summary": "List command requests",
+        "description": "API to get and filter command requests",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "enterprise_id",
+            "in": "path",
+            "description": "ID of the enterprise",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "command_type",
+            "in": "query",
+            "description": "Filter by type of command request i.e device, group etc",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "devices",
+            "in": "query",
+            "description": "Filter by device IDs. Accepts comma separated values.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "device_type",
+            "in": "query",
+            "description": "Filter by device type i.e active, inactive etc",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "command",
+            "in": "query",
+            "description": "Filter by command name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "issued_by",
+            "in": "query",
+            "description": "Filter by user. Accepts user id.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "on successful request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "url"
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "url"
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/V0CommandRequest"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Commands 2.0"
+        ]
+      }
+    },
+    "/v0/enterprise/{enterprise_id}/command/{request_id}/status/": {
+      "get": {
+        "operationId": "getCommandRequestStatus",
+        "summary": "get status list for command request",
+        "description": "API to get and filter command request status",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "enterprise_id",
+            "in": "path",
+            "description": "ID of the enterprise",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "request_id",
+            "in": "path",
+            "description": "ID for the command request",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "device",
+            "in": "query",
+            "description": "Filter status result by device id.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "description": "Filter by command state",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "on successful request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "url"
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "url"
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/V0CommandStatus"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Commands 2.0"
+        ]
+      }
+    },
+    "/v0/enterprise/{enterprise_id}/command/{request_id}/status/{command_id}/": {
+      "patch": {
+        "operationId": "partialUpdateCommandStatus",
+        "summary": "Update command status",
+        "description": "API to patch the state of command",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "enterprise_id",
+            "in": "path",
+            "description": "ID of the enterprise",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "request_id",
+            "in": "path",
+            "description": "ID for the command request",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "command_id",
+            "in": "path",
+            "description": "ID for the command",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "action",
+            "in": "query",
+            "description": "Action to be performed on device",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "acknowledge",
+              "in_progress",
+              "success",
+              "failed",
+              "cancel"
+            ]
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/V0CommandStatusUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "on successful update",
+            "schema": {
+              "$ref": "#/definitions/V0CommandStatus"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Commands 2.0"
+        ]
+      }
+    },
+    "/v0/enterprise/{enterprise_id}/device/{device_id}/command-history/": {
+      "get": {
+        "operationId": "getDeviceCommandHistory",
+        "summary": "get command history for device",
+        "description": "API to get and filter deivce command history",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "enterprise_id",
+            "in": "path",
+            "description": "Id of the enterprise",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "Id for the command request",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "description": "Filter by command state",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "on successful request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "url"
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "url"
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/V0CommandStatus"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "tags": [
+          "Commands 2.0"
+        ]
+      }
+    },
     "/v1/enterprise/{enterprise_id}/": {
       "get": {
         "operationId": "getEnterprise",
@@ -2608,175 +2974,6 @@
         }
       }
     },
-    "EMMEnterpriseStateEnum": {
-      "title": "State",
-      "description": "EMM enterprise workflow state\n``` * UNSPECIFIED = 1\n* BEGIN_SIGNUP = 2\n* COMPLETE_SIGNUP = 3\n* ENROLLED = 4\n* UNENROLLED = 5\n* ENROLL_FAILED = 10 ```\n",
-      "type": "integer",
-      "enum": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        10
-      ]
-    },
-    "Enterprise": {
-      "required": [
-        "name",
-        "short_code",
-        "details"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "title": "Id",
-          "description": "Enterprise id",
-          "type": "string",
-          "format": "uuid",
-          "readOnly": true
-        },
-        "url": {
-          "title": "Url",
-          "type": "string",
-          "format": "url",
-          "readOnly": true
-        },
-        "name": {
-          "title": "Name",
-          "type": "string",
-          "maxLength": 255,
-          "minLength": 1
-        },
-        "display_name": {
-          "title": "Display name",
-          "type": "string",
-          "maxLength": 50,
-          "minLength": 1,
-          "x-nullable": true
-        },
-        "short_code": {
-          "title": "Short code",
-          "type": "string",
-          "maxLength": 10,
-          "minLength": 1
-        },
-        "mdm_service": {
-          "title": "Mdm service",
-          "type": "integer",
-          "enum": [
-            1,
-            2
-          ]
-        },
-        "details": {
-          "$ref": "#/definitions/EnterpriseDetail"
-        },
-        "default_policy": {
-          "title": "Default policy",
-          "description": "Policy associated with enterprise",
-          "type": "integer"
-        },
-        "emm": {
-          "$ref": "#/definitions/GoogleEnterprise"
-        },
-        "created_on": {
-          "title": "Created on",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updated_on": {
-          "title": "Updated on",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "is_active": {
-          "title": "Is active",
-          "type": "boolean"
-        }
-      }
-    },
-    "EnterpriseDetail": {
-      "title": "Details",
-      "required": [
-        "registered_name",
-        "registered_address",
-        "location",
-        "zipcode",
-        "contact_email"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "title": "Id",
-          "type": "string",
-          "format": "uuid",
-          "readOnly": true
-        },
-        "registered_name": {
-          "title": "Registered name",
-          "type": "string",
-          "maxLength": 255,
-          "minLength": 1
-        },
-        "registered_address": {
-          "title": "Registered address",
-          "type": "string",
-          "minLength": 1
-        },
-        "location": {
-          "title": "Location",
-          "type": "string",
-          "maxLength": 255,
-          "minLength": 1
-        },
-        "zipcode": {
-          "title": "Zipcode",
-          "type": "string",
-          "maxLength": 8,
-          "minLength": 1
-        },
-        "contact_person": {
-          "title": "Contact person",
-          "type": "string",
-          "maxLength": 255,
-          "minLength": 1,
-          "x-nullable": true
-        },
-        "contact_number": {
-          "title": "Contact number",
-          "type": "string",
-          "maxLength": 20,
-          "minLength": 1,
-          "x-nullable": true
-        },
-        "contact_email": {
-          "title": "Contact email",
-          "type": "string",
-          "format": "email",
-          "maxLength": 254,
-          "minLength": 1
-        },
-        "created_on": {
-          "title": "Created on",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updated_on": {
-          "title": "Updated on",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "is_active": {
-          "title": "Is active",
-          "type": "boolean"
-        }
-      }
-    },
     "EnterpriseUpdateV1": {
       "type": "object",
       "properties": {
@@ -2957,83 +3154,6 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true
-        }
-      }
-    },
-    "GoogleEnterprise": {
-      "title": "Emm",
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "title": "ID",
-          "type": "integer",
-          "readOnly": true
-        },
-        "google_enterprise_id": {
-          "title": "Google enterprise id",
-          "type": "string",
-          "maxLength": 50,
-          "minLength": 1,
-          "x-nullable": true
-        },
-        "name": {
-          "title": "Name",
-          "type": "string",
-          "maxLength": 255,
-          "minLength": 1
-        },
-        "state": {
-          "$ref": "#/definitions/EMMEnterpriseStateEnum"
-        },
-        "callback_url": {
-          "title": "Callback url",
-          "type": "string",
-          "minLength": 1,
-          "x-nullable": true
-        },
-        "signup_url": {
-          "title": "Signup url",
-          "type": "string",
-          "minLength": 1,
-          "x-nullable": true
-        },
-        "completion_token": {
-          "title": "Completion token",
-          "type": "string",
-          "maxLength": 255,
-          "minLength": 1,
-          "x-nullable": true
-        },
-        "enterprise_token": {
-          "title": "Enterprise token",
-          "type": "string",
-          "maxLength": 255,
-          "minLength": 1,
-          "x-nullable": true
-        },
-        "is_active": {
-          "title": "Is active",
-          "type": "boolean"
-        },
-        "created_on": {
-          "title": "Created on",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updated_on": {
-          "title": "Updated on",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "enterprise": {
-          "title": "Enterprise",
-          "type": "string",
-          "format": "uuid"
         }
       }
     },
@@ -3249,6 +3369,264 @@
           "readOnly": true
         }
       }
+    },
+    "V0CommandArgs": {
+      "title": "Command args",
+      "type": "object",
+      "properties": {
+        "device_alias_name": {
+          "description": "Alternate human-readable name for your Device",
+          "type": "string"
+        },
+        "custom_settings_config": {
+          "description": "Managed configurations for your device (passed as JSON object)",
+          "type": "object"
+        }
+      }
+    },
+    "V0CommandRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "description": "Unique command request identifier",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "enterprise": {
+          "title": "Enterperise ID",
+          "description": "Esper account identifier",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "command_type": {
+          "type": "string",
+          "description": "Identifies the type of command\n\n```\n* DEVICE: command request is meant for devices\n* GROUP: command request is meant for groups\n* DYNAMIC: command request is meant for dynamic set of devices\n  i.e subset of devices from different groups or otherwise.\n```\n",
+          "enum": [
+            "DEVICE",
+            "GROUP",
+            "DYNAMIC"
+          ]
+        },
+        "devices": {
+          "type": "array",
+          "description": "list of devices to run commands",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "minItems": 0,
+          "maxItems": 500
+        },
+        "groups": {
+          "type": "array",
+          "description": "list of groups to run commands",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "minItems": 0,
+          "maxItems": 500
+        },
+        "device_type": {
+          "type": "string",
+          "description": "Type of devices to run commands on\n\n```\n* active: Run commands on currently online devices\n* inactive: Run commands on currently offline devices\n* all: Run commands on all the devices.\n  Commands will be queued for offline devices until they come back online.\n```\n",
+          "default": "active",
+          "enum": [
+            "active",
+            "inactive",
+            "all"
+          ]
+        },
+        "command": {
+          "$ref": "#/definitions/V0DeviceCommandEnum"
+        },
+        "command_args": {
+          "$ref": "#/definitions/V0CommandArgs"
+        },
+        "schedule": {
+          "$ref": "#/definitions/V0CommandScheduleEnum"
+        },
+        "schedule_args": {
+          "$ref": "#/definitions/V0CommandScheduleArgs"
+        },
+        "issued_by": {
+          "type": "string",
+          "format": "url",
+          "description": "command is issued by this user",
+          "readOnly": true
+        },
+        "created_on": {
+          "title": "Created on",
+          "description": "Timestamp of command request",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "status": {
+          "title": "Current Status",
+          "description": "Show creent status of commands issued during in this request",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/V0CommandRequestStatus"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "V0CommandRequestStatus": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "title": "Command State",
+          "description": "Current State of command",
+          "type": "string",
+          "format": "uuid"
+        },
+        "total": {
+          "title": "Count",
+          "description": "No of commands currently in this state",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "V0CommandScheduleArgs": {
+      "title": "Command Schedule Arguments",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "start_datetime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end_datetime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "time_type": {
+          "$ref": "#/definitions/V0CommandScheduleArgsTimeTypeEnum"
+        },
+        "window_start_time": {
+          "type": "string"
+        },
+        "window_end_time": {
+          "type": "string"
+        },
+        "days": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "V0CommandScheduleArgsTimeTypeEnum": {
+      "type": "string",
+      "description": "The Time-Type argument, in Schedule args, is to indicate which timezone the Command Framework should utilize when scheduling the command.\nFollowing Schedule Args for Time-Type are supported:\n\n```\n* CONSOLE: Use the local timezone of the user creating the schedule.\n* DEVICE: Use the local timezone of the device, to which the command is issued, wherever it may be.\n```\n",
+      "enum": [
+        "console",
+        "device"
+      ]
+    },
+    "V0CommandScheduleEnum": {
+      "type": "string",
+      "description": "Following Schedule types are supported\n\n```\n* IMMEDIATE: Schedule the command to execcute Immediately\n* WINDOW: Schedule the command to execute within the given window\n* RECURRING: Schedule the command to execute repeatedly, within given parameters\n```\n",
+      "enum": [
+        "IMMEDIATE",
+        "WINDOW",
+        "RECURRING"
+      ]
+    },
+    "V0CommandStatus": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "description": "Unique command identifier",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "request": {
+          "title": "Request Id",
+          "description": "Request Id associated with this command",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "device": {
+          "title": "Device",
+          "description": "Device associated with this command",
+          "type": "string",
+          "format": "url",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "Current state of the command",
+          "enum": [
+            "Command Queued",
+            "Command Initiated",
+            "Command Acknowledged",
+            "Command In Progress",
+            "Command TimeOut",
+            "Command Success",
+            "Command Failure",
+            "Command Scheduled",
+            "Command Cancelled"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "description": "details briefing the reason for current command state"
+        },
+        "created_on": {
+          "title": "Created on",
+          "description": "Timestamp of command creation",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated_on": {
+          "title": "Updated on",
+          "description": "Last updated timestamp of command",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "V0CommandStatusUpdate": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "details briefing the reason for current command state"
+        },
+        "details": {
+          "type": "object",
+          "properties": {
+            "reason": {
+              "type": "string",
+              "description": "details briefing the reason for current command state"
+            }
+          }
+        }
+      }
+    },
+    "V0DeviceCommandEnum": {
+      "type": "string",
+      "description": "Following commands are supported\n\n```\n* REBOOT: Reboot a device\n* UPDATE_HEARTBEAT: Ping a device\n* UPDATE_DEVICE_CONFIG: Push additional configurations to the Device\n```\n",
+      "enum": [
+        "REBOOT",
+        "UPDATE_HEARTBEAT",
+        "UPDATE_DEVICE_CONFIG"
+      ]
     }
   }
 }
