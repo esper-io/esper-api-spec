@@ -2650,10 +2650,8 @@ definitions:
         $ref: '#/definitions/V0CommandScheduleArgsTimeTypeEnum'
       window_start_time:
         type: string
-        format: date-time
       window_end_time:
         type: string
-        format: date-time
       days:
         type: array
         items:
