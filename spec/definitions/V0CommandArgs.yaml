@@ -1,0 +1,9 @@
+title: Command args
+type: object
+properties:
+  device_alias_name:
+    description: Alternate human-readable name for your Device
+    type: string
+  custom_settings_config:
+    description: Managed configurations for your device (passed as JSON object)
+    type: object

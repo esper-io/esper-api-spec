@@ -1,0 +1,21 @@
+title: Command Schedule Arguments
+type: object
+properties:
+  name:
+    type: string
+  start_datetime:
+    type: string
+    format: date-time
+  end_datetime:
+    type: string
+    format: date-time
+  time_type:
+    $ref: '#/definitions/V0CommandScheduleArgsTimeTypeEnum'
+  window_start_time:
+    type: string
+  window_end_time:
+    type: string
+  days:
+    type: array
+    items:
+      type: string
