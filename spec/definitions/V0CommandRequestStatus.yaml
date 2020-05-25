@@ -1,0 +1,13 @@
+type: object
+properties:
+  state:
+    title: Command State
+    description: Current State of command
+    type: string
+    format: uuid
+
+  total:
+    title: Count
+    description: No of commands currently in this state
+    type: integer
+    format: int64

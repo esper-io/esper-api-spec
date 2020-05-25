@@ -1,0 +1,52 @@
+get:
+  operationId: getCommandRequestStatus
+  summary:  get status list for command request
+  description: API to get and filter command request status
+  produces:
+    - application/json
+  parameters:
+    - name: enterprise_id
+      in: path
+      description: ID of the enterprise
+      required: true
+      type: string
+      format: uuid
+    - name: request_id
+      in: path
+      description: ID for the command request
+      required: true
+      type: string
+      format: uuid
+    - name: device
+      in: query
+      description: Filter status result by device id.
+      required: false
+      type: string
+    - name: state
+      in: query
+      description: Filter by command state
+      required: false
+      type: string
+  responses:
+    '200':
+      description: on successful request
+      schema:
+        type: object
+        properties:
+          count:
+            type: integer
+            format: int64
+          next:
+            type: string
+            format: url
+          previous:
+            type: string
+            format: url
+          results:
+            type: array
+            items:
+              $ref: '#/definitions/V0CommandStatus'
+  security:
+    - apiKey: []
+  tags:
+    - Commands 2.0
