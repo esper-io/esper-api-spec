@@ -2,7 +2,7 @@ body {
     color: #2c3e50 !important;
 }
 
-.nGwee{
+.cxRqCB {
     display: none ;
 }
 
@@ -11,6 +11,7 @@ body {
   padding: 0;
   font-family: "Nunito Sans", sans-serif !important;
 }
+
 
 .shoonya-header {
     z-index: 20;
@@ -35,7 +36,7 @@ body {
     background-color: #fcfcfc !important;
     border-right: 1px solid #eaecef;
 }
-.fLUKgj{
+.kTYKTV {
     background-color: #fff !important;
 }
 
@@ -67,6 +68,74 @@ body {
     margin-right: 15px;
     height: fit-content;
 }
+
+/* Sidebar font weights */
+.sc-bYSBpT {
+    color: rgb(104, 124, 140);
+    font-weight: 700;
+    font-size: 1em;
+}
 .sc-ifAKCX.dluJDj  {
     font-size: 14px;
+}
+
+/* Headings */
+h1 {
+    font-size: 32px !important;
+}
+
+/* Tags colors for get, post, patch */
+.operation-type.get {
+    background-color: rgb(206, 243, 199) !important;
+    font-size: 10px;
+    padding: 2px 6px;
+    height: 18px;
+    width: 48px;
+    color: rgb(107, 189, 91);
+}
+
+.operation-type.patch {
+    font-size: 10px;
+    padding: 2px 6px;
+    height: 18px;
+    width: 48px;
+    background-color: rgb(245, 220, 188) !important;
+    color: rgb(224, 157, 67);
+}
+
+.operation-type.delete {
+    font-size: 10px;
+    padding: 2px 6px;
+    height: 18px;
+    width: 48px;
+    background-color: rgb(245, 188, 188) !important;
+    color: rgb(224, 67, 67);
+}
+
+.operation-type.post {
+    font-size: 10px;
+    padding: 2px 6px;
+    height: 18px;
+    width: 48px;
+    background-color: rgb(197, 188, 245) !important;
+    color: rgb(96, 67, 224);
+}
+
+.operation-type.put {
+    font-size: 10px;
+    padding: 2px 6px;
+    height: 18px;
+    width: 48px;
+    background-color: rgb(188, 234, 245) !important;
+    color: rgb(67, 179, 224);
+}
+
+.sc-kPVwWT {
+    font-weight: 700;
+    border-radius: 3px;
+}
+
+/* Sidebar Response samples heading */
+.kBWwoV {
+    color: rgb(255, 255, 255) !important;
 }
