@@ -3,33 +3,44 @@
   <head>
     <title>Esper API Doc</title>
     <!-- needed for adaptive design -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="favicon.ico">
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="favicon.ico" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700&display=swap"
+      rel="stylesheet"
+    />
     <!--
     ReDoc uses font options from the parent element
     So override default browser styles
     -->
     <style>
-      body,p{
+      body,
+      p {
         margin: 0;
         padding: 0;
-        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;
+        font-family: "Nunito Sans", sans-serif !important;
+        font-size: 16px;
+        line-height: 28px;
+        color: #777777;
       }
-      h1, h2, h3, h4, h5 {
-        font-weight: 600 !important;
-        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        font-weight: 700 !important;
+        color: rgb(70, 68, 75) !important;
+        font-family: "Nunito Sans", sans-serif !important;
       }
     </style>
     {{redocHead}}
   </head>
   <body>
-
-  <header class="shoonya-header">
-
+    <header class="shoonya-header">
       <!-- png -->
       <a href="https://esper.io">
-        <img src="esper_logo.png"  class="shoonya-logo" />
+        <img src="esper_logo.png" class="shoonya-logo" />
       </a>
     </header>
     {{redocBody}}
