@@ -7,3 +7,7 @@ properties:
   custom_settings_config:
     description: Managed configurations for your device (passed as JSON object)
     type: object
+  app_version:
+    type: string
+  package_name:
+    type: string

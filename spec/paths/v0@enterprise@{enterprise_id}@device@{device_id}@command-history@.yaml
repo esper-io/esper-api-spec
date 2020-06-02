@@ -44,4 +44,4 @@ get:
   security:
     - apiKey: []
   tags:
-    - Commands 2.0
+    - Commands V2

@@ -88,10 +88,10 @@ tags:
     externalDocs:
       description: Find out more about API get generation
       url: 'https://docs.esper.io/home/module/genapikey.html'
-  - name: Commands 2.0
-    description: Commands 2.0 is to provide advanced device commands capabilities like queuing, support for offline devices, dynamic device set for commands and command history. Commands 2.0 is in active development and support for all the commands will be added soon.
+  - name: Commands V2
+    description: Commands V2.0 is to provide advanced device commands capabilities like queuing, support for offline devices, dynamic device set for commands and command history. Commands 2.0 is in active development and support for all the commands will be added soon.
     externalDocs:
-      description: Find out more about commands 2.0
+      description: Find out more about commands V2.0
       url: 'https://docs.esper.io/'
 schemes:
   - https
@@ -105,7 +105,7 @@ x-tagGroups:
       - Commands
       - Group Commands
       - Token
-      - Commands 2.0
+      - Commands V2
 securityDefinitions:
   apiKey:
     description: |

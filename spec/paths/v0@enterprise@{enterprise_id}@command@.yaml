@@ -25,7 +25,7 @@ post:
   security:
     - apiKey: []
   tags:
-    - Commands 2.0
+    - Commands V2
 
 get:
   operationId: listCommandRequest
@@ -87,4 +87,4 @@ get:
   security:
     - apiKey: []
   tags:
-    - Commands 2.0
+    - Commands V2
