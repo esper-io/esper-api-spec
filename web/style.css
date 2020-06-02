@@ -139,3 +139,8 @@ h1 {
 .kBWwoV {
     color: rgb(255, 255, 255) !important;
 }
+
+/* Pre tag */
+.kjegA pre {
+    max-width: 32rem;
+}
