@@ -13,7 +13,8 @@ get:
   security:
     - apiKey: []
   tags:
-    - EnterprisePolicy
+    - Enterprise Policy
+
 put:
   operationId: updatePolicy
   summary: Update Enterprise Policy
@@ -34,7 +35,8 @@ put:
   security:
     - apiKey: []
   tags:
-    - EnterprisePolicy
+    - Enterprise Policy
+
 patch:
   operationId: partialupdatePolicy
   summary: Partial update EnterprisePolicy
@@ -55,10 +57,11 @@ patch:
   security:
     - apiKey: []
   tags:
-    - EnterprisePolicy
+    - Enterprise Policy
+
 delete:
-  operationId: deleteGroup
-  summary: Delete a device group
+  operationId: deleteEnterprisePolicy
+  summary: Delete a Enterprise Policy
   description: Emtpy response
   produces:
     - application/json
@@ -69,7 +72,8 @@ delete:
   security:
     - apiKey: []
   tags:
-    - EnterprisePolicy
+    - Enterprise Policy
+
 parameters:
   - name: policy_id
     in: path

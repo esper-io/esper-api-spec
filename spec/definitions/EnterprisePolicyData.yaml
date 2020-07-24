@@ -74,7 +74,7 @@ properties:
           maxLength: 15
       dialer:
         type: string
-        description:
+        description: Pick a dialer - System default or Esper Dialer
         enum:
           - DEFAULT
           - SHOONYA
@@ -86,7 +86,7 @@ properties:
       type: object
       properties:
         type:
-          description:
+          description: Type of User account provided - USER or ADMIN
           type: string
           enum:
             - USER
@@ -102,43 +102,43 @@ properties:
   googleAccountPermission:
     description: Details regarding Google accounts to be associated with the device
     type: object
-      properties:
-        maxAccount:
-          description: Maximum number of Google accounts to be associated with this device. (Max = 10)
-          type: integer
-        emails:
-          type: array
-          description: List of emails to be associated
-          items:
+    properties:
+      maxAccount:
+        description: Maximum number of Google accounts to be associated with this device. (Max = 10)
+        type: integer
+      emails:
+        type: array
+        description: List of emails to be associated
+        items:
+          type: string
+          format: email
+      domains:
+        type: array
+        description: List of domains that can be associated
+        items:
             type: string
-            format: email
-        domains:
-          type: array
-          description: List of domains that can be associated
-          items:
-              type: string
 
   devicePasswordPolicy:
     description: Define the Password Policy for the device
     type: object
-      properties:
-        passwordQuality:
-          description: What is the type of password quality to apply to the device?
-          type: string
-          enum:
-            - PASSWORD_QUALITY_ALPHABETIC
-            - PASSWORD_QUALITY_ALPHANUMERIC
-            - PASSWORD_QUALITY_BIOMETRIC_WEAK
-            - PASSWORD_QUALITY_COMPLEX
-            - PASSWORD_QUALITY_NUMERIC
-            - PASSWORD_QUALITY_NUMERIC_COMPLEX
-            - PASSWORD_QUALITY_SOMETHING
-            - PASSWORD_QUALITY_UNSPECIFIED
+    properties:
+      passwordQuality:
+        description: What is the type of password quality to apply to the device?
+        type: string
+        enum:
+          - PASSWORD_QUALITY_ALPHABETIC
+          - PASSWORD_QUALITY_ALPHANUMERIC
+          - PASSWORD_QUALITY_BIOMETRIC_WEAK
+          - PASSWORD_QUALITY_COMPLEX
+          - PASSWORD_QUALITY_NUMERIC
+          - PASSWORD_QUALITY_NUMERIC_COMPLEX
+          - PASSWORD_QUALITY_SOMETHING
+          - PASSWORD_QUALITY_UNSPECIFIED
 
   minimumPasswordLength:
     description: What is the minimum length for your device's password
     type: integer
-    minValue: 4
+    minimum: 4
 
   permissionPolicy:
     description: What permission should be applied by default for all apps, henceforth?

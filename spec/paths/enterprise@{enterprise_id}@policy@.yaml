@@ -25,7 +25,7 @@ post:
   security:
     - apiKey: []
   tags:
-    - EnterprisePolicy
+    - Enterprise Policy
 
 get:
   operationId: listPolicies
@@ -88,4 +88,4 @@ get:
   security:
     - apiKey: []
   tags:
-    - EnterprisePolicy
+    - Enterprise Policy
