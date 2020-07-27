@@ -1,0 +1,180 @@
+title: Policy Data
+type: object
+properties:
+  keyguardDisabled:
+    description: Should KeyGuard be disabled?
+    type: boolean
+  safeBootDisabled:
+    description: Should SafeBoot be disabled?
+    type: boolean
+  statusBarDisabled:
+    description: Should Status Bar be disabled?
+    type: boolean
+  factoryResetDisabled:
+    description: Should Factory Reset be disabled?
+    type: boolean
+  screenshotDisabled:
+    description: Should Screenshot capability be disabled?
+    type: boolean
+  usbConnectivityDisabled:
+    description: Should USB connectivity be disabled?
+    type: boolean
+  smsDisabled:
+    description: Should SMS functionality be disabled?
+    type: boolean
+  outgoingCallsDisabled:
+    description: Should Outgoing Calls be disabled?
+    type: boolean
+  cameraDisabled:
+    description: Should Camera be disabled?
+    type: boolean
+  nfcBeamDisabled:
+    description: Should NFC capability be disabled?
+    type: boolean
+  disablePlayStore:
+    description: Should Google Play Store be disabled on the device?
+    type: boolean
+  usbFileTransferDisabled:
+    description: Should USB File transfer capability be disabled?
+    type: boolean
+  tetheringDisabled:
+    description: Should USB Tethering capability be enabled?
+    type: boolean
+  dateTimeConfigDisabled:
+    description: Should Date/Time configuration capability be disabled?
+    type: boolean
+  appUninstallDisabled:
+    description: Should App uninstall capability be disabled?
+    type: boolean
+  googleAssistantDisabled:
+    description: Should Google Assistant feature be disabled?
+    type: boolean
+  disableLocalAppInstall:
+    description: Should Side-loading of Applications be disabled?
+    type: boolean
+  adbDisabled:
+    description: Should Android Debugger be disabled?
+    type: boolean
+
+  phonePolicy:
+    type: object
+    description: Rules regarding restricting calls from/to phone-numbers
+    properties:
+      incomingNumbers:
+        type: array
+        description: List of permitted incoming phone numbers to recieve calls from
+        items:
+          type: string
+          maxLength: 15
+      outgoingNumbers:
+        type: array
+        description: List of permitted outgoing phone numbers to make calls to
+        items:
+          type: string
+          maxLength: 15
+      dialer:
+        type: string
+        description: Pick a dialer - System default or Esper Dialer
+        enum:
+          - DEFAULT
+          - SHOONYA
+
+  frpGoogles:
+    description: Details regarding Factory Reset Protection capability. List of permitted Google People IDs, emails and such
+    type: array
+    items:
+      type: object
+      properties:
+        type:
+          description: Type of User account provided - USER or ADMIN
+          type: string
+          enum:
+            - USER
+            - ADMIN
+        email:
+          description: Email id to be used for Factory protection. This will be asked on the Device's UI
+          type: string
+          format: email
+        googleId:
+          description: Google People ID associated with the above email (https://developers.google.com/people/api/rest/v1/people/get)
+          type: string
+
+  googleAccountPermission:
+    description: Details regarding Google accounts to be associated with the device
+    type: object
+    properties:
+      maxAccount:
+        description: Maximum number of Google accounts to be associated with this device. (Max = 10)
+        type: integer
+      emails:
+        type: array
+        description: List of emails to be associated
+        items:
+          type: string
+          format: email
+      domains:
+        type: array
+        description: List of domains that can be associated
+        items:
+            type: string
+
+  devicePasswordPolicy:
+    description: Define the Password Policy for the device
+    type: object
+    properties:
+      passwordQuality:
+        description: What is the type of password quality to apply to the device?
+        type: string
+        enum:
+          - PASSWORD_QUALITY_ALPHABETIC
+          - PASSWORD_QUALITY_ALPHANUMERIC
+          - PASSWORD_QUALITY_BIOMETRIC_WEAK
+          - PASSWORD_QUALITY_COMPLEX
+          - PASSWORD_QUALITY_NUMERIC
+          - PASSWORD_QUALITY_NUMERIC_COMPLEX
+          - PASSWORD_QUALITY_SOMETHING
+          - PASSWORD_QUALITY_UNSPECIFIED
+
+  minimumPasswordLength:
+    description: What is the minimum length for your device's password
+    type: integer
+    minimum: 4
+
+  permissionPolicy:
+    description: What permission should be applied by default for all apps, henceforth?
+    type: string
+    enum:
+      - PERMISSION_POLICY_PROMPT
+      - PERMISSION_POLICY_AUTO_GRANT
+      - PERMISSION_POLICY_AUTO_DENY
+
+  deviceUpdatePolicy:
+    description: Configuration regarding Device OS Updates
+    type: object
+    properties:
+      type:
+        description: What type of installation is preferred?
+        enum:
+          - TYPE_INSTALL_AUTOMATIC
+          - TYPE_POSTPONE
+          - TYPE_INSTALL_WINDOWED
+          - TYPE_INSTALL_DISABLED
+        type: string
+      maintenanceStart:
+        type: integer
+        description: If the `type` is `TYPE_INSTALL_WINDOWED`, when should the maintenance start?
+      maintenanceEnd:
+        type: integer
+        description: If the `type` is `TYPE_INSTALL_WINDOWED`, when should the maintenance end?
+
+  settingsAccessLevel:
+    type: string
+    description: Type of Android settings app to be applied? Default System Settings or ESPER Settings App?
+    enum:
+      - SYSTEM
+      - SHOONYA
+
+  settingsAppPassword:
+    type: string
+    description: Lock Password (optional) for the ESPER Settings app
+    format: password

@@ -1,0 +1,59 @@
+type: object
+properties:
+  id:
+    title: Id
+    description: Unique Policy identifier
+    type: integer
+    readOnly: true
+
+  uuid:
+    title: UUID
+    description: Unique Policy identifier
+    type: string
+    format: uuid
+    readOnly: true
+
+  url:
+    title: Policy URL
+    description: URL link to policy
+    type: string
+    format: url
+    readOnly: True
+
+  name:
+    title: Policy Name
+    description: Name of the Policy
+    type: string
+
+  description:
+    title: Policy Description
+    description: Details regarding the Policy
+    type: string
+
+  device_count:
+    title: Number of Devices with this policy applied
+    description: Count of Devices with this policy applied
+    type: integer
+    readOnly: true
+
+  policy:
+    $ref: '#/definitions/EnterprisePolicyData'
+
+  updated_on:
+    title: Updated On
+    type: string
+    format: date-time
+    description: Last-Updated Timestamp of Policy
+    readOnly: true
+
+  created_on:
+    title: Created on
+    description: Creation Timestamp of Policy
+    type: string
+    format: date-time
+    readOnly: true
+
+  is_active:
+    title: Policy Active status
+    description: Is this policy currently active
+    type: boolean

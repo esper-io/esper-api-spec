@@ -1,0 +1,91 @@
+post:
+  summary: Create a new Enterprise Policy
+  description: API to create a new Enterprise Policy
+  operationId: createPolicy
+  produces:
+    - application/json
+  parameters:
+    - name: enterprise_id
+      in: path
+      description: ID of the enterprise
+      required: true
+      type: string
+      format: uuid
+    - name: request
+      in: body
+      description: The request body to create an Enteprise Policy
+      required: true
+      schema:
+        $ref: '#/definitions/EnterprisePolicy'
+  responses:
+    201:
+      description: command request successfully created
+      schema:
+        $ref: '#/definitions/EnterprisePolicy'
+  security:
+    - apiKey: []
+  tags:
+    - Enterprise Policy
+
+get:
+  operationId: listPolicies
+  summary: List all policies in enterprise
+  description: Returns Policies list
+  produces:
+    - application/json
+  parameters:
+    - name: enterprise_id
+      in: path
+      description: ID of the enterprise
+      required: true
+      type: string
+      format: uuid
+    - name: name
+      in: query
+      description: filter by policy name
+      required: false
+      type: string
+    - name: is_active
+      in: query
+      description: filter by Active policies
+      required: false
+      type: boolean
+    - name: limit
+      in: query
+      description: Number of results to return per page.
+      required: false
+      type: integer
+      default: 20
+    - name: offset
+      in: query
+      description: The initial index from which to return the results.
+      required: false
+      type: integer
+      default: 0
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        required:
+          - count
+          - results
+        type: object
+        properties:
+          count:
+            type: integer
+          next:
+            type: string
+            format: url
+            x-nullable: true
+          previous:
+            type: string
+            format: url
+            x-nullable: true
+          results:
+            type: array
+            items:
+              $ref: '#/definitions/EnterprisePolicy'
+  security:
+    - apiKey: []
+  tags:
+    - Enterprise Policy
