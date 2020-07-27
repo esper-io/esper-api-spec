@@ -93,6 +93,11 @@ tags:
     externalDocs:
       description: Find out more about commands V2.0
       url: 'https://docs.esper.io/'
+  - name: Enterprise Policy
+    description: APIs to Esper Compliance Policy
+    externalDocs:
+      description: Find out more about Compliance Policy
+      url: 'https://docs.esper.io/'
 schemes:
   - https
 x-tagGroups:
@@ -106,6 +111,8 @@ x-tagGroups:
       - Group Commands
       - Token
       - Commands V2
+      - Enterprise Policy
+
 securityDefinitions:
   apiKey:
     description: |
