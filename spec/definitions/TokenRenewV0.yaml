@@ -1,0 +1,28 @@
+type: object
+properties:
+  user:
+    title: User id
+    description: Id of the user resource
+    type: string
+  enterprise:
+    title: Enterprise id
+    description: Id of the enterprise resource
+    type: string
+    format: uuid
+  token:
+    title: API Token
+    description: API token for accessing esper APIs
+    type: string
+  expires_at:
+    title: API token expiry
+    description: Date and time of when your API token will get expired
+    type: string
+    format: date-time 
+  developerapp:
+    title: Developer app id
+    description: Id of the developer app resource that you created using the esper dev console
+    type: string
+    format: uuid
+    
+  
+
