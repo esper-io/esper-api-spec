@@ -9,10 +9,6 @@ properties:
     description: Id of the enterprise resource
     type: string
     format: uuid
-  authserver_token_id:
-    title: Token id
-    description: Token for the authserver
-    type: string
   token:
     title: API Token
     description: API token for accessing esper APIs
