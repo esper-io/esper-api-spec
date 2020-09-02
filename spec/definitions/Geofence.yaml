@@ -1,0 +1,66 @@
+type: object
+properties: 
+  id:
+    title: Geofence id
+    description: id of the geofence
+    type: string
+    format: uuid
+  name:
+    title: Geofence name
+    description: Name of the geofence
+    type: string
+  description:
+    title: Geofence description
+    description: A description about the geofence 
+    type: string
+  enterprise:
+    title: Enterprise id
+    description: id of the enterprise resource
+    type: string
+    format: uuid
+  latitude:
+    title: Geofence latitude
+    description: Latitude corresponding to the geofence
+    type: string
+    format: decimal
+  longitude:
+    title: Geofence longitude
+    description: Longitude corresponding to the geofence
+    type: string
+    format: decimal
+  radius:
+    title: Geofence radius
+    description: The radius within which the geofence should be applied
+    type: integer
+  radius_unit:
+    title: Unit of radius
+    description: The unit in which the radius is taken, eg - kilometers, meters etc
+    type: string
+    enum:
+      - KILOMETERS
+      - METERS
+      - MILES
+  device_actions:
+    title: Device Actions
+    description: The actions to be performed on the device
+    type: array
+    items:
+      type: string
+  device_count:
+    title: Device count
+    description: Number of devices 
+    type: integer
+  created_by:
+    title: Created by
+    description: The user who created the geofence
+    type: string
+  created_on:
+    title: Creation date and time
+    description: Date and time of when the geofence was created
+    type: string
+    format: date-time 
+  updated_on:
+    title: Updation date and time
+    description: Date and time of when the geofence was updated
+    type: string
+    format: date-time
