@@ -1,18 +1,18 @@
 post:
   operationId: upload
-  summary: upload an application to enterprise
+  summary: Upload an application to enterprise
   description: Returns application
   produces:
     - application/json
   parameters:
     - name: app_file
-      description:  valid APK file
+      description: Valid APK file
       in: formData
       required: true
       type: file
   responses:
     '201':
-      description: successful operation
+      description: Successful operation
       schema:
         type: object
         properties:
