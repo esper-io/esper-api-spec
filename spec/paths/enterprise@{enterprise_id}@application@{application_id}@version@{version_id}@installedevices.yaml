@@ -1,0 +1,65 @@
+get:
+  operationId: getInstallDevices
+  summary: List install devices
+  description: Returns list of devices with the specified app version installed
+  produces:
+    - application/json
+  parameters:
+    - name: search
+      in: query
+      description: A search term
+      required: false
+      type: string
+    - name: limit
+      in: query
+      description: Number of results to return per page
+      required: false
+      type: integer
+    - name: offset
+      in: query
+      description: The initial index from which to return the results
+      required: false
+      type: integer
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        required:
+          - count
+          - results
+        type: object
+        properties:
+          count:
+            type: integer
+          next:
+            type: string
+            format: url
+          previous:
+            type: string
+            format: url
+          results:
+            type: array
+            items:
+              $ref: '#/definitions/InstallDevices'
+  security:
+    - apiKey: []
+  tags:
+    - Application
+parameters:
+  - name: version_id
+    in: path
+    description: A UUID string identifying this app version.
+    required: true
+    type: string
+    format: uuid
+  - name: application_id
+    in: path
+    description: A UUID string identifying this application.
+    required: true
+    type: string
+    format: uuid
+  - name: enterprise_id
+    description: A UUID string identifying enterprise.
+    in: path
+    required: true
+    type: string

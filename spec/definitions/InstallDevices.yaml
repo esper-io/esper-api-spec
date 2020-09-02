@@ -1,0 +1,19 @@
+required:
+  - id
+type: object
+properties:
+  id:
+    title: Id
+    type: string
+    format: uuid
+  device_name:
+    title: Device name
+    type: string
+  alias_name:
+    title: alias name
+    type: string
+  group_name:
+    title: Group name
+    type: string
+    maxLength: 255
+    minLength: 1
