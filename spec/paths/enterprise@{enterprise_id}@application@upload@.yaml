@@ -12,7 +12,7 @@ post:
       type: file
   responses:
     '201':
-      description: Successful operation
+      description: successful operation
       schema:
         type: object
         properties:
