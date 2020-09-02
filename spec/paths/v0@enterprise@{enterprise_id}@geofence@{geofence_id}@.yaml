@@ -14,6 +14,50 @@ get:
     - apiKey: []
   tags:
     - Geofence
+
+put:
+  operationId: updateGeofence
+  summary: Update geofence information
+  description: Returns geofence instance
+  produces:
+    - application/json
+  parameters: 
+    - name: data
+      in: body
+      required: true
+      schema:
+        $ref: '#/definitions/Geofence'
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/Geofence'
+  security:
+    - apiKey: []
+  tags:
+    - Geofence
+
+patch: 
+  operationId: partialUpdateGeofence
+  summary: Partially updates geofence information
+  description: Returns geofence instance
+  produces:
+    - application/json
+  parameters: 
+    - name: data
+      in: body
+      required: true
+      schema:
+        $ref: '#/definitions/GeofenceUpdate'
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/Geofence'
+  security:
+    - apiKey: []
+  tags:
+    - Geofence
     
 delete:
   operationId: deleteGeofence
@@ -29,6 +73,7 @@ delete:
     - apiKey: []
   tags:
     - Geofence
+
 parameters:
   - name: geofence_id
     in: path

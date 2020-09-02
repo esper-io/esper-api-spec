@@ -100,6 +100,9 @@ tags:
       url: 'https://docs.esper.io/'
   - name: Geofence
     description: APIs for geofence management
+    externalDocs:
+      description: Find out more about Geofence
+      url: 'https://docs.esper.io/home/console.html#geofence'
 schemes:
   - https
 x-tagGroups:
