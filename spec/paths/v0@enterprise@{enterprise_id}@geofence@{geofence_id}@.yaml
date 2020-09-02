@@ -41,3 +41,4 @@ parameters:
     in: path
     required: true
     type: string
+    format: uuid
