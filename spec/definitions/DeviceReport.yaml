@@ -1,0 +1,26 @@
+type: object
+properties:
+  group_name:
+    type: string
+  active_devices:
+    type: integer
+  inactive_devices:
+    type: integer
+  registered_devices:
+    type: integer
+  new_devices:
+    type: integer
+  disabled_devices:
+    type: integer
+  device_status_reports:
+    type: array
+    items:
+      $ref: '#/definitions/SingleDeviceReport'
+      
+
+
+
+
+
+
+

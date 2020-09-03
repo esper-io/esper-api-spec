@@ -1,0 +1,8 @@
+type: object
+properties:
+  peak_active_devices:
+    type: integer
+  provisioned_devices:
+    type: integer
+  registered_devices:
+    type: integer

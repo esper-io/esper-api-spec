@@ -1,0 +1,31 @@
+get:
+  summary: Get a list response of group reports
+  description: Returns a list of group reports
+  operationId: enterprise_report_group-report_list
+  produces:
+    - application/json
+  responses: 
+    '200':
+      description: successful operation
+      schema:
+        type: object
+        properties:
+          count:
+            type: integer
+            format: int64
+          next:
+            type: string
+            format: url
+          previous:
+            type: string
+            format: url
+          results:
+            type: array
+            items:
+              $ref: '#/definitions/GroupReport'
+    '400':
+      description: Bad request
+  security:
+    - apiKey: []
+  tags:
+    - Report

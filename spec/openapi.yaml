@@ -112,6 +112,7 @@ x-tagGroups:
       - Token
       - Commands V2
       - Enterprise Policy
+      - Report
 
 securityDefinitions:
   apiKey:

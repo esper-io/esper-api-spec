@@ -1,0 +1,31 @@
+type: object
+properties:
+  device_id:
+    type: string
+    format: uuid
+  device_name:
+    type: string
+  alias_name:
+    type: string
+  device_brand:
+    type: string
+  device_model:
+    type: string
+  android_version:
+    type: string
+  serial_number:
+    type: string
+  is_new:
+    type: boolean
+  last_known_location:
+    type: string
+  days_active:
+    type: integer
+  status:
+    type: string
+    enum:
+      - ACTIVE
+      - INACTIVE
+      - DISABLED
+  inactive_since_three_days:
+    type: boolean
