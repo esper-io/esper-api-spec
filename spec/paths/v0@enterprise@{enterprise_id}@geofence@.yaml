@@ -55,8 +55,8 @@ get:
     - Geofence
 
 post:
-  operationId: uploadGeofence
-  summary: Upload a geofence
+  operationId: createGeofence
+  summary: Create a geofence
   description: Returns Geofence instance
   produces:
     - application/json
