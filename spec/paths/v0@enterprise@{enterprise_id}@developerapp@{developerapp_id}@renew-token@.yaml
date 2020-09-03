@@ -1,4 +1,4 @@
-get:
+post:
   operationId: renewToken
   summary: Renew Token
   description: API to renew your token
@@ -23,7 +23,7 @@ get:
       required: true
       type: string
   responses:
-    '200':
+    '201':
       description: successful operation
       schema:
         $ref: '#/definitions/TokenRenewV0'
