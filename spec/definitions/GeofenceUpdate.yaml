@@ -1,0 +1,41 @@
+type: object
+properties: 
+  name:
+    title: Geofence name
+    description: Name of the geofence
+    type: string
+  description:
+    title: Geofence description
+    description: A description about the geofence 
+    type: string
+  latitude:
+    title: Geofence latitude
+    description: Latitude corresponding to the geofence
+    type: string
+    format: decimal
+  longitude:
+    title: Geofence longitude
+    description: Longitude corresponding to the geofence
+    type: string
+    format: decimal
+  radius:
+    title: Geofence radius
+    description: The radius within which the geofence should be applied
+    type: integer
+  radius_unit:
+    title: Unit of radius
+    description: The unit in which the radius is taken, eg - kilometers, meters etc
+    type: string
+    enum:
+      - KILOMETERS
+      - METERS
+      - MILES
+  device_actions:
+    title: Device Actions
+    description: The actions to be performed on the device
+    type: array
+    items:
+      type: string
+      enum:
+        - LOCK_DOWN
+        - BEEP
