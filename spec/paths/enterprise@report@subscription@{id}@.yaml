@@ -23,8 +23,8 @@ get:
 
 put:
   operationId: enterprise_report_subscription_update
-  summary: Put/create report delivery subscription
-  description: API to put the details of a report delivery subscription
+  summary: Update a report delivery subscription
+  description: API to update the details of a report delivery subscription
   produces:
     - application/json
   parameters:
@@ -51,8 +51,8 @@ put:
 
 patch:
   operationId: enterprise_report_subscription_partial_update
-  summary: Patch/update report delivery subscription
-  description: API to patch/update the details of a report delivery subscription
+  summary: Partial update a report delivery subscription
+  description: API to partial update the details of a report delivery subscription
   produces:
     - application/json
   parameters:
