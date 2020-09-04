@@ -4,6 +4,17 @@ get:
   operationId: enterprise_report_enterprise-report_list
   produces:
     - application/json
+  parameters:
+  - name: limit
+    in: query
+    description: Number of results to return per page.
+    required: false
+    type: integer
+  - name: offset
+    in: query
+    description: The initial index from which to return the results.
+    required: false
+    type: integer
   responses: 
     '200':
       description: successful operation

@@ -3,29 +3,48 @@ properties:
   device_id:
     type: string
     format: uuid
+    title: Device ID
+    description: A UUID identifying the device
   device_name:
     type: string
+    title: Device Name
+    description:
   alias_name:
     type: string
+    title: Alias Name
+    description: Alias of the device
   device_brand:
     type: string
+    title: Device Brand
+    description:
   device_model:
     type: string
+    title: Device Model
+    description:
   android_version:
     type: string
+    title: Android Version
+    description:
   serial_number:
     type: string
+    title: Serial Number
+    description:
   is_new:
     type: boolean
+    title: Is new
   last_known_location:
     type: string
+    title: Last known location
   days_active:
     type: integer
+    title: Days Active
   status:
     type: string
     enum:
       - ACTIVE
       - INACTIVE
       - DISABLED
+    title: Status
   inactive_since_three_days:
     type: boolean
+    title: Inactive since three days

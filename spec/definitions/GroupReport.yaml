@@ -2,13 +2,25 @@ type: object
 properties:
   group_name:
     type: string
+    title: Group Name
+    description: Name of the group under the enterprise
   registered_devices:
     type: integer
+    title: Registered Devices
+    description: Total number of registered devices in the group
   active_devices:
     type: integer
+    title: Active Devices
+    description: Total number of acitve devices in the group
   disabled_devices:
     type: integer
+    title: Disabled Devices
+    description: Total number of disabled devices in the group
   inactive_devices:
     type: integer
+    title: Inactive Devices
+    description: Total number of inactive devices in the group
   new_devices:
     type: integer
+    title: New Devices
+    description: Total number of new devices in the group
