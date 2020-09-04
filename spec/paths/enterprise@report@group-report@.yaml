@@ -1,20 +1,27 @@
 get:
   summary: Get a list response of group reports
   description: Returns a list of group reports
-  operationId: enterprise_report_group-report_list
+  operationId: getGroupReportList
   produces:
     - application/json
   parameters:
-    - name: limit
+    - name: start_date
       in: query
-      description: Number of results to return per page.
-      required: false
-      type: integer
-    - name: offset
+      description: Start date for the group report
+      type: string
+      format: date
+      required: true
+    - name: end_date
       in: query
-      description: The initial index from which to return the results.
-      required: false
-      type: integer
+      description: End date for the group report
+      type: string
+      format: date
+      required: true
+    - name: group_name
+      in: query
+      description: Group name for the group report
+      type: string
+      required: true
   responses: 
     '200':
       description: successful operation

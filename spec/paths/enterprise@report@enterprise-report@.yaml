@@ -1,21 +1,23 @@
 get:
-  summary: Get enterprise wise report
+  summary: Get an enterprise report
   description: Report with details of an enterprise
-  operationId: enterprise_report_enterprise-report_list
+  operationId: getEnterpriseReportList
   produces:
     - application/json
   parameters:
-  - name: limit
-    in: query
-    description: Number of results to return per page.
-    required: false
-    type: integer
-  - name: offset
-    in: query
-    description: The initial index from which to return the results.
-    required: false
-    type: integer
-  responses: 
+    - name: start_date
+      in: query
+      description: Start date for the device report
+      type: string
+      format: date
+      required: true
+    - name: end_date
+      in: query
+      description: End date for the device report
+      type: string
+      format: date
+      required: true
+  responses:
     '200':
       description: successful operation
       schema:

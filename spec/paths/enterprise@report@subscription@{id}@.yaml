@@ -1,6 +1,6 @@
 get:
-  operationId: enterprise_report_subscription_read
-  summary:  Get subscription by ID
+  operationId: getReportSubscription
+  summary:  Get a report delivery subscription by ID
   description: API to get the details of a subscription by subscription ID
   produces:
     - application/json
@@ -20,9 +20,9 @@ get:
     - apiKey: []
   tags:
     - Report
-
+    
 put:
-  operationId: enterprise_report_subscription_update
+  operationId: updateReportSubscription
   summary: Update a report delivery subscription
   description: API to update the details of a report delivery subscription
   produces:
@@ -50,7 +50,7 @@ put:
     - Report
 
 patch:
-  operationId: enterprise_report_subscription_partial_update
+  operationId: partialUpdateReportSubscription
   summary: Partial update a report delivery subscription
   description: API to partial update the details of a report delivery subscription
   produces:
@@ -78,7 +78,7 @@ patch:
     - Report
 
 delete:
-  operationId: enterprise_report_subscription_delete
+  operationId: deleteReportSubscription
   summary: Delete a report delivery subscription
   description: API to delete a report delivery subscription by ID
   produces:

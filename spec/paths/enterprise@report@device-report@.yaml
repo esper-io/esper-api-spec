@@ -1,9 +1,27 @@
 get:
-  summary: Get group report with individual devices reports
-  description: Group report with individual device report 
-  operationId: enterprise_report_device-report_list 
+  summary: Get group report with individual device reports
+  description: Group report with individual device reports
+  operationId: getDeviceReportList 
   produces:
     - application/json
+  parameters:
+    - name: start_date
+      in: query
+      description: Start date for the device report
+      type: string
+      format: date
+      required: true
+    - name: end_date
+      in: query
+      description: End date for the device report
+      type: string
+      format: date
+      required: true
+    - name: group_name
+      in: query
+      description: Group name for the device report
+      type: string
+      required: true
   responses: 
     '200':
       description: successful operation
