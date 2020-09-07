@@ -1,28 +1,66 @@
 type: object
 properties:
+  id:
+    title: Token id
+    description: Id of the token
+    type: string
+    format: integer
+    readOnly: true
   user:
     title: User id
     description: Id of the user resource
     type: string
+    readOnly: true
   enterprise:
     title: Enterprise id
     description: Id of the enterprise resource
     type: string
     format: uuid
+    readOnly: true
+  authserver_token_id:
+    title: Auth server Token id
+    description: Id of the auth server token
+    type: string
+    format: integer
+    readOnly: true
   token:
     title: API Token
     description: API token for accessing esper APIs
     type: string
+    readOnly: true
   expires_at:
     title: API token expiry
     description: Date and time of when your API token will get expired
     type: string
     format: date-time 
+    readOnly: true
   developerapp:
     title: Developer app id
     description: Id of the developer app resource that you created using the esper dev console
     type: string
     format: uuid
-    
+    readOnly: true
+  source_refresh_token:
+    title: Source Refresh Token
+    description: If from a refresh, the consumed RefreshToken
+    type: string
+    readOnly: true
+  scope:
+    title: Scope of API token
+    description: This defines what access scopes your API token has
+    type: string
+    readOnly: true
+  created_on:
+    title: Created on
+    description: Date and time of when this resource was created
+    type: string
+    format: date-time
+    readOnly: true
+  updated_on:
+    title: Updated on
+    description: Date and time of when this resource was updated
+    type: string
+    format: date-time
+    readOnly: true
   
 
