@@ -17,12 +17,6 @@ properties:
     type: string
     format: uuid
     readOnly: true
-  authserver_token_id:
-    title: Auth server Token id
-    description: Id of the auth server token
-    type: string
-    format: integer
-    readOnly: true
   token:
     title: API Token
     description: API token for accessing esper APIs
@@ -39,11 +33,6 @@ properties:
     description: Id of the developer app resource that you created using the esper dev console
     type: string
     format: uuid
-    readOnly: true
-  source_refresh_token:
-    title: Source Refresh Token
-    description: If from a refresh, the consumed RefreshToken
-    type: string
     readOnly: true
   scope:
     title: Scope of API token
