@@ -12,6 +12,7 @@ properties:
   alias_name:
     title: alias name
     type: string
+    x-nullable: true
   group_name:
     title: Group name
     type: string

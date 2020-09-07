@@ -34,9 +34,11 @@ get:
           next:
             type: string
             format: url
+            x-nullable: true
           previous:
             type: string
             format: url
+            x-nullable: true
           results:
             type: array
             items:
