@@ -8,7 +8,7 @@ properties:
   device_name:
     type: string
     title: Device Name
-    description:
+    description: Device name 
   alias_name:
     type: string
     title: Alias Name
@@ -16,19 +16,19 @@ properties:
   device_brand:
     type: string
     title: Device Brand
-    description:
-  device_model:
+    description: Brand/vendor name of the device
+  device_model: 
     type: string
     title: Device Model
-    description:
+    description: Device model 
   android_version:
     type: string
     title: Android Version
-    description:
+    description: Android Version of the device
   serial_number:
     type: string
     title: Serial Number
-    description:
+    description: Serial number of the device
   is_new:
     type: boolean
     title: Is new

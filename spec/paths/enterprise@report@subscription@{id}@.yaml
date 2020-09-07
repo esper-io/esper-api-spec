@@ -82,7 +82,7 @@ delete:
   summary: Delete a report delivery subscription
   description: API to delete a report delivery subscription by ID
   produces:
-    application/json
+    - application/json
   parameters:
     - name: id
       in: path
