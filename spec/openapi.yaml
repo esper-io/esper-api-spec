@@ -98,6 +98,11 @@ tags:
     externalDocs:
       description: Find out more about Compliance Policy
       url: 'https://docs.esper.io/'
+  - name: Geofence
+    description: APIs for geofence management
+    externalDocs:
+      description: Find out more about Geofence
+      url: 'https://docs.esper.io/home/console.html#geofence'
 schemes:
   - https
 x-tagGroups:
@@ -112,6 +117,7 @@ x-tagGroups:
       - Token
       - Commands V2
       - Enterprise Policy
+      - Geofence
       - Report
 
 securityDefinitions:
