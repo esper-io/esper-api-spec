@@ -21,7 +21,6 @@ properties:
     title: API Token
     description: API token for accessing esper APIs
     type: string
-    readOnly: true
   expires_at:
     title: API token expiry
     description: Date and time of when your API token will get expired
