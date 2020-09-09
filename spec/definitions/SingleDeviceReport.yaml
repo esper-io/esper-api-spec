@@ -1,0 +1,72 @@
+type: object
+properties:
+  device_id:
+    type: string
+    format: uuid
+    title: Device ID
+    description: A UUID identifying the device
+  device_name:
+    type: string
+    title: Device Name
+    description: Device name 
+  alias_name:
+    type: string
+    title: Alias Name
+    description: Alias of the device
+  device_brand:
+    type: string
+    title: Device Brand
+    description: Brand/vendor name of the device
+  device_model: 
+    type: string
+    title: Device Model
+    description: Device model 
+  android_version:
+    type: string
+    title: Android Version
+    description: Android Version of the device
+  serial_number:
+    type: string
+    title: Serial Number
+    description: Serial number of the device
+  is_new:
+    type: boolean
+    title: Is new
+  last_known_location:
+    type: string
+    title: Last known location
+  days_active:
+    type: integer
+    title: Days Active
+  days_inactive:
+    type: integer
+    title: Days Inactive
+  registered_date:
+    type: string
+    format: date
+    title: Registered date
+  recently_changed_location:
+    type: string
+    title: Recently Changed Location
+  tags:
+    type: array
+    items:
+      type: string
+  imei:
+    type: string
+    title: IMEI
+  status:
+    type: string
+    enum:
+      - ACTIVE
+      - INACTIVE
+      - DISABLED
+    title: Status
+  inactive_since_three_days:
+    type: boolean
+    title: Inactive since three days
+  last_seen:
+    type: string
+    format: date-time
+    title: Last seen
+  
