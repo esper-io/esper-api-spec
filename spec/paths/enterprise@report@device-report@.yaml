@@ -21,7 +21,6 @@ get:
       in: query
       description: Group name for the device report
       type: string
-      required: true
   responses: 
     '200':
       description: successful operation
@@ -32,4 +31,4 @@ get:
   security:
     - apiKey: []
   tags:
-    - Report
+    - Reports

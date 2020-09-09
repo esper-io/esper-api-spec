@@ -19,7 +19,7 @@ get:
   security:
     - apiKey: []
   tags:
-    - Report
+    - Reports
     
 put:
   operationId: updateReportSubscription
@@ -47,7 +47,7 @@ put:
   security:
     - apiKey: []
   tags:
-    - Report
+    - Reports
 
 patch:
   operationId: partialUpdateReportSubscription
@@ -75,7 +75,7 @@ patch:
   security:
     - apiKey: []
   tags:
-    - Report
+    - Reports
 
 delete:
   operationId: deleteReportSubscription
@@ -96,5 +96,5 @@ delete:
   security:
     - apiKey: []
   tags:
-    - Report
+    - Reports
     

@@ -21,29 +21,16 @@ get:
       in: query
       description: Group name for the group report
       type: string
-      required: true
   responses: 
     '200':
       description: successful operation
       schema:
-        type: object
-        properties:
-          count:
-            type: integer
-            format: int64
-          next:
-            type: string
-            format: url
-          previous:
-            type: string
-            format: url
-          results:
-            type: array
-            items:
-              $ref: '#/definitions/GroupReport'
+        type: array
+        items:
+          $ref: '#/definitions/GroupReport'
     '400':
       description: Bad request
   security:
     - apiKey: []
   tags:
-    - Report
+    - Reports
