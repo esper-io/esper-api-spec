@@ -103,6 +103,11 @@ tags:
     externalDocs:
       description: Find out more about Geofence
       url: 'https://docs.esper.io/home/console.html#geofence'
+  - name: Reports
+    description: APIs for Reports management. Provides group, enterprise and device wise reports and functionality to subscribe emails.
+    externalDocs:
+      description: Find out more about Report
+      url: 'https://docs.esper.io/home/console.html#reports'
 schemes:
   - https
 x-tagGroups:
@@ -118,6 +123,7 @@ x-tagGroups:
       - Commands V2
       - Enterprise Policy
       - Geofence
+      - Reports
 
 securityDefinitions:
   apiKey:

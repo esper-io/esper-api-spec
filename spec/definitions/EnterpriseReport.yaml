@@ -1,0 +1,14 @@
+type: object
+properties:
+  peak_active_devices:
+    type: integer
+    title: Peak Active Devices
+    description: Highest number of active devices in the enterprise
+  provisioned_devices:
+    type: integer
+    title: Provisioned Devices
+    description: Total number of provisioned devices in the enterprise
+  registered_devices:
+    type: integer
+    title: Registered Devices
+    description: Total number of registered devices in the enterprise
