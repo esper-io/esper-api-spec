@@ -1,6 +1,3 @@
-required:
-  - name
-  - parent
 type: object
 properties:
   id:
@@ -41,9 +38,10 @@ properties:
     type: string
     readOnly: true
   children_count:
-    title: Children count
+    title: Children Count
     type: integer
     readOnly: true
-  
+
+
   
   

@@ -1,3 +1,5 @@
+required:
+  - name
 type: object
 properties:
   id:
@@ -5,21 +7,9 @@ properties:
     type: string
     format: uuid
     readOnly: true
-  device_ids:
-    type: array
-    items:
-      type: string
-      format: uuid
-    uniqueItems: true
-  device_count:
-    title: Device count
-    type: integer
-    readOnly: true
   name:
     title: Name
     type: string
-    maxLength: 255
-    minLength: 1
   created_on:
     title: Created on
     type: string
@@ -30,3 +20,30 @@ properties:
     type: string
     format: url
     readOnly: true
+  parent:
+    title: Parent
+    type: string
+    format: uuid
+  device_ids:
+    type: array
+    items:
+      type: string
+      format: uuid
+    uniqueItems: true
+    writeOnly: true
+  device_count:
+    title: Device count
+    type: integer
+    readOnly: true
+  path:
+    title: Path
+    type: string
+    readOnly: true
+  children_count:
+    title: Children Count
+    type: integer
+    readOnly: true
+
+
+  
+  
