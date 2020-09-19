@@ -136,9 +136,9 @@ properties:
           - PASSWORD_QUALITY_UNSPECIFIED
 
   minimumPasswordLength:
-        description: What is the minimum length for your device's password
-        type: integer
-        minimum: 4   
+    description: What is the minimum length for your device's password
+    type: integer
+    minimum: 4   
 
   permissionPolicy:
     description: What permission should be applied by default for all apps, henceforth?
