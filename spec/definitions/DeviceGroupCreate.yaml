@@ -1,5 +1,6 @@
 required:
   - name
+  - parent
 type: object
 properties:
   id:
@@ -32,19 +33,20 @@ properties:
   device_ids:
     title: Device ids
     type: array
-    description: Devices ids
+    description: Device ids 
     items:
       type: string
       format: uuid
     uniqueItems: true
   device_count:
     title: Device count
+    description: Count of devices in the group
     type: integer
     readOnly: true
   path:
     title: Path
-    type: string
     description: Path of the group
+    type: string
     readOnly: true
   children_count:
     title: Children Count

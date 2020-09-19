@@ -7,7 +7,7 @@ get:
   parameters:
     - name: name
       in: query
-      description: filter by group name
+      description: Filter by group name
       required: false
       type: string
     - name: limit
@@ -60,7 +60,7 @@ post:
       in: body
       required: true
       schema:
-        $ref: '#/definitions/DeviceGroup'
+        $ref: '#/definitions/DeviceGroupCreate'
   responses:
     '201':
       description: successful operation

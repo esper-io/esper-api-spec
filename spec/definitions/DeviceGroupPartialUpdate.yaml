@@ -2,43 +2,52 @@ type: object
 properties:
   id:
     title: Id
+    description: Group id
     type: string
     format: uuid
     readOnly: true
   name:
     title: Name
+    description: Group name
     type: string
   created_on:
     title: Created on
+    description: Date and time of when the group was created
     type: string
     format: date-time
     readOnly: true
   enterprise:
     title: Enterprise
+    description: Enterprise url
     type: string
     format: url
     readOnly: true
   parent:
     title: Parent
+    description: Parent group id
     type: string
     format: uuid
   device_ids:
+    title: Device ids
     type: array
+    description: Device ids 
     items:
       type: string
       format: uuid
     uniqueItems: true
-    writeOnly: true
   device_count:
     title: Device count
+    description: Count of devices in the group
     type: integer
     readOnly: true
   path:
     title: Path
+    description: Path of the group
     type: string
     readOnly: true
   children_count:
     title: Children Count
+    description: Count of child groups 
     type: integer
     readOnly: true
 

@@ -28,13 +28,9 @@ put:
         $ref: '#/definitions/DeviceGroupUpdate'
     - name: action
       in: query
-      schema:
-            type: string
-            enum:
-              - add
-              - remove
-              - rename
-              - move
+      required: false
+      type: string
+      description: add / remove / rename / move
   responses:
     '200':
       description: successful operation
@@ -58,13 +54,9 @@ patch:
         $ref: '#/definitions/DeviceGroupPartialUpdate'
     - name: action
       in: query
-      schema:
-            type: string
-            enum:
-              - add
-              - remove
-              - rename
-              - move
+      required: false
+      type: string
+      description: add / remove / rename / move
   responses:
     '200':
       description: successful operation
