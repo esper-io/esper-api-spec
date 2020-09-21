@@ -1,6 +1,5 @@
 required:
   - name
-  - parent
 type: object
 properties:
   id:
