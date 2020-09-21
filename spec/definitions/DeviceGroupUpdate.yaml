@@ -51,7 +51,3 @@ properties:
     description: Count of child groups 
     type: integer
     readOnly: true
-
-
-  
-  

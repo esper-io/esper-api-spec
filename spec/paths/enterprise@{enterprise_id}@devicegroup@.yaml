@@ -60,7 +60,7 @@ post:
       in: body
       required: true
       schema:
-        $ref: '#/definitions/DeviceGroupCreate'
+        $ref: '#/definitions/DeviceGroupUpdate'
   responses:
     '201':
       description: successful operation
