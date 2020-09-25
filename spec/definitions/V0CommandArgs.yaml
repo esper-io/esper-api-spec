@@ -8,6 +8,23 @@ properties:
     description: Managed configurations for your device (passed as JSON object)
     type: object
   app_version:
+    description: The version id of app uploaded on Esper
     type: string
   package_name:
+    description: The app package name uploaded on Esper
+    type: string
+  policy_url:
+    description: The URL to the policy
+    type: string
+  wifi_access_points:
+    description: Wifi access points for the device (passed as JSON object)
+    type: object
+  state:
+    description: LOCKED/UNLOCKED
+    type: string
+  message:
+    description: Message to be added with command
+    type: string
+  app_state:
+    description: The state of app - SHOW/HIDE/DISABLE
     type: string
