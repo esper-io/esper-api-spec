@@ -108,6 +108,11 @@ tags:
     externalDocs:
       description: Find out more about Report
       url: 'https://docs.esper.io/home/console.html#reports'
+  - name: Subscription
+    description: APIs for Subscription management
+    externalDocs:
+      description: Find out more about Report
+      url: 'https://docs.esper.io/home/console.html#subscription'
 schemes:
   - https
 x-tagGroups:
@@ -124,6 +129,7 @@ x-tagGroups:
       - Enterprise Policy
       - Geofence
       - Reports
+      - Subscription
 
 securityDefinitions:
   apiKey:

@@ -1,0 +1,35 @@
+required:
+  - enterprise
+  - aws_account_id
+type: object
+properties:
+  id:
+    title: Id
+    type: string
+    format: uuid
+    readOnly: true
+  aws_account_id:
+    title: AWS account Id
+    type: string
+    minLength: 1
+  sns_topic_arn:
+    title: SNS topic arn
+    type: string
+    readOnly: true
+  created_on:
+    title: Created on
+    type: string
+    format: date-time
+    readOnly: true
+  updated_on:
+    title: Updated on
+    type: string
+    format: date-time
+    readOnly: true
+  is_subscribed:
+    title: Is subscribed
+    type: boolean
+  enterprise:
+    title: Enterprise
+    type: string
+    format: url
