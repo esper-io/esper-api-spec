@@ -1,0 +1,78 @@
+get:
+  operationId: getAllSubscriptions
+  summary: List Subscriptions in Enterprise
+  description: API to view all the subscriptions in an enterprise
+  produces:
+    - application/json
+  parameters: 
+    - name: enterprise_id
+      in: path
+      description: A UUID string identifying the enterprise.
+      required: true
+      type: string
+      format: uuid
+    - name: limit
+      in: query
+      description: Number of results to return per page.
+      required: false
+      type: integer
+    - name: offset
+      in: query
+      description: The initial index from which to return the results.
+      required: false
+      type: integer
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        required:
+          - count
+          - results
+        type: object
+        properties:
+          count:
+            type: integer
+          next:
+            type: string
+            format: url
+            x-nullable: true
+          previous:
+            type: string
+            format: url
+            x-nullable: true
+          results:
+            type: array
+            items:
+              $ref: '#/definitions/EventSubscription'
+  security:
+    - apiKey: []
+  tags:
+    - Subscription
+
+post:
+  operationId: createSubscription
+  summary: Create a Subscription
+  description: Returns Subscription instance
+  produces:
+    - application/json
+  parameters:
+    - name: data
+      in: body
+      required: true
+      schema:
+        $ref: '#/definitions/EventSubscriptionArgs'
+    - name: enterprise_id
+      in: path
+      description: A UUID string identifying the enterprise.
+      required: true
+      type: string
+      format: uuid
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/EventSubscription'
+  security:
+    - apiKey: []
+  tags:
+    - Subscription
