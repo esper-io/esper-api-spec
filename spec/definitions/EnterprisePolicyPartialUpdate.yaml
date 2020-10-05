@@ -1,7 +1,3 @@
-required:
-  - name
-  - enterprise
-  - policy
 type: object
 properties:
   uuid:
@@ -40,12 +36,6 @@ properties:
     type: integer
     readOnly: true
 
-  google_policy_id:
-    title: Google policy id
-    description: Id of the Google policy
-    type: string
-    readOnly: true
-
   policy:
     $ref: '#/definitions/EnterprisePolicyData'
 
@@ -67,3 +57,9 @@ properties:
     title: Policy Active status
     description: Is this policy currently active
     type: boolean
+
+  google_policy_id:
+    title: Google policy id
+    description: Id of the Google policy
+    type: string
+    readOnly: true

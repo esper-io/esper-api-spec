@@ -26,6 +26,11 @@ put:
       required: true
       schema:
         $ref: '#/definitions/DeviceGroupUpdate'
+    - name: action
+      in: query
+      required: false
+      type: string
+      description: add / remove / rename / move
   responses:
     '200':
       description: successful operation
@@ -46,7 +51,12 @@ patch:
       in: body
       required: true
       schema:
-        $ref: '#/definitions/DeviceGroupUpdate'
+        $ref: '#/definitions/DeviceGroupPartialUpdate'
+    - name: action
+      in: query
+      required: false
+      type: string
+      description: add / remove / rename / move
   responses:
     '200':
       description: successful operation
