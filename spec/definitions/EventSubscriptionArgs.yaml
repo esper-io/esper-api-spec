@@ -1,0 +1,9 @@
+required:
+  - aws_account_id
+type: object
+properties:
+  aws_account_id:
+    title: AWS account Id
+    type: string
+    minLength: 1
+    
