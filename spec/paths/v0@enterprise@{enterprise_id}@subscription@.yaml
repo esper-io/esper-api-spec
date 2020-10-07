@@ -1,27 +1,26 @@
 get:
-  operationId: getAllGroups
-  summary: List device groups
-  description: Returns EnterpriseDeviceGroup list
+  operationId: getAllSubscriptions
+  summary: List Subscriptions in Enterprise
+  description: API to view all the subscriptions in an enterprise
   produces:
-      - application/json
-  parameters:
-    - name: name
-      in: query
-      description: Filter by group name
-      required: false
+    - application/json
+  parameters: 
+    - name: enterprise_id
+      in: path
+      description: A UUID string identifying the enterprise.
+      required: true
       type: string
+      format: uuid
     - name: limit
       in: query
       description: Number of results to return per page.
       required: false
       type: integer
-      default: 20
     - name: offset
       in: query
       description: The initial index from which to return the results.
       required: false
       type: integer
-      default: 0
   responses:
     '200':
       description: successful operation
@@ -44,35 +43,36 @@ get:
           results:
             type: array
             items:
-              $ref: '#/definitions/DeviceGroup'
+              $ref: '#/definitions/EventSubscription'
   security:
     - apiKey: []
   tags:
-    - Device Group
+    - Subscription
+
 post:
-  operationId: createGroup
-  summary: Create a device group
-  description: Returns EnterpriseDeviceGroup instance
+  operationId: createSubscription
+  summary: Create a Subscription
+  description: Returns Subscription instance
   produces:
-      - application/json
+    - application/json
   parameters:
     - name: data
       in: body
       required: true
       schema:
-        $ref: '#/definitions/DeviceGroupUpdate'
+        $ref: '#/definitions/EventSubscriptionArgs'
+    - name: enterprise_id
+      in: path
+      description: A UUID string identifying the enterprise.
+      required: true
+      type: string
+      format: uuid
   responses:
     '201':
       description: successful operation
       schema:
-        $ref: '#/definitions/DeviceGroup'
+        $ref: '#/definitions/EventSubscription'
   security:
     - apiKey: []
   tags:
-    - Device Group
-parameters:
-  - name: enterprise_id
-    description: A UUID string identifying enterprise.
-    in: path
-    required: true
-    type: string
+    - Subscription

@@ -18,7 +18,3 @@ properties:
     type: string
     maxLength: 255
     minLength: 1
-  group_id:
-    title: Group Id
-    type: string
-    format: uuid

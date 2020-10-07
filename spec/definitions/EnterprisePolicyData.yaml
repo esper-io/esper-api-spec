@@ -138,7 +138,7 @@ properties:
   minimumPasswordLength:
     description: What is the minimum length for your device's password
     type: integer
-    minimum: 4
+    minimum: 4   
 
   permissionPolicy:
     description: What permission should be applied by default for all apps, henceforth?
@@ -173,6 +173,7 @@ properties:
     enum:
       - SYSTEM
       - SHOONYA
+      - NONE
 
   settingsAppPassword:
     type: string
