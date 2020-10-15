@@ -24,7 +24,7 @@ jobs:
       - git clone https://pallavigopi:$BITBUCKET_TOKEN@bitbucket.org/shoonyacloud/esper-sdk-config.git
       - cd esper-sdk-config
       - wget -q https://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/2.4.4/swagger-codegen-cli-2.4.4.jar
-      - git clone https://$GITHUB_TOKEN@github.com/esper-io/esper-client-py.git
+      - git clone https://$GH_TOKEN@github.com/esper-io/esper-client-py.git
       - java -jar swagger-codegen-cli-2.4.4.jar generate -i ./esper-api-spec.yaml -l python -c ./sdk-config/python-config.json --template-dir ./sdk-templates/python/ -o esper-client-py
       - cd esper-client-py
       - git config --global user.email "travis@travis-ci.org"
