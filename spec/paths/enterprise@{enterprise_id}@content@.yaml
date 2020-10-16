@@ -1,0 +1,90 @@
+get:
+  operationId: getAllContent
+  summary: List content in the enterprise
+  description: Returns Content list
+  produces:
+    - application/json
+  parameters:
+    - name: tags
+      in: query
+      description: filter by tag name
+      required: false
+      type: string
+    - name: description
+      in: query
+      description: filter by description name
+      required: false
+      type: string
+    - name: limit
+      in: query
+      description: Number of results to return per page.
+      required: false
+      type: integer
+      default: 20
+    - name: offset
+      in: query
+      description: The initial index from which to return the results.
+      required: false
+      type: integer
+      default: 0
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        required:
+          - count
+          - results
+        type: object
+        properties:
+          count:
+            type: integer
+          next:
+            type: string
+            format: url
+            x-nullable: true
+          previous:
+            type: string
+            format: url
+            x-nullable: true
+          results:
+            type: array
+            items:
+              $ref: '#/definitions/Content'
+  security:
+    - apiKey: []
+  tags:
+    - Content
+post:
+  operationId: postContent
+  summary: Add new content in the enterprise
+  description: Returns Content instance
+  produces:
+    - application/json
+  parameters:
+    - name: request
+      in: body
+      description: The request body to create a content instance
+      required: true
+      schema:
+        type: object
+        properties:
+          key:
+            description: A binary data/file
+            type: string
+            format: binary
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/Content'
+  security:
+    - apiKey: []
+  tags:
+    - Content
+
+parameters:
+  - name: enterprise_id
+    description: A UUID string identifying this enterprise.
+    in: path
+    required: true
+    type: string
