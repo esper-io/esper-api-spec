@@ -7,7 +7,7 @@ jobs:
      language: python
      if: tag IS present
      script:
-      - git clone https://pallavigopi:$BITBUCKET_TOKEN@bitbucket.org/shoonyacloud/esper-sdk-config.git
+      - git clone https://$BITBUCKET_USER:$BITBUCKET_TOKEN@bitbucket.org/shoonyacloud/esper-sdk-config.git
       - cd esper-sdk-config
       - export SDK_VERSION=$(git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' https://github.com/esper-io/esper-api-spec | cut --delimiter='/' --fields=3 | tail --lines=1 | cut -b 2-)
       - python3 update_version.py
@@ -31,7 +31,7 @@ jobs:
       - git config --global user.name "Travis CI"
       - git add .
       - git status
-      - COMMIT_MESSAGE=$(git log --format='%b' --merges -1)
+      - COMMIT_MESSAGE=$(git log --format='%b' --merges -1 master)
       - git diff-index --quiet HEAD || git commit -m "$COMMIT_MESSAGE"
       - git push -u origin master
       - export SDK_VERSION=$(git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' https://github.com/esper-io/esper-api-spec | cut --delimiter='/' --fields=3 | tail --lines=1)
