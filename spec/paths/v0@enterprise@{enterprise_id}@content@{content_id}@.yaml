@@ -1,0 +1,73 @@
+get:
+  operationId: getContent
+  summary: Get content information
+  description: Returns Content instance
+  produces:
+    - application/json
+  parameters: []
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/Content'
+  security:
+    - apiKey: []
+  tags:
+    - Content
+delete:
+  operationId: deleteContent
+  summary: Delete Content
+  description: Empty response
+  produces:
+    - application/json
+  parameters: []
+  responses:
+    '204':
+      description: successful operation
+  security:
+    - apiKey: []
+  tags:
+    - Content
+patch:
+  operationId: patchContent
+  summary: Patch a content instance
+  produces:
+    - application/json
+  parameters:
+    - name: data
+      in: body
+      schema:
+        type: object
+        properties:
+          tags:
+            title: Tags
+            description: Tags for the content
+            type: array
+            items:
+              type: string
+              maxLength: 255
+          description:
+            title: Description
+            description: Description of the content
+            type: string        
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/Content'
+  security:
+    - apiKey: []
+  tags:
+    - Content
+parameters:
+  - name: content_id
+    in: path
+    description: A UUID string identifying a content instance.
+    required: true
+    type: string
+    format: uuid
+  - name: enterprise_id
+    description: A UUID string identifying enterprise.
+    in: path
+    required: true
+    type: string
