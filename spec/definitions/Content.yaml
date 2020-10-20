@@ -5,14 +5,17 @@ properties:
   id:
     title: Id
     description: Unique content Identifier
-    type: string
-    format: uuid
+    type: integer
     readOnly: true
   download_url:
     title: Content download URL
     description: URL to download the content
     type: string
     format: url
+  name:
+    title: Name
+    description: Name of the content
+    type: string
   key:
     title: Key
     type: string
@@ -21,9 +24,10 @@ properties:
   is_dir:
     title: Is Directory
     type: boolean
+    default: false
   kind:
     title: Content kind
-    description: The data type of the content
+    description: The mime type of the content
     type: string
     maxLength: 255
     x-nullable: true
@@ -33,7 +37,7 @@ properties:
     type: string
   size:
     title: Content Size
-    description: Size of the content
+    description: Size of the content in bytes
     type: string
     maxLength: 255
   path:
@@ -73,7 +77,10 @@ properties:
     format: url
   owner:
     title: Owner
-    description: URL of the content owner
-    type: string
-    format: url
-    x-nullable: true
+    description: Owner of the content
+    type: object
+    properties:
+      id:
+        type: integer
+      username:
+        type: string

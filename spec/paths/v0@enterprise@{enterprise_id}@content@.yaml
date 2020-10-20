@@ -5,14 +5,9 @@ get:
   produces:
     - application/json
   parameters:
-    - name: tags
+    - name: search
       in: query
-      description: filter by tag name
-      required: false
-      type: string
-    - name: description
-      in: query
-      description: filter by description name
+      description: Seach by tags, description
       required: false
       type: string
     - name: limit
@@ -54,34 +49,7 @@ get:
     - apiKey: []
   tags:
     - Content
-post:
-  operationId: postContent
-  summary: Add new content in the enterprise
-  description: Returns Content instance
-  produces:
-    - application/json
-  parameters:
-    - name: request
-      in: body
-      description: The request body to create a content instance
-      required: true
-      schema:
-        type: object
-        properties:
-          key:
-            description: A binary data/file
-            type: string
-            format: binary
-  responses:
-    '200':
-      description: successful operation
-      schema:
-        $ref: '#/definitions/Content'
-  security:
-    - apiKey: []
-  tags:
-    - Content
-
+    
 parameters:
   - name: enterprise_id
     description: A UUID string identifying this enterprise.
