@@ -1,0 +1,40 @@
+language: python
+python:
+  - "3.6"
+jobs:
+ include:
+   - stage: Version Updation for sdk config
+     language: python
+     if: tag IS present
+     script:
+      - git clone https://$BITBUCKET_USER:$BITBUCKET_TOKEN@bitbucket.org/shoonyacloud/esper-sdk-config.git
+      - cd esper-sdk-config
+      - export SDK_VERSION=$(git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' https://github.com/esper-io/esper-api-spec | cut --delimiter='/' --fields=3 | tail --lines=1 | cut -b 2-)
+      - python3 update_version.py
+      - git config --global user.email "travis@travis-ci.org"
+      - git config --global user.name "Travis CI"
+      - git add sdk-config/python-config.json
+      - git diff-index --quiet HEAD || git commit -m "(Travis build $TRAVIS_BUILD_NUMBER) Update SDK Version number"
+      - git push -u origin master
+   - stage: SDK Generation
+     language: java
+     jdk: openjdk8
+     if: tag IS present
+     script:
+      - git clone https://$BITBUCKET_USER:$BITBUCKET_TOKEN@bitbucket.org/shoonyacloud/esper-sdk-config.git
+      - cd esper-sdk-config
+      - ./pull_api_spec.sh
+      - wget -q https://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/2.4.4/swagger-codegen-cli-2.4.4.jar
+      - git clone https://$GH_TOKEN@github.com/esper-io/esper-client-py.git
+      - java -jar swagger-codegen-cli-2.4.4.jar generate -i ./esper-api-spec.yaml -l python -c ./sdk-config/python-config.json --template-dir ./sdk-templates/python/ -o esper-client-py
+      - cd esper-client-py
+      - git config --global user.email "travis@travis-ci.org"
+      - git config --global user.name "Travis CI"
+      - git add .
+      - git status
+      - COMMIT_MESSAGE=$(git log --format='%b' --merges -1 master)
+      - git diff-index --quiet HEAD || git commit -m "$COMMIT_MESSAGE"
+      - git push -u origin master
+      - export SDK_VERSION=$(git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' https://github.com/esper-io/esper-api-spec | cut --delimiter='/' --fields=3 | tail --lines=1)
+      - git tag -a $SDK_VERSION -m "$COMMIT_MESSAGE"
+      - git push origin $SDK_VERSION
