@@ -7,7 +7,7 @@ post:
   consumes:
     - multipart/form-data
   parameters:
-    - name: app_file
+    - name: key
       description: Valid file to upload
       in: formData
       required: true
