@@ -20,8 +20,12 @@ jobs:
      language: java
      jdk: openjdk8
      if: tag IS present
+     before_script:
+      - git clone https://github.com/esper-io/esper-api-spec.git 
+      - cd esper-api-spec
+      - export COMMIT_MESSAGE=$(git log --format='%b' --merges -1 origin/master)
+      - export SDK_VERSION=$(git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' https://github.com/esper-io/esper-api-spec | cut --delimiter='/' --fields=3 | tail --lines=1)
      script:
-      - COMMIT_MESSAGE=$(git log --format='%b' --merges -1 master)
       - git clone https://$BITBUCKET_USER:$BITBUCKET_TOKEN@bitbucket.org/shoonyacloud/esper-sdk-config.git
       - cd esper-sdk-config
       - ./pull_api_spec.sh
@@ -35,6 +39,5 @@ jobs:
       - git status
       - git diff-index --quiet HEAD || git commit -m "$COMMIT_MESSAGE"
       - git push -u origin master
-      - export SDK_VERSION=$(git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' https://github.com/esper-io/esper-api-spec | cut --delimiter='/' --fields=3 | tail --lines=1)
       - git tag -a $SDK_VERSION -m "$COMMIT_MESSAGE"
       - git push origin $SDK_VERSION
