@@ -3,15 +3,15 @@ description: |
   Following commands are supported
 
   ```
-  * ADD_TO_WHITELIST: Whitelist an installed sytem app
+  * ADD_TO_WHITELIST: Whitelist an installed sytem app. Requires `package_name` in command arguments where `package_name` is the app package uploaded on Esper 
   * ADD_WIFI_AP : Add wifi access points for device. Requires `wifi_access_points` in command arguments where `wifi_access_points` is the data with access points
-  * CLEAR_APP_DATA : Clear data for an installed app
+  * CLEAR_APP_DATA : Clear data for an installed app. Requires `package_name` in command arguments where `package_name` is the app package uploaded on Esper 
   * INSTALL: Install an app on a device. Requires `app_version` in command arguments where `app_version` is the version id of app uploaded on Esper
   * LOCK: Lock device screen
   * REBOOT: Reboot a device
-  * REMOVE_FROM_WHITELIST : Remove an installed system app from whitelist
+  * REMOVE_FROM_WHITELIST : Remove an installed system app from whitelist. Requires `package_name` in command arguments where `package_name` is the app package uploaded on Esper 
   * REMOVE_WIFI_AP : Remove Wifi access points for device. Requires `wifi_access_points` in command arguments where `wifi_access_points` is the data with access points
-  * SET_APP_PERMISSION : Set permission for an installed app.
+  * SET_APP_PERMISSION : Set permission for an installed app. Requires `package_name`, `grant_state`, `permission` in command arguments where `package_name` is the app package uploaded on Esper, `grant_state` should be "PERMISSION_GRANT_STATE_DEFAULT", "PERMISSION_GRANT_STATE_DENIED", "PERMISSION_GRANT_STATE_GRANTED" and `permission` is a valid permission
   * SET_APP_STATE : Set the state of an app - SHOW/HIDE/DISABLE. Requries `app_state` and `package_name` in command arguments where `app_state` is the state of app and `package_name` is the app package uploaded on Esper
   * SET_BLUETOOTH_STATE : Set bluetooth state (ON/OFF) for device. Requires `bluetooth_state` in command arguments where `bluetooth_state` is a boolean.
   * SET_BRIGHTNESS_SCALE : Set brightness for device. Requires `brightness_value` in command arguments where `brightness_value` is an integer (1-100).
