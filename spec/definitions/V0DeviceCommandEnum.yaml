@@ -3,31 +3,57 @@ description: |
   Following commands are supported
 
   ```
-  * REBOOT: Reboot a device
-  * UPDATE_HEARTBEAT: Ping a device
-  * UPDATE_DEVICE_CONFIG: Push additional configurations to the Device
-  * INSTALL: Install an app on a device. Requires `app_version` in command arguments where `app_version` is the version id of app uploaded on Esper
-  * UNINSTALL: UnInstall an app from device. Requires `package_name` in command arguments where `package_name` is the app package uploaded on Esper
-  * SET_NEW_POLICY : Apply policy on device. Requires `policy_url` in command arguments where `policy_url` is the URL to the policy 
+  * ADD_TO_WHITELIST: Whitelist an installed sytem app. Requires `package_name` in command arguments where `package_name` is the app package uploaded on Esper 
   * ADD_WIFI_AP : Add wifi access points for device. Requires `wifi_access_points` in command arguments where `wifi_access_points` is the data with access points
+  * CLEAR_APP_DATA : Clear data for an installed app. Requires `package_name` in command arguments where `package_name` is the app package uploaded on Esper 
+  * INSTALL: Install an app on a device. Requires `app_version` in command arguments where `app_version` is the version id of app uploaded on Esper
+  * LOCK: Lock device screen
+  * REBOOT: Reboot a device
+  * REMOVE_FROM_WHITELIST : Remove an installed system app from whitelist. Requires `package_name` in command arguments where `package_name` is the app package uploaded on Esper 
   * REMOVE_WIFI_AP : Remove Wifi access points for device. Requires `wifi_access_points` in command arguments where `wifi_access_points` is the data with access points
-  * SET_KIOSK_APP : Command to set the Kiosk app for a device. Requires `package_name` in command arguments where `package_name` is the app package uploaded on Esper
+  * SET_APP_PERMISSION : Set permission for an installed app. Requires `package_name`, `grant_state`, `permission` in command arguments where `package_name` is the app package uploaded on Esper, `grant_state` should be "PERMISSION_GRANT_STATE_DEFAULT", "PERMISSION_GRANT_STATE_DENIED", "PERMISSION_GRANT_STATE_GRANTED" and `permission` is a valid permission
+  * SET_APP_STATE : Set the state of an app - SHOW/HIDE/DISABLE. Requries `app_state` and `package_name` in command arguments where `app_state` is the state of app and `package_name` is the app package uploaded on Esper
+  * SET_BLUETOOTH_STATE : Set bluetooth state (ON/OFF) for device. Requires `bluetooth_state` in command arguments where `bluetooth_state` is a boolean.
+  * SET_BRIGHTNESS_SCALE : Set brightness for device. Requires `brightness_value` in command arguments where `brightness_value` is an integer (1-100).
   * SET_DEVICE_LOCKDOWN_STATE : Set lockdown state for a device. Requires `state` and `message` in command arguments where `state` is LOCKED/UNLOCKED and `message` is the message to be added with command
-  * SET_APP_STATE : Set the state of an app - SHOW/HIDE/DISABLE. Requries `app_state` and `package_name`  in command arguments where `app_state` is the state of app and `package_name` is the app package uploaded on Esper
+  * SET_GPS_STATE :Set the GPS state for a device. Requires `gps_state` in command arguments where `gps_state` should be either 0, 1, 2, 3 or 4 (LOCATION_MODE_HIGH_ACCURACY = 0, LOCATION_MODE_SENSORS_ONLY = 1, LOCATION_MODE_BATTERY_SAVING = 2, LOCATION_MODE_OFF = 3, LOCATION_MODE_ON = 4)
+  * SET_KIOSK_APP : Command to set the Kiosk app for a device. Requires `package_name` in command arguments where `package_name` is the app package uploaded on Esper  
+  * SET_NEW_POLICY : Apply policy on device. Requires `policy_url` in command arguments where `policy_url` is the URL to the policy 
+  * SET_ROTATION_STATE : Set screen orientation. Requires `rotate_state` in command arguments where `rotate_state` should be either 0, 1 or 2 (0 = AUTO, 1 = PORTRAIT_ONLY, 2 = LANDSCAPE_ONLY)
+  * SET_SCREEN_OFF_TIMEOUT: Set screen off timeout for a device. Requires `screen_off_timeout` in command arguments where `screen_off_timeout` should be either -1 or between 5000 and 1800000
+  * SET_STREAM_VOLUME : Set strema volume for a device. Requires `stream` and `volume_level` in command arguments where `stream` should be either 0(Ring), 1(Notification), 2(Alarm) or 3(Music) and `volume_level` should be a value from 0 to 100
+  * SET_TIMEZONE : Set the timezone for a device. Requires `timezone_string` in command arguments where `timezone_string` is a valid string representing the timezone
+  * SET_WIFI_STATE : Set the wifi state (ON/OFF) for a device. Requires `wifi_state` in command arguments where `wifi_state` is a boolean. 
+  * UNINSTALL: Uninstall an app from device. Requires `package_name` in command arguments where `package_name` is the app package uploaded on Esper
+  * UPDATE_DEVICE_CONFIG: Push additional configurations to the Device
+  * UPDATE_HEARTBEAT: Ping a device
+  * UPDATE_LATEST_DPC : Prompt device to update the DPC app to the latest versions.
   * WIPE : Wipes the device.
-  * UPDATE_LATEST_DPC : Prompt device to update the DPC app to the latest versions. 
   ```
 enum:
-  - REBOOT
-  - UPDATE_HEARTBEAT
-  - UPDATE_DEVICE_CONFIG
-  - INSTALL
-  - UNINSTALL
-  - SET_NEW_POLICY
+  - ADD_TO_WHITELIST
   - ADD_WIFI_AP
+  - CLEAR_APP_DATA 
+  - INSTALL
+  - LOCK
+  - REBOOT
+  - REMOVE_FROM_WHITELIST
   - REMOVE_WIFI_AP
-  - SET_KIOSK_APP
+  - SET_APP_PERMISSION 
+  - SET_APP_STATE 
+  - SET_BLUETOOTH_STATE 
+  - SET_BRIGHTNESS_SCALE
   - SET_DEVICE_LOCKDOWN_STATE
-  - SET_APP_STATE
-  - WIPE
+  - SET_GPS_STATE
+  - SET_KIOSK_APP
+  - SET_NEW_POLICY
+  - SET_ROTATION_STATE
+  - SET_SCREEN_OFF_TIMEOUT
+  - SET_STREAM_VOLUME
+  - SET_TIMEZONE
+  - SET_WIFI_STATE 
+  - UNINSTALL
+  - UPDATE_DEVICE_CONFIG
+  - UPDATE_HEARTBEAT
   - UPDATE_LATEST_DPC
+  - WIPE
