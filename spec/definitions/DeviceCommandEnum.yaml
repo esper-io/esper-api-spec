@@ -18,9 +18,11 @@ description: |
   * SET_SCREEN_OFF_TIMEOUT: Screen timeout setting
   * ADD_TO_WHITELIST: Whitelist an installed sytem app
   * CLEAR_APP_DATA: Clear app data
+  * CAPTURE_SCREENSHOT: Allows you to take screenshot of the device's current screen. The "tag" is an optional param that can be be set to corresponding screenshot. 
   ```
 enum:
   - REBOOT
+  - CAPTURE_SCREENSHOT  
   - LOCK
   - INSTALL
   - UPDATE_HEARTBEAT
