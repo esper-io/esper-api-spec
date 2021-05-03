@@ -2,24 +2,24 @@ body {
     color: #2c3e50 !important;
 }
 
-.cxRqCB {
+/* Documentation Powered by ReDoc */
+.jbXOXf {
     display: none ;
 }
 
-.iNzLCk {
-  margin: 0;
-  padding: 0;
-  font-family: "Nunito Sans", sans-serif !important;
+/* Headings */
+h1 {
+    font-size: 32px !important;
 }
 
-
+/* Shoonya header top bar */
 .shoonya-header {
     z-index: 20;
     right: 0;
     height: 3.6rem;
-    background-color: #fff;
+    background-color: #1b2341;
     box-sizing: border-box;
-    border-bottom: 1px solid #eaecef;
+    /* border-bottom: 1px solid #eaecef; */
     padding: .7rem 1.5rem;
     line-height: 2.2rem;
 
@@ -32,14 +32,11 @@ body {
     vertical-align: top;
 }
 
+/* // Left sidebar */
 .menu-content {
     background-color: #fcfcfc !important;
     border-right: 1px solid #eaecef;
 }
-.kTYKTV {
-    background-color: #fff !important;
-}
-
 .search-input {
     height: 45px !important;
     margin: 0px !important;
@@ -50,39 +47,17 @@ body {
 .search-icon{
      top: 15px !important;
 }
-.api-content {
-    padding-left: 5rem;
-}
-.api-content .api-info > p {
-    display: none !important;
-}
-
-@media print, screen and (max-width: 85rem) {
-    .api-info{
-        padding: 5px !important;
-    }
-}
-.dtUibw {
-    border-radius: 15px !important;
-    padding: 20px !important;
-    margin-right: 15px;
-    height: fit-content;
-}
 
 /* Sidebar font weights */
-.sc-bYSBpT {
+.sc-fzqKxP {
     color: rgb(104, 124, 140);
     font-weight: 700;
     font-size: 1em;
 }
-.sc-ifAKCX.dluJDj  {
+.sc-fzocqA.bIApuP {
     font-size: 14px;
 }
 
-/* Headings */
-h1 {
-    font-size: 32px !important;
-}
 
 /* Tags colors for get, post, patch */
 .operation-type.get {
@@ -129,18 +104,49 @@ h1 {
     background-color: rgb(188, 234, 245) !important;
     color: rgb(67, 179, 224);
 }
+/* class="sc-pscky gza-dof" */
+/* // Right sidebar */
+.sc-pscky.gza-dof {
+    /* background-color: rgb(238, 238, 238) !important; */
+}
 
-.sc-kPVwWT {
+/* Right sidebar box */
+.eIeJha {
+    /* border-radius: 15px !important;
+    padding: 20px !important;
+    margin-right: 15px;
+    height: fit-content; */
+}
+
+/* Sidebar Response samples heading */
+.czQAZT {
+    color: rgb(255, 255, 255) !important;
+}
+
+
+/* // GET TAG */
+.http-verb {
     font-weight: 700;
     border-radius: 3px;
 }
 
-/* Sidebar Response samples heading */
-.kBWwoV {
-    color: rgb(255, 255, 255) !important;
+
+
+/* // Center content */
+.api-content .api-info > p {
+    display: none !important;
+}
+
+@media print, screen and (max-width: 85rem) {
+    .api-info{
+        padding: 5px !important;
+    }
 }
 
 /* Pre tag */
-.kjegA pre {
+.hanQOS pre {
     max-width: 32rem;
+}
+pre {
+    border-radius: 5px;
 }

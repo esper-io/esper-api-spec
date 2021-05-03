@@ -74,7 +74,9 @@ tags:
       description: Find out more about device group management
       url: 'https://docs.esper.io/home/console.html#groups'
   - name: Commands
-    description: APIs to run device commands
+    description: |
+      APIs to run device commands.
+      `This version of commands is being deprecated and documentation will be archived soon. Please use Commands V2.`
     externalDocs:
       description: Find out more about device commands
       url: 'https://docs.esper.io/home/console/device-management/-/#device-actions'
@@ -108,6 +110,11 @@ tags:
     externalDocs:
       description: Find out more about Report
       url: 'https://docs.esper.io/home/console.html#subscription'
+  - name: Content
+    description: APIs for Content management
+    externalDocs:
+      description: Find out more about Content management
+      url: 'https://docs.esper.io/home/console.html#content'
 schemes:
   - https
 x-tagGroups:
@@ -125,6 +132,7 @@ x-tagGroups:
       - Geofence
       - Reports
       - Subscription
+      - Content
 
 securityDefinitions:
   apiKey:

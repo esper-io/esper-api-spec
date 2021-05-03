@@ -28,3 +28,33 @@ properties:
   app_state:
     description: The state of app - SHOW/HIDE/DISABLE
     type: string
+  bluetooth_state:
+    description: The state of bluetooth - ON/OFF
+    type: boolean
+  brightness_value:
+    description: The brightness value of a device(1-100)
+    type: integer
+  gps_state:
+    description: The GPS state of a device. Should be either 0, 1, 2, 3 or 4 (LOCATION_MODE_HIGH_ACCURACY = 0, LOCATION_MODE_SENSORS_ONLY = 1, LOCATION_MODE_BATTERY_SAVING = 2, LOCATION_MODE_OFF = 3, LOCATION_MODE_ON = 4)
+    type: integer
+  rotate_state:
+    description: The screen orientation of a device. Should be either 0, 1 or 2 (0 = AUTO, 1 = PORTRAIT_ONLY, 2 = LANDSCAPE_ONLY)
+    type: integer
+  screen_off_timeout:
+    description: The value for screen timeout of a device. Should be either -1 or between 5000 and 1800000
+    type: integer
+  stream:
+    description: The value of the volume stream. Should be either 0(Ring), 1(Notification), 2(Alarm) or 3(Music)
+    type: integer
+  volume_level:
+    description: The level of volume. Should be a value from 0 to 100
+    type: integer
+  timezone_string:
+    description: The timezone of a device. Should be a valid timezone string
+    type: integer
+  wifi_state:
+    description: The state of WIFI - ON/OFF
+    type: boolean
+  wifi_revert_timeout:
+    description: The WIFI revert timeout. Should be greater than or equal to 1
+    type: integer
