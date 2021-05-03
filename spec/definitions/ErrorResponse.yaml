@@ -1,0 +1,13 @@
+type: object
+properties:
+  errors:
+    title: Messages describing the error
+    type: array
+    items:
+      type: string
+  message:
+    title: Message describing the error
+    type: string
+  status:
+    title: alias name
+    type: integer
