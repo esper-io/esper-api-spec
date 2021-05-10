@@ -22,7 +22,6 @@ description: |
   ```
 enum:
   - REBOOT
-  - CAPTURE_SCREENSHOT  
   - LOCK
   - INSTALL
   - UPDATE_HEARTBEAT
@@ -37,3 +36,4 @@ enum:
   - UNINSTALL
   - ADD_TO_WHITELIST
   - CLEAR_APP_DATA
+  - CAPTURE_SCREENSHOT  
