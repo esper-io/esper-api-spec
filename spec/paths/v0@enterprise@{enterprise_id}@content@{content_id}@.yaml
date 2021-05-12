@@ -14,10 +14,6 @@ get:
       description: Authorization information is missing or invalid.
       schema: 
         $ref: '#/definitions/ErrorResponse'
-    '403':
-      description: Forbidden, no permission to perform this action.
-      schema: 
-        $ref: '#/definitions/ErrorResponse'
     '404':
       description: Not Found.
       schema: 

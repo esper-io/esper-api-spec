@@ -1,5 +1,5 @@
 get:
-  operationId: getAppVersion
+  operationId: getAppVersionV1
   summary: Get app version information
   description: Returns AppVersion instance
   produces:
@@ -9,7 +9,7 @@ get:
     '200':
       description: successful operation
       schema:
-        $ref: '#/definitions/AppVersion'
+        $ref: '#/definitions/AppVersionV1'
     '401':
       description: Authorization information is missing or invalid.
       schema: 
@@ -25,9 +25,9 @@ get:
   security:
     - apiKey: []
   tags:
-    - Application
+    - Application V1
 delete:
-  operationId: deleteAppVersion
+  operationId: deleteAppVersionV1
   summary: Delete app version
   description: Empty response
   produces:
@@ -55,9 +55,9 @@ delete:
   security:
     - apiKey: []
   tags:
-    - Application
+    - Application V1
 patch:
-  operationId: patchAppVersion
+  operationId: patchAppVersionV1
   summary: Patch an App version instance
   produces:
     - application/json
@@ -83,7 +83,7 @@ patch:
             - Alpha
             - Beta
             - Production    
-          is_enabled:
+          is_enabled: # TODOx: verify
             title: Is Enabled
             description: Is the app version enabled
             type: boolean
@@ -91,7 +91,7 @@ patch:
             title: Minimum SDK version
             description: Version number of minimum SDK version that supports this app version
             type: string
-          target_sdk_version:
+          target_sdk_version: # TODOx: verify
             title: Target SDK version
             description: Target SDK version that supports this app version
             type: string
@@ -116,7 +116,7 @@ patch:
     '200':
       description: successful operation
       schema:
-        $ref: '#/definitions/AppVersion'
+        $ref: '#/definitions/AppVersionV1'
     '400':
       description: Bad request
       schema: 
@@ -140,7 +140,7 @@ patch:
   security:
     - apiKey: []
   tags:
-    - Application
+    - Application V1
 parameters:
   - name: version_id
     in: path

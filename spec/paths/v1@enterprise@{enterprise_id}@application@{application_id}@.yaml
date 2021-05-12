@@ -1,5 +1,5 @@
 get:
-  operationId: getApplication
+  operationId: getApplicationv1
   summary: Get application information
   description: Returns Application instance
   produces:
@@ -9,7 +9,7 @@ get:
     '200':
       description: successful operation
       schema:
-        $ref: '#/definitions/Application'
+        $ref: '#/definitions/ApplicationV1'
     '401':
       description: Authorization information is missing or invalid.
       schema: 
@@ -25,9 +25,9 @@ get:
   security:
     - apiKey: []
   tags:
-    - Application
+    - Application V1
 delete:
-  operationId: deleteApplication
+  operationId: deleteApplicationV1
   summary: Delete an application
   description: Empty response
   produces:
@@ -55,7 +55,7 @@ delete:
   security:
     - apiKey: []
   tags:
-    - Application
+    - Application V1
 parameters:
   - name: application_id
     in: path
@@ -68,4 +68,3 @@ parameters:
     in: path
     required: true
     type: string
-# TOODx: Add patch for application

@@ -1,6 +1,7 @@
 post:
   summary: Run commands on group devices
-  description: Fire commands on all the group devices
+  description: Fire commands on all the group devices. Deprecated in favour of commands V2.
+  deprecated: true
   operationId: runGroupCommand
   produces:
     - application/json

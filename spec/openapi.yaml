@@ -63,6 +63,8 @@ tags:
     externalDocs:
       description: Find out more about application management
       url: 'https://docs.esper.io/home/console.html#apps'
+  - name: Application V1
+    description: APIs for application management
   - name: Device
     description: APIs for device management
     externalDocs:
@@ -122,6 +124,7 @@ x-tagGroups:
     tags:
       - Enterprise
       - Application
+      - Application V1
       - Device
       - Device Group
       - Commands
