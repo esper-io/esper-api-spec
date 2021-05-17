@@ -1,0 +1,20 @@
+type: object
+properties:
+  request_id:
+    title: Request id
+    type: string
+    format: uuid
+  templates:
+    description: List of linked templates to an app version
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          title: Id
+          description: Id of the linked template
+          type: integer
+        name:
+          title: Name
+          description: Name of the linked template
+          type: string

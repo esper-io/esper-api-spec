@@ -4,7 +4,12 @@ get:
   description: Returns AppVersion instance
   produces:
     - application/json
-  parameters: []
+  parameters: 
+    - name: request_id
+      in: query
+      description: If this value exists in cache, delete the application and cache entry.
+      required: false
+      type: string
   responses:
     '200':
       description: successful operation
@@ -34,8 +39,16 @@ delete:
     - application/json
   parameters: []
   responses:
+    '200':
+      description: No request id is provided and the application is linked to one or more templates. Returns a request_id. Call with this request id to delete the resource.
+      schema:
+        $ref: '#/definitions/AppVersionDelete'
     '204':
       description: The resource was deleted successfully.
+    '400':
+      description: Invalid request.
+      schema:
+        $ref: '#/definitions/ErrorResponse'
     '401':
       description: Authorization information is missing or invalid.
       schema: 
