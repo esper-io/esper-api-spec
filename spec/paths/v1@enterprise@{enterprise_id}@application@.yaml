@@ -1,5 +1,5 @@
 get:
-  operationId: getAllApplications
+  operationId: getAllApplicationsV1
   summary: List apps in enterprise
   description: Returns Application list
   produces:
@@ -104,7 +104,7 @@ get:
           results:
             type: array
             items:
-              $ref: '#/definitions/Application'
+              $ref: '#/definitions/ApplicationV1'
     '401':
       description: Authorization information is missing or invalid.
       schema: 
@@ -116,7 +116,7 @@ get:
   security:
     - apiKey: []
   tags:
-    - Application
+    - Application V1
 parameters:
   - name: enterprise_id
     description: A UUID string identifying this enterprise.

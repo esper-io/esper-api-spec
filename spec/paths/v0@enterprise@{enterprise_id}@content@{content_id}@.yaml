@@ -10,6 +10,18 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/Content'
+    '401':
+      description: Authorization information is missing or invalid.
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
+    '404':
+      description: Not Found.
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
+    '500':
+      description: Internal server error
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
   security:
     - apiKey: []
   tags:
@@ -23,7 +35,23 @@ delete:
   parameters: []
   responses:
     '204':
-      description: successful operation
+      description: The resource was deleted successfully.
+    '401':
+      description: Authorization information is missing or invalid.
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
+    '403':
+      description: Forbidden, no permission to perform this action.
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
+    '404':
+      description: Not Found.
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
+    '500':
+      description: Internal server error
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
   security:
     - apiKey: []
   tags:
@@ -55,6 +83,30 @@ patch:
       description: successful operation
       schema:
         $ref: '#/definitions/Content'
+    '400':
+      description: Bad request
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
+    '401':
+      description: Authorization information is missing or invalid.
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
+    '403':
+      description: Forbidden, no permission to perform this action.
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
+    '404':
+      description: Not Found.
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
+    '415':
+      description: Unsupported media type.
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
+    '500':
+      description: Internal server error
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
   security:
     - apiKey: []
   tags:

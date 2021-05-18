@@ -1,5 +1,5 @@
 get:
-  operationId: getInstallDevices
+  operationId: getInstallDevicesV1
   summary: List install devices
   description: Returns list of devices with the specified app version installed
   produces:
