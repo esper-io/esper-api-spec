@@ -125,6 +125,10 @@ patch:
               - ACCEPTED
               - APPROVED
               - REJECTED
+          is_default:
+            title: Is default
+            description: Is the app version default
+            type: boolean
   responses:
     '200':
       description: successful operation
