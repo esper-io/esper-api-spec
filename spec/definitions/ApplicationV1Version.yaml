@@ -6,78 +6,36 @@ properties:
     type: string
     format: uuid
     readOnly: true
-  installed_count:
-    title: Installed count
-    type: integer
-    readOnly: true
-  is_g_play:
-    title: Is google play
-    type: boolean
-  app_file:
-    title: App file url
-    type: string
-    format: url
-    x-nullable: true
-  app_icon:
-    title: App icon url
-    type: string
-    format: url
-    x-nullable: true
   version_code:
     title: Version code
     type: string
     maxLength: 50
     minLength: 1
-    x-nullable: true
   build_number:
     title: Build number
     type: string
     maxLength: 100
     minLength: 1
     x-nullable: true
+  hash_string:
+    title: Hash string
+    type: string
   min_sdk_version:
-    title: Minimum sdk version
+    title: Min sdk version
     type: string
     maxLength: 10
     minLength: 1
     x-nullable: true
-  enterprise:
-    title: Enterprise URL
+  target_sdk_version:
+    title: Target sdk version
     type: string
-    format: url
-  application:
-    title: Application URL
+    maxLength: 10
+    minLength: 1
+    x-nullable: true
+  icon_url:
+    title: Url for the icon
     type: string
     format: url
   release_name:
     title: Name of the release
     type: string
-    maxLength: 255
-    x-nullable: true
-  release_comments:
-    title: Release comments
-    type: string
-    x-nullable: true
-  approval_status:
-    title: Approval Status
-    type: string 
-    maxLength: 50
-    enum:
-      - AVAILABLE
-      - ACCEPTED
-      - APPROVED
-      - REJECTED
-    default: "APPROVED"
-  release_date:
-    title: Release date
-    type: string
-    format: date-time  
-  size_in_mb:
-    title: Size in mb
-    type: number
-    default: 0
-  is_default:
-    title: Is default
-    type: boolean
-    default: false
-  
