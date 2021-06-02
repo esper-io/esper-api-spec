@@ -15,9 +15,14 @@ get:
       description: filter by build number
       required: false
       type: string
+    - name: is_g_play
+      in: query
+      description: filter google play applications
+      required: false
+      type: boolean
     - name: approval_status
       in: query
-      description: filter by application status
+      description: filter by approval status
       required: false
       type: string
       enum:
@@ -28,6 +33,11 @@ get:
     - name: is_enabled
       in: query
       description: filter by enabled versions
+      required: false
+      type: boolean
+    - name: is_default
+      in: query
+      description: filter by default versions
       required: false
       type: boolean
     - name: created_on_gt
@@ -59,7 +69,6 @@ get:
       description: Number of results to return per page.
       required: false
       type: integer
-      default: 20
     - name: offset
       in: query
       description: The initial index from which to return the results.

@@ -83,30 +83,14 @@ patch:
           release_name:
             title: Release name
             description: Name of the Release
-            type: string
-          release_comments:
-            title: Release comments
-            description: Additional comments about the release
-            type: string
-          release_track:
-            title: Release track
-            description: Description of the content
-            type: string    
-            enum:
-            - Alpha
-            - Beta
-            - Production    
-          is_enabled: # TODOx: verify
-            title: Is Enabled
-            description: Is the app version enabled
+            type: string 
+          is_default:
+            title: Is Default
+            description: Is the app version the deafult
             type: boolean
           min_sdk_version:
             title: Minimum SDK version
             description: Version number of minimum SDK version that supports this app version
-            type: string
-          target_sdk_version: # TODOx: verify
-            title: Target SDK version
-            description: Target SDK version that supports this app version
             type: string
           build_number:
             title: Build Number
