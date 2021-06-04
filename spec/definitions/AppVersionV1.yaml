@@ -83,3 +83,9 @@ properties:
     title: Is default
     type: boolean
     default: false
+  created_on:
+    title: Created on
+    type: string
+    format: date-time
+    readOnly: true
+  
