@@ -1,7 +1,8 @@
 get:
   operationId: getGroupCommand
   summary: Get group command status
-  description: Returns GroupCommand instance
+  description: Returns GroupCommand instance. Deprecated in favour of commands V2.
+  deprecated: true
   produces:
     - application/json
   parameters: []

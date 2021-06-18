@@ -1,7 +1,8 @@
 get:
   operationId: getCommand
   summary: Get command status
-  description: Return DeviceCommand instance
+  description: Return DeviceCommand instance. Deprecated in favour of commands V2.
+  deprecated: true
   produces:
     - application/json
   parameters: []

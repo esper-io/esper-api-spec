@@ -1,0 +1,31 @@
+required:
+  - application_name
+  - package_name
+  - enterprise
+type: object
+properties:
+  id:
+    title: Id
+    type: string
+    format: uuid
+    readOnly: true
+  latest_version:
+    $ref: '#/definitions/ApplicationVersionV1'
+  application_name:
+    title: Application name
+    type: string
+    maxLength: 255
+    minLength: 1
+  package_name:
+    title: Package name
+    type: string
+    maxLength: 255
+    minLength: 1
+    readOnly: true
+  is_hidden:
+    title: Is hidden
+    type: boolean
+  enterprise:
+    title: Enterprise
+    type: string
+    format: url

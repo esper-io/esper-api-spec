@@ -1,4 +1,4 @@
-title: Version
+title: Application Version
 required:
   - permissions
   - version_code
@@ -98,3 +98,12 @@ properties:
     title: Application
     type: string
     format: url
+  approval_status:
+    title: Application status
+    type: string
+    enum:
+      - AVAILABLE
+      - ACCEPTED
+      - APPROVED
+      - REJECTED
+      

@@ -1,20 +1,15 @@
 get:
-  operationId: getAppVersion
+  operationId: getAppVersionV1
   summary: Get app version information
   description: Returns AppVersion instance
   produces:
     - application/json
-  parameters: 
-    - name: request_id
-      in: query
-      description: If this value exists in cache, delete the application and cache entry.
-      required: false
-      type: string
+  parameters: []
   responses:
     '200':
       description: successful operation
       schema:
-        $ref: '#/definitions/AppVersion'
+        $ref: '#/definitions/AppVersionV1'
     '401':
       description: Authorization information is missing or invalid.
       schema: 
@@ -30,14 +25,19 @@ get:
   security:
     - apiKey: []
   tags:
-    - Application
+    - Application V1
 delete:
-  operationId: deleteAppVersion
+  operationId: deleteAppVersionV1
   summary: Delete app version
   description: Empty response
   produces:
     - application/json
-  parameters: []
+  parameters: 
+    - name: request_id
+      in: query
+      description: If this value exists in cache, delete the application and cache entry.
+      required: false
+      type: string
   responses:
     '200':
       description: No request id is provided and the application is linked to one or more templates. Returns a request_id. Call with this request id to delete the resource.
@@ -68,9 +68,9 @@ delete:
   security:
     - apiKey: []
   tags:
-    - Application
+    - Application V1
 patch:
-  operationId: patchAppVersion
+  operationId: patchAppVersionV1
   summary: Patch an App version instance
   produces:
     - application/json
@@ -83,30 +83,14 @@ patch:
           release_name:
             title: Release name
             description: Name of the Release
-            type: string
-          release_comments:
-            title: Release comments
-            description: Additional comments about the release
-            type: string
-          release_track:
-            title: Release track
-            description: Description of the content
-            type: string    
-            enum:
-            - Alpha
-            - Beta
-            - Production    
-          is_enabled:
-            title: Is Enabled
-            description: Is the app version enabled
+            type: string 
+          is_default:
+            title: Is Default
+            description: Is the app version the deafult
             type: boolean
           min_sdk_version:
             title: Minimum SDK version
             description: Version number of minimum SDK version that supports this app version
-            type: string
-          target_sdk_version:
-            title: Target SDK version
-            description: Target SDK version that supports this app version
             type: string
           build_number:
             title: Build Number
@@ -125,15 +109,11 @@ patch:
               - ACCEPTED
               - APPROVED
               - REJECTED
-          is_default:
-            title: Is default
-            description: Is the app version default
-            type: boolean
   responses:
     '200':
       description: successful operation
       schema:
-        $ref: '#/definitions/AppVersion'
+        $ref: '#/definitions/AppVersionV1'
     '400':
       description: Bad request
       schema: 
@@ -157,7 +137,7 @@ patch:
   security:
     - apiKey: []
   tags:
-    - Application
+    - Application V1
 parameters:
   - name: version_id
     in: path

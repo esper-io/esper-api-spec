@@ -1,51 +1,45 @@
 get:
-  operationId: getAllApplications
-  summary: List apps in enterprise
-  description: Returns Application list
+  operationId: getAppVersionsV1
+  summary: List App versions
+  description: Returns AppVersion list
   produces:
     - application/json
   parameters:
-    - name: application_name
+    - name: version_code
       in: query
-      description: filter by application name
+      description: filter by version code
       required: false
       type: string
-    - name: package_name
+    - name: build_number
       in: query
-      description: filter by package name
+      description: filter by build number
       required: false
       type: string
-    - name: package_name_exact
+    - name: is_g_play
       in: query
-      description: filter by package name (exact match)
-      required: false
-      type: string
-    - name: has_uploaded_version
-      in: query
-      description: Returns applications having atleast on version uploaded
+      description: filter google play applications
       required: false
       type: boolean
-    - name: category
+    - name: approval_status
       in: query
-      description: filter by category
+      description: filter by approval status
       required: false
       type: string
-    - name: supported_sdk
+      enum:
+        - AVAILABLE
+        - ACCEPTED
+        - APPROVED
+        - REJECTED
+    - name: is_enabled
       in: query
-      description: filter by supported sdk versions
-      required: false
-      type: integer
-    - name: is_active
-      in: query
-      description: filter by active applications
-      required: false
-      type: boolean
-    - name: is_hidden
-      in: query
-      description: filter default esper apps
+      description: filter by enabled versions
       required: false
       type: boolean
-      default: false
+    - name: is_default
+      in: query
+      description: filter by default versions
+      required: false
+      type: boolean
     - name: created_on_gt
       in: query
       description: filter applications created after a given timestamp
@@ -75,7 +69,6 @@ get:
       description: Number of results to return per page.
       required: false
       type: integer
-      default: 20
     - name: offset
       in: query
       description: The initial index from which to return the results.
@@ -104,7 +97,7 @@ get:
           results:
             type: array
             items:
-              $ref: '#/definitions/Application'
+              $ref: '#/definitions/AppVersionV1'
     '401':
       description: Authorization information is missing or invalid.
       schema: 
@@ -116,10 +109,16 @@ get:
   security:
     - apiKey: []
   tags:
-    - Application
+    - Application V1
 parameters:
+  - name: application_id
+    in: path
+    description: A UUID string identifying this application.
+    required: true
+    type: string
+    format: uuid
   - name: enterprise_id
-    description: A UUID string identifying this enterprise.
+    description: A UUID string identifying enterprise.
     in: path
     required: true
     type: string
