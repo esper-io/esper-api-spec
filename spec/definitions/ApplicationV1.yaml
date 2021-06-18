@@ -10,7 +10,7 @@ properties:
     format: uuid
     readOnly: true
   latest_version:
-    $ref: '#/definitions/ApplicationV1Version'
+    $ref: '#/definitions/ApplicationVersionV1'
   application_name:
     title: Application name
     type: string

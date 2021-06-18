@@ -1,4 +1,4 @@
-title: App Version
+title: Application Version V1
 type: object
 properties:
   id:

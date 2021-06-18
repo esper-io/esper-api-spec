@@ -68,4 +68,3 @@ parameters:
     in: path
     required: true
     type: string
-# TOODx: Add patch for application

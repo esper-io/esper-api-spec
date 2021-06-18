@@ -1,4 +1,4 @@
-title: Version
+title: Application Version
 required:
   - permissions
   - version_code
