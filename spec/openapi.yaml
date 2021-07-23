@@ -155,7 +155,7 @@ securityDefinitions:
       > Please note the use of keyword **Bearer** before the token value.
 
 
-      You can read more about api key authentication scheme [here](https://swagger.io/docs/specification/authentication/api-keys/).
+      You can read more about api key authentication scheme [here](https://console-docs.esper.io/API/generate.html).
     name: Authorization
     type: apiKey
     in: header
