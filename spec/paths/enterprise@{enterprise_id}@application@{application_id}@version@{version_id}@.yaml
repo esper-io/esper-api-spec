@@ -4,12 +4,7 @@ get:
   description: Returns AppVersion instance
   produces:
     - application/json
-  parameters: 
-    - name: request_id
-      in: query
-      description: If this value exists in cache, delete the application and cache entry.
-      required: false
-      type: string
+  parameters: []
   responses:
     '200':
       description: successful operation
@@ -37,7 +32,12 @@ delete:
   description: Empty response
   produces:
     - application/json
-  parameters: []
+  parameters: 
+    - name: request_id
+      in: query
+      description: If this value exists in cache, delete the application and cache entry.
+      required: false
+      type: string
   responses:
     '200':
       description: No request id is provided and the application is linked to one or more templates. Returns a request_id. Call with this request id to delete the resource.

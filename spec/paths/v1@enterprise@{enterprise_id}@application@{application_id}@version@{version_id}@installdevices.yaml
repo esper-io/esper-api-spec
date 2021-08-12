@@ -62,7 +62,7 @@ get:
   security:
     - apiKey: []
   tags:
-    - Application
+    - Application V1
 parameters:
   - name: version_id
     in: path

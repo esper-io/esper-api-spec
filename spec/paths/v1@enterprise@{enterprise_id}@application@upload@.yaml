@@ -1,0 +1,53 @@
+post:
+  operationId: upload
+  summary: Upload an application to enterprise
+  description: Returns application
+  produces:
+    - application/json
+  consumes:
+    - multipart/form-data
+    - application/x-www-form-urlencoded
+  parameters:
+    - name: app_file
+      description: Valid APK file
+      in: formData
+      required: true
+      type: file
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        type: object
+        properties:
+          application:
+            $ref: '#/definitions/Application'
+    '400':
+      description: Bad request
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
+    '401':
+      description: Authorization information is missing or invalid.
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
+    '403':
+      description: Forbidden, no permission to perform this action.
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
+    '415':
+      description: Unsupported media type.
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
+    '500':
+      description: Internal server error
+      schema: 
+        $ref: '#/definitions/ErrorResponse'
+  security:
+    - apiKey: []
+  tags:
+    - Application V1
+parameters:
+  - name: enterprise_id
+    description: A UUID string identifying this enterprise.
+    in: path
+    required: true
+    type: string
