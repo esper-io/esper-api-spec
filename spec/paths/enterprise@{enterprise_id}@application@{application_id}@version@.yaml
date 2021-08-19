@@ -76,6 +76,17 @@ get:
       required: false
       type: integer
       default: 0
+    - name: ordering
+      in: query
+      description: |
+        Order result set by field name.
+
+        ```
+        * installed_count: order by asc
+        * -installed_count: order by desc
+        ```
+      required: false
+      type: string
   responses:
     '200':
       description: successful operation
