@@ -114,10 +114,9 @@ patch:
 parameters:
   - name: content_id
     in: path
-    description: A UUID string identifying a content instance.
+    description: An integer string identifying a content instance.
     required: true
-    type: string
-    format: uuid
+    type: integer
   - name: enterprise_id
     description: A UUID string identifying enterprise.
     in: path

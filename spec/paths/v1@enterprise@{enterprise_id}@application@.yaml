@@ -19,7 +19,7 @@ get:
       in: query
       description: filter by package name (exact match)
       required: false
-      type: string
+      type: boolean
     - name: has_uploaded_version
       in: query
       description: Returns applications having atleast on version uploaded
