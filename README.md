@@ -1,4 +1,6 @@
 # Esper API Specification
+> [!WARNING]  
+> This repo is no longer supported. See [Esper's API docs](https://api.esper.io/) for our latest API documentation. 
 [![Build Status](https://travis-ci.com/esper-io/esper-api-spec.svg?branch=master)](https://travis-ci.com/esper-io/esper-api-spec) [![Gitter](https://badges.gitter.im/esper-dev/community.svg)](https://gitter.im/esper-dev/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Open API specification for Esper APIs. 
